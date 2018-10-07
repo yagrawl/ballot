@@ -9,7 +9,8 @@
     "heroku-postbuild": "cd Client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "dependencies": {
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "twilio": "^3.22.0"
   },
   "devDependencies": {
     "concurrently": "^3.6.1"

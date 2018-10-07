@@ -1,10 +1,23 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+const twilio = require('twilio');
 const port = process.env.PORT || 5000;
+
+let twilio_account_sid = process.env.TWILIO_ACCOUNT_SID;
+let twilio_auth_token = process.env.TWILIO_AUTH_TOKEN;
+
+var twilio_client = new twilio(twilio_account_sid, twilio_auth_token);
 
 // API calls
 app.get('/init', (req, res) => {
+  let ip = req.connection.remoteAddress;
+  twilio_client.messages.create({
+      body: `Request Access from ${ip}`,
+      to: '+12178191201',
+      from: '+12175744280 '
+  })
+  .then((message) => console.log(message.sid));
   res.send({ express: 'The Ballot' });
 });
 
