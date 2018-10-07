@@ -4,7 +4,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 // API calls
-app.get('/api/hello', (req, res) => {
+app.get('/init', (req, res) => {
   res.send({ express: 'The Ballot' });
 });
 
