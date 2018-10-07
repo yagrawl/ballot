@@ -12,12 +12,15 @@ var twilio_client = new twilio(twilio_account_sid, twilio_auth_token);
 // API calls
 app.get('/init', (req, res) => {
   let ip = req.connection.remoteAddress;
+  console.log(`Request Access from ${ip}`);
+
   twilio_client.messages.create({
       body: `Request Access from ${ip}`,
       to: '+12178191201',
-      from: '+12175744280 '
+      from: '+12175744280'
   })
   .then((message) => console.log(message.sid));
+
   res.send({ express: 'The Ballot' });
 });
 
