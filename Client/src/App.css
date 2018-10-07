@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'ProximaNovaThin';
+  src: local('ProximaNovaThin'), url(./fonts/ProximaNovaThin.woff) format('woff');
+}
+
 .App {
   text-align: center;
 }
@@ -15,7 +20,12 @@
   align-items: center;
   justify-content: center;
   font-size: calc(30px + 2vmin);
+  font-family: ProximaNovaThin;
   color: white;
+}
+
+.App-content {
+  font-size: 16px;
 }
 
 @keyframes App-logo-spin {
