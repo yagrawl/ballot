@@ -6,7 +6,7 @@ const port = process.env.PORT || 5000;
 
 // API calls
 app.get('/init', (req, res) => {
-  let ip = req.connection.remoteAddress;
+  let ip = req.headers['x-forwarded-for'];
   console.log(`Request Access from ${ip}`);
 
   let transporter = nodemailer.createTransport({
@@ -19,7 +19,7 @@ app.get('/init', (req, res) => {
 
   var mailOptions = {
     from: 'alert.theballot@gmail.com',
-    to: 'yagrawl2@gmail.com',
+    to: 'akhilkandimalla1997@gmail.com',
     subject: 'Ballot Accessed Alert',
     text: `The ballot was just accessed from ${ip}`
   };
