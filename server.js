@@ -19,7 +19,7 @@ app.get('/init', (req, res) => {
 
   var mailOptions = {
     from: 'alert.theballot@gmail.com',
-    to: 'akhilkandimalla1997@gmail.com',
+    to: 'alert.theballot@gmail.com',
     subject: 'Ballot Accessed Alert',
     text: `The ballot was just accessed from ${ip}`
   };
