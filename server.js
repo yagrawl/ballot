@@ -13,11 +13,12 @@ app.get('/init', (req, res) => {
 
   let now = new time.Date();
   let result = '';
+  let main_res = res;
 
   iplocation(ip)
   .then(res => {
     ip_data = res;
-    result = `The ballot was just accessed from ${ip} at ${now}. Potential location is ${ip_data.city}, ${ip_data.region_code} specifically at lat: ${ip_data.latitude} and long: ${ip_data.longitude}`;
+    result = `The ballot was just accessed from ${ip} at ${now}.\nPotential location is ${ip_data.city}, ${ip_data.region_code} specifically at lat: ${ip_data.latitude} and long: ${ip_data.longitude}`;
     console.log(result);
 
     var mailOptions = {
@@ -43,7 +44,7 @@ app.get('/init', (req, res) => {
       }
     });
 
-    res.send({ express: result });
+    main_res.send({ express: result });
   })
   .catch(err => {
     console.error(err)
