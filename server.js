@@ -10,44 +10,45 @@ const port = process.env.PORT || 5000;
 // API calls
 app.get('/init', (req, res) => {
   let ip = req.headers['x-forwarded-for'].toString();
-  frameEmail(ip);
-  res.send({ express: 'The Ballot' });
-});
 
-let frameEmail = function(ip) {
   let now = new time.Date();
+  let result = '';
+
   iplocation(ip)
   .then(res => {
     ip_data = res;
-    console.log(`The ballot was just accessed from ${ip} at ${now}. Potential location is ${ip_data.city}, ${ip_data.region_code} specifically at lat: ${ip_data.latitude} and long: ${ip_data.longitude}`);
+    result = `The ballot was just accessed from ${ip} at ${now}. Potential location is ${ip_data.city}, ${ip_data.region_code} specifically at lat: ${ip_data.latitude} and long: ${ip_data.longitude}`;
+    console.log(result);
 
     var mailOptions = {
       from: 'alert.theballot@gmail.com',
       to: 'alert.theballot@gmail.com',
       subject: 'Ballot Accessed Alert',
-      text: `The ballot was just accessed from ${ip} at ${now}. Potential location is ${ip_data.city}, ${ip_data.region_code} specifically at lat: ${ip_data.latitude} and long: ${ip_data.longitude}`
+      text: result
     };
+
+    let transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'alert.theballot@gmail.com',
+        pass: process.env.SEND_MAIL_PASSWORD
+      }
+    });
+
+    transporter.sendMail(mailOptions, function(error, info){
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+    });
+
+    res.send({ express: result });
   })
   .catch(err => {
     console.error(err)
   })
-
-  let transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: 'alert.theballot@gmail.com',
-      pass: process.env.SEND_MAIL_PASSWORD
-    }
-  });
-
-  transporter.sendMail(mailOptions, function(error, info){
-    if (error) {
-      console.log(error);
-    } else {
-      console.log('Email sent: ' + info.response);
-    }
-  });
-}
+});
 
 if (process.env.NODE_ENV === 'production') {
 
