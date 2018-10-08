@@ -1,23 +1,37 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const twilio = require('twilio');
+const nodemailer = require('nodemailer');
 const port = process.env.PORT || 5000;
-
-let twilio_account_sid = process.env.TWILIO_ACCOUNT_SID;
-let twilio_auth_token = process.env.TWILIO_AUTH_TOKEN;
-
-var twilio_client = new twilio(twilio_account_sid, twilio_auth_token);
 
 // API calls
 app.get('/init', (req, res) => {
   let ip = req.connection.remoteAddress;
-  twilio_client.messages.create({
-      body: `Request Access from ${ip}`,
-      to: '+12178191201',
-      from: '+13128001785'
-  })
-  .then((message) => console.log(message.sid));
+  console.log(`Request Access from ${ip}`);
+
+  let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'alert.theballot@gmail.com',
+      pass: process.env.SEND_MAIL_PASSWORD
+    }
+  });
+
+  var mailOptions = {
+    from: 'alert.theballot@gmail.com',
+    to: 'yagrawl2@gmail.com',
+    subject: 'Ballot Accessed Alert',
+    text: `The ballot was just accessed from ${ip}`
+  };
+
+  transporter.sendMail(mailOptions, function(error, info){
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+  });
+
   res.send({ express: 'The Ballot' });
 });
 
