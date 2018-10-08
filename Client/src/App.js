@@ -27,7 +27,8 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <p>{this.state.response}</p>
+          <p>The Ballot</p>
+          <p className="App-content">{this.state.response}</p>
         </header>
       </div>
     );
