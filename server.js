@@ -2,12 +2,26 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const nodemailer = require('nodemailer');
+const iplocation = require('iplocation');
+const time = require('time');
 const port = process.env.PORT || 5000;
 
 // API calls
 app.get('/init', (req, res) => {
   let ip = req.headers['x-forwarded-for'];
-  console.log(`Request Access from ${ip}`);
+  let now = new time.Date();
+  let info;
+
+  iplocation(ip)
+  .then(res => {
+    info = res;
+  })
+  .catch(err => {
+    console.error(err)
+  })
+
+  console.log(`The ballot was just accessed from ${ip} at ${now}. Potential
+    location is ${info.city}, ${info.region_code}`);
 
   let transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -21,7 +35,8 @@ app.get('/init', (req, res) => {
     from: 'alert.theballot@gmail.com',
     to: 'alert.theballot@gmail.com',
     subject: 'Ballot Accessed Alert',
-    text: `The ballot was just accessed from ${ip}`
+    text: `The ballot was just accessed from ${ip} at ${now}. Potential
+      location is ${info.city}, ${info.region_code}`
   };
 
   transporter.sendMail(mailOptions, function(error, info){
