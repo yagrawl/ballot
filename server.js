@@ -4,24 +4,33 @@ const app = express();
 const nodemailer = require('nodemailer');
 const iplocation = require('iplocation');
 const time = require('time');
+
 const port = process.env.PORT || 5000;
 
 // API calls
 app.get('/init', (req, res) => {
-  let ip = req.headers['x-forwarded-for'];
-  let now = new time.Date();
-  let info;
+  let ip = req.headers['x-forwarded-for'].toString();
+  frameEmail(ip);
+  res.send({ express: 'The Ballot' });
+});
 
+let frameEmail = function(ip) {
+  let now = new time.Date();
   iplocation(ip)
   .then(res => {
-    info = res;
+    ip_data = res;
+    console.log(`The ballot was just accessed from ${ip} at ${now}. Potential location is ${ip_data.city}, ${ip_data.region_code} specifically at lat: ${ip_data.latitude} and long: ${ip_data.longitude}`);
+
+    var mailOptions = {
+      from: 'alert.theballot@gmail.com',
+      to: 'alert.theballot@gmail.com',
+      subject: 'Ballot Accessed Alert',
+      text: `The ballot was just accessed from ${ip} at ${now}. Potential location is ${ip_data.city}, ${ip_data.region_code} specifically at lat: ${ip_data.latitude} and long: ${ip_data.longitude}`
+    };
   })
   .catch(err => {
     console.error(err)
   })
-
-  console.log(`The ballot was just accessed from ${ip} at ${now}. Potential
-    location is ${info.city}, ${info.region_code}`);
 
   let transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -31,14 +40,6 @@ app.get('/init', (req, res) => {
     }
   });
 
-  var mailOptions = {
-    from: 'alert.theballot@gmail.com',
-    to: 'alert.theballot@gmail.com',
-    subject: 'Ballot Accessed Alert',
-    text: `The ballot was just accessed from ${ip} at ${now}. Potential
-      location is ${info.city}, ${info.region_code}`
-  };
-
   transporter.sendMail(mailOptions, function(error, info){
     if (error) {
       console.log(error);
@@ -46,9 +47,7 @@ app.get('/init', (req, res) => {
       console.log('Email sent: ' + info.response);
     }
   });
-
-  res.send({ express: 'The Ballot' });
-});
+}
 
 if (process.env.NODE_ENV === 'production') {
 
