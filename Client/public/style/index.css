@@ -1,14 +1,54 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+@font-face {
+    font-family: Proxima Nova;
+    src: url(fonts/ProximaNovaThin.otf);
+    font-weight: 100;
+}
+
+@font-face {
+    font-family: Proxima Nova;
+    src: url(fonts/ProximaSemibold.otf);
+    font-weight: 300;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 5s linear;
+  height: 40vmin;
+}
+
+.App-header {
+  background-color: white;
+  min-height: 120vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(30px + 2vmin);
+  font-family: Proxima Nova;
+  font-weight: 100;
+  color: #282C34;
+}
+
+.App-content {
+  font-size: 20px;
+  font-family: Proxima Nova;
+  width: 350px;
+  color: #282C34;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(180deg);
+  }
 }
