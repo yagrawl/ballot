@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'ProximaNovaThin';
-  src: local('ProximaNovaThin'), url(./fonts/ProximaNovaThin.woff) format('woff');
+  src: local('ProximaNovaThin'), url(./assets/fonts/ProximaNovaThin.woff) format('woff');
 }
 
 .App {
