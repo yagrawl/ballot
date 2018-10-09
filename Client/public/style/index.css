@@ -15,6 +15,12 @@ body {
     font-weight: 300;
 }
 
+@font-face {
+    font-family: Rockwell;
+    src: url(fonts/Rockwell.TTF);
+    font-weight: 200;
+}
+
 .App {
   text-align: center;
 }
@@ -25,23 +31,24 @@ body {
 }
 
 .App-header {
-  background-color: white;
-  min-height: 120vh;
+  background-color: #282C34;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(30px + 2vmin);
-  font-family: Proxima Nova;
-  font-weight: 100;
-  color: #282C34;
+  font-family: Rockwell;
+  font-weight: 400;
+  color: #8BD9F9;
 }
 
 .App-content {
   font-size: 20px;
   font-family: Proxima Nova;
+  font-weight: 100;
   width: 350px;
-  color: #282C34;
+  color: white;
 }
 
 @keyframes App-logo-spin {
