@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import logo from '../assets/imgs/logo.svg';
+import Inputbox from '../components/inputbox';
 
 class Create extends Component {
   state = {
@@ -29,6 +30,7 @@ class Create extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>Create Poll</p>
+          <Inputbox label={'Question'}/>
         </header>
       </div>
     );
