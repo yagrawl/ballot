@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import logo from '.././assets/imgs/logo.svg';
+import { Link } from 'react-router-dom';
 
-class App extends Component {
+import logo from '../assets/imgs/logo.svg';
+
+class Index extends Component {
   state = {
     response: ''
   };
@@ -34,4 +36,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Index;
