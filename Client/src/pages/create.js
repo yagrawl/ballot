@@ -29,7 +29,6 @@ class Create extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>Create Poll</p>
-          <p className="App-content">{this.state.response}</p>
         </header>
       </div>
     );

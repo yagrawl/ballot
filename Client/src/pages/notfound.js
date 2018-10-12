@@ -7,11 +7,11 @@ class NotFound extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={notFoundArt} className="not-found"/>
+        <header className="not-found-header">
+          <img src={notFoundArt} className="not-found-image"/>
           <p>404 : NOT FOUND</p>
           <Link to={'./create'}>
-            <button className="ButtonStyle button1">
+            <button className="button button-transparent">
               Go Back Home
             </button>
           </Link>

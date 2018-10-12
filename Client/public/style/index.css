@@ -3,6 +3,7 @@ body {
   padding: 0;
 }
 
+/* Import Fonts */
 @font-face {
     font-family: Proxima Nova;
     src: url(fonts/ProximaNovaThin.otf);
@@ -30,9 +31,13 @@ body {
   height: 40vmin;
 }
 
-.not-found {
-  height: 400px;
-  margin-top: -80px;
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(180deg);
+  }
 }
 
 .App-header {
@@ -56,7 +61,7 @@ body {
   color: white;
 }
 
-.ButtonStyle {
+.button {
     background-color: #389BC2;
     border: none;
     color: white;
@@ -64,32 +69,46 @@ body {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 24px;
+    font-size: 16px;
     font-family: Proxima Nova;
     font-weight: 100;
     margin: 4px 2px;
-    -webkit-transition-duration: 0.4s; /* Safari */
+    -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
     cursor: pointer;
     border-radius: 30px;
 }
 
-.button1 {
+.button-transparent {
     background-color: transparent;
     color: white;
     border: 2px solid #389BC2;
 }
 
-.button1:hover {
+.button-transparent:hover {
     background-color: #389BC2;
     color: white;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(180deg);
-  }
+/* Not Found : styles */
+
+.not-found-image {
+  height: 400px;
+  margin-top: 0;
+}
+
+.not-found-header {
+  background-color: #3D4259;
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(20px + 2vmin);
+  font-family: Proxima Nova;
+  font-weight: 200;
+  color: #8BD9F9;
+}
+
+.not-found-header * .button {
+  font-size: 16px;
 }
