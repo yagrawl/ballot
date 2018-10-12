@@ -30,6 +30,11 @@ body {
   height: 40vmin;
 }
 
+.not-found {
+  height: 400px;
+  margin-top: -80px;
+}
+
 .App-header {
   background-color: #282C34;
   min-height: 100vh;
