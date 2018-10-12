@@ -51,6 +51,35 @@ body {
   color: white;
 }
 
+.ButtonStyle {
+    background-color: #389BC2;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 24px;
+    font-family: Proxima Nova;
+    font-weight: 100;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 30px;
+}
+
+.button1 {
+    background-color: transparent;
+    color: white;
+    border: 2px solid #389BC2;
+}
+
+.button1:hover {
+    background-color: #389BC2;
+    color: white;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
