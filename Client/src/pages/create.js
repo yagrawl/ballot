@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import logo from '../assets/imgs/logo.svg';
+import logo from '../assets/imgs/logo.png';
 import Inputbox from '../components/inputbox';
 
 class Create extends Component {
@@ -26,11 +26,15 @@ class Create extends Component {
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>Create Poll</p>
-          <Inputbox label={'Question'}/>
+      <div>
+        <div className="setup-navbar">
+          <img src={logo} className="logo-image" alt="logo" />
+        </div>
+        <header className="create-header">
+          <div className="active-area">
+            <p className="page-title">Create Poll</p>
+            <Inputbox label={'Question'}/>
+          </div>
         </header>
       </div>
     );

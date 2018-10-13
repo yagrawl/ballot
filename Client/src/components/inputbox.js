@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 class Inputbox extends Component {
   constructor(props) {
@@ -21,10 +21,10 @@ class Inputbox extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <label>
+        <label className="input-label">
           {this.props.label}
-          <input type="text" value={this.state.value} onChange={this.handleChange} />
         </label>
+        <input className="input-box" type="text" value={this.state.value} onChange={this.handleChange} />
         <input type="submit" value="Submit" />
       </form>
     );

@@ -61,6 +61,32 @@ body {
   color: white;
 }
 
+.setup-navbar {
+  display: inline;
+  margin: 0px;
+}
+
+.logo-image {
+  max-height: 28px;
+  display: inline;
+  margin-top: 30px;
+  margin-left: 30px;
+  position: relative;
+  top: 50%;
+}
+
+.page-title {
+  font-family: Proxima Nova;
+  font-weight: 200;
+  font-size: 30px;
+  color: #389BC2;
+}
+
+.active-area {
+    max-width: 580px;
+    margin: 6vh auto;
+}
+
 .button {
     background-color: #389BC2;
     border: none;
@@ -88,6 +114,48 @@ body {
 .button-transparent:hover {
     background-color: #389BC2;
     color: white;
+}
+
+/* Create : styles */
+.create-header {
+  background-color: white;
+}
+
+.input-label {
+  font-family: Proxima Nova;
+  font-weight: 200;
+  font-size: 24px;
+  color: #515151;
+  display: block;
+}
+
+.input-box {
+  font-family: Proxima Nova;
+  font-weight: 200;
+  font-size: 28px;
+  color: #B3B3B3;
+  width: 100%;
+  margin-top: 10px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: 0.5px solid #B3B3B3;
+  border-radius: 15px;
+}
+
+.input-box:focus {
+  outline: none;
+}
+
+@media screen and (max-width: 620px) {
+    .active-area {
+        margin-left: 5vh;
+        margin-right: 5vh;
+    }
+
+    .input-box {
+      width: 95%;
+    }
 }
 
 /* Not Found : styles */

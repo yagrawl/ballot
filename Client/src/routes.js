@@ -11,7 +11,7 @@ class Routes extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div>
         <Switch>
           <Route exact path="/" component={Index}/>
           <Route path="/create" component={Create}/>
