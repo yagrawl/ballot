@@ -67,7 +67,7 @@ body {
 }
 
 .logo-image {
-  max-height: 28px;
+  max-height: 24px;
   display: inline;
   margin-top: 30px;
   margin-left: 30px;
@@ -77,9 +77,9 @@ body {
 
 .page-title {
   font-family: Proxima Nova;
-  font-weight: 200;
-  font-size: 30px;
-  color: #389BC2;
+  font-weight: 300;
+  font-size: 24px;
+  color: #8BD9F9;
 }
 
 .active-area {
@@ -105,13 +105,37 @@ body {
     border-radius: 30px;
 }
 
+.button-black {
+  background-color: white;
+  border: none;
+  color: #389BC2;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-family: Proxima Nova;
+  font-weight: 100;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 30px;
+}
+
+.button-black-transparent {
+    background-color: transparent;
+    color: #389BC2;
+    border: 2px solid #389BC2;
+}
+
 .button-transparent {
     background-color: transparent;
     color: white;
     border: 2px solid #389BC2;
 }
 
-.button-transparent:hover {
+.button-transparent:hover, .button-black-transparent:hover {
     background-color: #389BC2;
     color: white;
 }
@@ -124,7 +148,7 @@ body {
 .input-label {
   font-family: Proxima Nova;
   font-weight: 200;
-  font-size: 24px;
+  font-size: 20px;
   color: #515151;
   display: block;
 }
@@ -132,7 +156,7 @@ body {
 .input-box {
   font-family: Proxima Nova;
   font-weight: 200;
-  font-size: 28px;
+  font-size: 20px;
   color: #B3B3B3;
   width: 100%;
   margin-top: 10px;

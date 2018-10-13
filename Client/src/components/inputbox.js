@@ -3,18 +3,25 @@ import React, { Component } from 'react';
 class Inputbox extends Component {
   constructor(props) {
     super(props);
-    this.state = {value: ''};
+    this.state = {question: '',
+                  option1: '',
+                 };
 
-    this.handleChange = this.handleChange.bind(this);
+    this.handleQuestionChange = this.handleQuestionChange.bind(this);
+    this.handleOptionChange = this.handleOptionChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({value: event.target.value});
+  handleQuestionChange(event) {
+    this.setState({question: event.target.question});
+  }
+
+  handleOptionChange(event) {
+    this.setState({option1: event.target.option1});
   }
 
   handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.value);
+    alert('submitted ' + this.state.question + ' ' + this.state.option1 );
     event.preventDefault();
   }
 
@@ -24,8 +31,9 @@ class Inputbox extends Component {
         <label className="input-label">
           {this.props.label}
         </label>
-        <input className="input-box" type="text" value={this.state.value} onChange={this.handleChange} />
-        <input type="submit" value="Submit" />
+        <input className="input-box" type="text" value={this.state.question} onChange={this.handleQuestionChange} />
+        <input className="input-box" type="text" value={this.state.option1} onChange={this.handleOptionChange} />
+        <input className="button-black button-black-transparent" type="submit" value="Submit" />
       </form>
     );
   }
