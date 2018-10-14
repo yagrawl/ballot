@@ -3,6 +3,7 @@ body {
   padding: 0;
 }
 
+/* Import Fonts */
 @font-face {
     font-family: Proxima Nova;
     src: url(fonts/ProximaNovaThin.otf);
@@ -30,6 +31,15 @@ body {
   height: 40vmin;
 }
 
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(180deg);
+  }
+}
+
 .App-header {
   background-color: #282C34;
   min-height: 100vh;
@@ -51,7 +61,33 @@ body {
   color: white;
 }
 
-.ButtonStyle {
+.setup-navbar {
+  display: inline;
+  margin: 0px;
+}
+
+.logo-image {
+  max-height: 24px;
+  display: inline;
+  margin-top: 30px;
+  margin-left: 30px;
+  position: relative;
+  top: 50%;
+}
+
+.page-title {
+  font-family: Proxima Nova;
+  font-weight: 300;
+  font-size: 24px;
+  color: #8BD9F9;
+}
+
+.active-area {
+    max-width: 580px;
+    margin: 6vh auto;
+}
+
+.button {
     background-color: #389BC2;
     border: none;
     color: white;
@@ -59,32 +95,114 @@ body {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 24px;
+    font-size: 16px;
     font-family: Proxima Nova;
     font-weight: 100;
     margin: 4px 2px;
-    -webkit-transition-duration: 0.4s; /* Safari */
+    -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
     cursor: pointer;
+    outline: none;
     border-radius: 30px;
 }
 
-.button1 {
+.button-black {
+  background-color: white;
+  border: none;
+  color: #389BC2;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-family: Proxima Nova;
+  font-weight: 100;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 30px;
+}
+
+.button-black-transparent {
+    background-color: transparent;
+    color: #389BC2;
+    border: 2px solid #389BC2;
+}
+
+.button-transparent {
     background-color: transparent;
     color: white;
     border: 2px solid #389BC2;
 }
 
-.button1:hover {
+.button-transparent:hover, .button-black-transparent:hover {
     background-color: #389BC2;
     color: white;
+    outline: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(180deg);
-  }
+/* Create : styles */
+.create-header {
+  background-color: white;
+}
+
+.input-label {
+  font-family: Proxima Nova;
+  font-weight: 200;
+  font-size: 20px;
+  color: #515151;
+  display: block;
+}
+
+.input-box {
+  font-family: Proxima Nova;
+  font-weight: 200;
+  font-size: 20px;
+  color: #B3B3B3;
+  width: 100%;
+  margin-top: 10px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: 0.5px solid #B3B3B3;
+  border-radius: 15px;
+}
+
+.input-box:focus, .button:focus {
+  outline: none;
+}
+
+@media screen and (max-width: 620px) {
+    .active-area {
+        margin-left: 5vh;
+        margin-right: 5vh;
+    }
+
+    .input-box {
+      width: 95%;
+    }
+}
+
+/* Not Found : styles */
+
+.not-found-image {
+  height: 400px;
+  margin-top: 0;
+}
+
+.not-found-header {
+  background-color: #3D4259;
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(20px + 2vmin);
+  font-family: Proxima Nova;
+  font-weight: 200;
+  color: #8BD9F9;
+}
+
+.not-found-header * .button {
+  font-size: 16px;
 }

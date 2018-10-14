@@ -15,7 +15,7 @@ class Index extends Component {
   }
 
   callApi = async () => {
-    const response = await fetch('/init');
+    const response = await fetch('/ip');
     const body = await response.json();
 
     if (response.status !== 200) throw Error(body.message);
@@ -29,6 +29,11 @@ class Index extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>ballot.</p>
+          <Link to={'./create'}>
+            <button className="button button-transparent">
+              Create Poll
+            </button>
+          </Link>
           <p className="App-content">{this.state.response}</p>
         </header>
       </div>
