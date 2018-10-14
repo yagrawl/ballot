@@ -3,25 +3,18 @@ import React, { Component } from 'react';
 class Inputbox extends Component {
   constructor(props) {
     super(props);
-    this.state = {question: '',
-                  option1: '',
-                 };
+    this.state = {value: ''};
 
-    this.handleQuestionChange = this.handleQuestionChange.bind(this);
-    this.handleOptionChange = this.handleOptionChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleQuestionChange(event) {
-    this.setState({question: event.target.question});
-  }
-
-  handleOptionChange(event) {
-    this.setState({option1: event.target.option1});
+  handleChange(event) {
+    this.setState({value: event.target.value});
   }
 
   handleSubmit(event) {
-    alert('submitted ' + this.state.question + ' ' + this.state.option1 );
+    alert('submitted ' + this.state.value );
     event.preventDefault();
   }
 
@@ -31,9 +24,8 @@ class Inputbox extends Component {
         <label className="input-label">
           {this.props.label}
         </label>
-        <input className="input-box" type="text" value={this.state.question} onChange={this.handleQuestionChange} />
-        <input className="input-box" type="text" value={this.state.option1} onChange={this.handleOptionChange} />
-        <input className="button-black button-black-transparent" type="submit" value="Submit" />
+        <input className="input-box" type="text" value={this.state.value} placeholder="Enter your question here" onChange={this.handleChange} />
+        <center><input className="button-black button-black-transparent" type="submit" value="Submit" /></center>
       </form>
     );
   }

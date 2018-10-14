@@ -102,6 +102,7 @@ body {
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
     cursor: pointer;
+    outline: none;
     border-radius: 30px;
 }
 
@@ -138,6 +139,7 @@ body {
 .button-transparent:hover, .button-black-transparent:hover {
     background-color: #389BC2;
     color: white;
+    outline: none;
 }
 
 /* Create : styles */
@@ -167,7 +169,7 @@ body {
   border-radius: 15px;
 }
 
-.input-box:focus {
+.input-box:focus, .button:focus {
   outline: none;
 }
 
