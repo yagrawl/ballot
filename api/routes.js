@@ -1,6 +1,7 @@
 /*
  * Import a controller and add the defined routes.
- * eg.
+ *  - add the route object as a local variable
+ *  - follow app.route('/route/:id').CURD property 
  */
 
 module.exports = function(app) {
