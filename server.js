@@ -7,7 +7,7 @@ const time = require('time');
 
 const port = process.env.PORT || 5000;
 
-let routes = require('./api/routes/createRoute');
+let routes = require('./api/routes.js');
 routes(app);
 
 // app.get('/ip', (req, res) => {
