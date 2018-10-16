@@ -7,10 +7,13 @@ const time = require('time');
 
 const port = process.env.PORT || 5000;
 
-app.get('/ip', (req, res) => {
-  let ip = req.headers['x-forwarded-for'].toString();
-  res.send({ express: ip });
-});
+let routes = require('./api/routes/createRoute');
+routes(app);
+
+// app.get('/ip', (req, res) => {
+//   let ip = req.headers['x-forwarded-for'].toString();
+//   res.send({ express: ip });
+// });
 
 app.get('/api/list', (req, res) => {
   let list = ["item1", "item2", "item3"];
