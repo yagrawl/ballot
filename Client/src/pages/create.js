@@ -27,9 +27,11 @@ class Create extends Component {
   render() {
     return (
       <div>
-        <div className="setup-navbar">
-          <img src={logo} className="logo-image" alt="logo" />
-        </div>
+        <Link to={'./'}>
+          <div className="setup-navbar">
+            <img src={logo} className="logo-image" alt="logo" />
+          </div>
+        </Link>
         <header className="create-header">
           <div className="active-area">
             <p className="page-title">Create Poll</p>
