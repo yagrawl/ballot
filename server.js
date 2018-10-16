@@ -10,11 +10,6 @@ const port = process.env.PORT || 5000;
 let routes = require('./api/routes.js');
 routes(app);
 
-// app.get('/ip', (req, res) => {
-//   let ip = req.headers['x-forwarded-for'].toString();
-//   res.send({ express: ip });
-// });
-
 app.get('/api/list', (req, res) => {
   let list = ["item1", "item2", "item3"];
   res.json(list);
