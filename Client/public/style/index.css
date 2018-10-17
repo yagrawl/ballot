@@ -12,6 +12,12 @@ body {
 
 @font-face {
     font-family: Proxima Nova;
+    src: url(fonts/ProximaNovaRegular.otf);
+    font-weight: 200;
+}
+
+@font-face {
+    font-family: Proxima Nova;
     src: url(fonts/ProximaNovaSemibold.otf);
     font-weight: 300;
 }
@@ -157,20 +163,30 @@ body {
 
 .input-box {
   font-family: Proxima Nova;
-  font-weight: 200;
-  font-size: 20px;
-  color: #B3B3B3;
-  width: 100%;
+  font-weight: 100;
+  font-size: 24px;
+  color: #8BD9F9;
+  width: 90%;
   margin-top: 10px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
-  border: 0.5px solid #B3B3B3;
-  border-radius: 15px;
+  border: 0;
+  outline: 0;
+  background: #F5F3F4;
+  border-radius: 10px;
+}
+
+.input-box::placeholder {
+  color: #757575;
 }
 
 .input-box:focus, .button:focus {
   outline: none;
+}
+
+textarea {
+  resize: none
 }
 
 @media screen and (max-width: 620px) {

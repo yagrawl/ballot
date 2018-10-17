@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import logo from '../assets/imgs/logo.png';
 import Inputbox from '../components/inputbox';
+import TextAreaBox from '../components/textareabox';
 
 class Create extends Component {
   state = {
@@ -35,7 +36,13 @@ class Create extends Component {
         <header className="create-header">
           <div className="active-area">
             <p className="page-title">Create Poll</p>
-            <Inputbox label={'Question'}/>
+            <TextAreaBox
+              title={'Question'}
+              rows={1}
+              name={''}
+              placeholder={'Type your question here'}
+            />
+            {/* <Inputbox label={'Question'}/> */}
           </div>
         </header>
       </div>
