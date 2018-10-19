@@ -149,6 +149,10 @@ body {
     outline: none;
 }
 
+.divider {
+  margin-top: 30px;
+}
+
 /* Create : styles */
 .create-header {
   background-color: white;

@@ -9,39 +9,85 @@ class PollDetails extends Component {
 
     this.state = {
       poll: {
-        question: ''
+        question: "",
+        option1: ""
       }
-    }
+    };
 
-    this.handleQuestion = this.handleQuestion.bind(this);
-    this.handleDetailsSubmission = this.handleDetailsSubmission.bind(this);
+    this.handleTextArea = this.handleTextArea.bind(this);
+    this.handleFullName = this.handleFullName.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
-  handleQuestion(event) {
-    let value = event.target.value;
-    this.setState(prevState => ({
-      poll: {...prevState.poll, question: value}
-    }), () => console.log(this.state.poll));
+  handleFullName(e) {
+    console.log("Inside handleFullName");
+    let value = e.target.value;
+    this.setState(
+      prevState => ({
+        poll: {
+          ...prevState.poll,
+          option1: value
+        }
+      }),
+      () => console.log(this.state.poll)
+    );
   }
 
-  handleDetailsSubmission(event) {
-    let pollDetails = this.state.poll;
-    console.log(pollDetails);
-    alert(pollDetails.question);
-    event.preventDefault();
+  handleTextArea(e) {
+    console.log("Inside handleTextArea");
+    let value = e.target.value;
+    this.setState(
+      prevState => ({
+        poll: {
+          ...prevState.poll,
+          question: value
+        }
+      }),
+      () => console.log(this.state.poll)
+    );
+  }
+
+  handleFormSubmit(e) {
+    e.preventDefault();
+    let userData = this.state.poll;
+
+    fetch("/create/details", {
+      method: "POST",
+      body: JSON.stringify(userData),
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    }).then(response => {
+      response.json().then(data => {
+        console.log("Successful" + data);
+        alert(data.question);
+      });
+    });
   }
 
   render() {
     return (
-      <form onSubmit={this.handleDetailsSubmission}>
+      <form className="container-fluid" onSubmit={this.handleFormSubmit}>
+
         <TextAreaBox
-          title={'Question'}
+          title={"Question"}
           rows={2}
-          name={''}
-          placeholder={'Type your question here'}
+          value={this.state.poll.question}
+          name={"question"}
+          handleChange={this.handleTextArea}
+          placeholder={"Type your question here"}
+        />
+        <div className="divider"></div>
+        <TextBox
+          title={"Option"}
+          name={"option1"}
+          value={this.state.poll.option1}
+          placeholder={"Enter Option"}
+          handleChange={this.handleFullName}
         />
 
-        <center><input className="button-black button-black-transparent" type="submit" value="Next" /></center>
+        <input className="button-black button-black-transparent" type="submit" value="Submit" />
       </form>
     );
   }
