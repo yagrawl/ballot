@@ -30,9 +30,7 @@ class Index extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <p>ballot.</p>
           <Link to={'./create'}>
-            <button className="button button-transparent">
-              Create Poll
-            </button>
+            <button className="button button-transparent">Create Poll</button>
           </Link>
           <p className="App-content">{this.state.response}</p>
         </header>

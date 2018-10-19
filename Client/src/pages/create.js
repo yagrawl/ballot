@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import logo from '../assets/imgs/logo.png';
-import Inputbox from '../components/inputbox';
+import TextBox from '../components/textbox';
 import TextAreaBox from '../components/textareabox';
 
 class Create extends Component {
@@ -38,11 +38,10 @@ class Create extends Component {
             <p className="page-title">Create Poll</p>
             <TextAreaBox
               title={'Question'}
-              rows={1}
+              rows={2}
               name={''}
               placeholder={'Type your question here'}
             />
-            {/* <Inputbox label={'Question'}/> */}
           </div>
         </header>
       </div>

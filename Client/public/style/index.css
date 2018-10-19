@@ -163,14 +163,14 @@ body {
 
 .input-box {
   font-family: Proxima Nova;
-  font-weight: 100;
+  font-weight: 200;
   font-size: 24px;
   color: #8BD9F9;
   width: 90%;
   margin-top: 10px;
   padding-left: 15px;
   padding-top: 10px;
-  padding-bottom: 10px;
+  padding-bottom: 13px;
   border: 0;
   outline: 0;
   background: #F5F3F4;
@@ -178,6 +178,7 @@ body {
 }
 
 .input-box::placeholder {
+  font-weight: 100;
   color: #757575;
 }
 
