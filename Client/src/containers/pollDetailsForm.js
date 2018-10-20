@@ -9,32 +9,15 @@ class PollDetails extends Component {
 
     this.state = {
       poll: {
-        question: "",
-        option1: ""
+        question: ""
       }
     };
 
     this.handleTextArea = this.handleTextArea.bind(this);
-    this.handleFullName = this.handleFullName.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
-  handleFullName(e) {
-    console.log("Inside handleFullName");
-    let value = e.target.value;
-    this.setState(
-      prevState => ({
-        poll: {
-          ...prevState.poll,
-          option1: value
-        }
-      }),
-      () => console.log(this.state.poll)
-    );
-  }
-
   handleTextArea(e) {
-    console.log("Inside handleTextArea");
     let value = e.target.value;
     this.setState(
       prevState => ({
@@ -42,29 +25,24 @@ class PollDetails extends Component {
           ...prevState.poll,
           question: value
         }
-      }),
-      () => console.log(this.state.poll)
+      })
     );
   }
 
   handleFormSubmit(e) {
     e.preventDefault();
-    let userData = this.state.poll;
+    let data = this.state.poll;
+    alert(data.question);
 
     fetch("/create/details", {
       method: "POST",
-      body: JSON.stringify(userData),
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    }).then(response => {
-      response.json().then(data => {
-        console.log("Successful" + data);
-        alert(data.question);
-      });
-    });
-  }
+      body: JSON.stringify(data),
+      headers: {"Content-Type": "application/json"}
+    })
+    .then(response => response.json())
+    .then(response => console.log('Success:', JSON.stringify(response)))
+    .catch(error => console.error('Error:', error));
+  };
 
   render() {
     return (
@@ -78,14 +56,8 @@ class PollDetails extends Component {
           handleChange={this.handleTextArea}
           placeholder={"Type your question here"}
         />
+
         <div className="divider"></div>
-        <TextBox
-          title={"Option"}
-          name={"option1"}
-          value={this.state.poll.option1}
-          placeholder={"Enter Option"}
-          handleChange={this.handleFullName}
-        />
 
         <input className="button-black button-black-transparent" type="submit" value="Submit" />
       </form>
