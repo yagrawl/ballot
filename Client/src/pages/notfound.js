@@ -8,7 +8,7 @@ class NotFound extends Component {
     return (
       <div className="App">
         <header className="not-found-header">
-          <img src={notFoundArt} className="not-found-image"/>
+          <img src={notFoundArt} className="not-found-image" alt="not found graphic"/>
           <p>404 : NOT FOUND</p>
           <Link to={'./'}>
             <button className="button button-transparent">

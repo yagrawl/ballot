@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import logo from '../assets/imgs/logo.png';
-import Inputbox from '../components/inputbox';
+import PollDetails from '../containers/pollDetailsForm';
 
 class Create extends Component {
   state = {
@@ -35,7 +35,7 @@ class Create extends Component {
         <header className="create-header">
           <div className="active-area">
             <p className="page-title">Create Poll</p>
-            <Inputbox label={'Question'}/>
+            <PollDetails/>
           </div>
         </header>
       </div>
