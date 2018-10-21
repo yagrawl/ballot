@@ -4,7 +4,7 @@ const TextBox = (props) => (
   <div>
     <label className="input-label">{props.title}</label>
     <input
-      className="input-box"
+      className={props.className}
       name={props.name}
       value={props.value}
       onChange={props.handleChange}
