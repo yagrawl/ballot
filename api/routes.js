@@ -22,4 +22,7 @@ module.exports = function(app) {
   app.route('/api/demo')
     .post(demo.demo_create)
     .get(demo.demo_read);
+
+  app.route('/api/demo/table')
+    .get(demo.demo_table);
 };

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import TextBox from '../components/textbox';
 import Logo from '../components/logo'
+import DataList from '../components/datalist';
 
 class Demo extends Component {
   constructor(props) {
@@ -13,7 +14,9 @@ class Demo extends Component {
       rkey: "",
       ukey: "",
       uvalue: "",
-      dkey: ""
+      dkey: "",
+      response: [{"key": "",
+                  "value": ""}]
     };
 
     this.handleCreateKey = this.handleCreateKey.bind(this);
@@ -22,7 +25,16 @@ class Demo extends Component {
 
     this.handleCreate = this.handleCreate.bind(this);
     this.handleRead = this.handleRead.bind(this);
+    this.handleRefresh = this.handleRefresh.bind(this);
   }
+
+  callApi = async () => {
+    const response = await fetch('/api/demo/table');
+    const body = await response.json();
+
+    if (response.status !== 200) throw Error(body.message);
+    return body;
+  };
 
   handleCreateKey(e) {
     let value = e.target.value;
@@ -57,7 +69,6 @@ class Demo extends Component {
   handleCreate(e) {
     e.preventDefault();
     let data = this.state;
-    alert(data.ckey);
 
     fetch("/api/demo", {
       method: "POST",
@@ -75,6 +86,22 @@ class Demo extends Component {
 
     let url = "/api/demo" + '?key=' + data ;
     fetch(url).then(response => console.log(response.json()));
+  };
+
+  handleRefresh(e) {
+    e.preventDefault();
+
+    this.callApi()
+      .then(res => {
+        this.setState(
+          prevState => ({
+              ...prevState,
+              response: res.result
+          })
+        );
+        console.log(this.state)
+      })
+      .catch(err => console.log(err));
   };
 
   render() {
@@ -161,7 +188,12 @@ class Demo extends Component {
             <div className="split-demo right-demo">
               <div className="right-content">
                 <div className="left-margin-demo">
-                  <p className="heading-demo">Database</p>
+                  <p className="heading-demo input-box-demo">Database</p>
+                  <form onSubmit={this.handleRefresh}>
+                    <input className="button-black button-black-transparent button-demo"
+                    type="submit" value="Refresh"/>
+                  </form>
+                  <DataList data={this.state.response} />
                 </div>
               </div>
             </div>

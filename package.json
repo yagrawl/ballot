@@ -16,6 +16,8 @@
     "node-geocoder": "^3.22.0",
     "nodemailer": "^4.6.8",
     "path": "^0.12.7",
+    "sql-template-strings": "^2.2.2",
+    "sqlstring": "^2.3.1",
     "time": "^0.12.0",
     "twilio": "^3.22.0"
   },
