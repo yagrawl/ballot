@@ -273,10 +273,15 @@ textarea {
 }
 
 .input-box-demo {
-  width: 30%;
+  width: 25%;
   font-size: 18px;
   display: inline-block;
   float: left;
+  margin-bottom: 30px;
+}
+
+.input-box-second-demo {
+  margin-left: 10px;
 }
 
 .heading-demo {
@@ -295,11 +300,12 @@ textarea {
   width: 20%;
   font-size: 16px;
   margin-right: 50px;
+  margin-left: 20px;
   float: right;
   text-align: center;
   padding-top: 6px;
   padding-bottom: 8px;
-  float: left;
+  float: right;
   clear: right;
 }
 

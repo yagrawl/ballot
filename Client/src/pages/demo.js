@@ -28,7 +28,7 @@ class Demo extends Component {
                   <TextBox
                     value={this.state.key}
                     name={"Value"}
-                    className={"input-box input-box-demo"}
+                    className={"input-box input-box-demo input-box-second-demo"}
                     // handleChange={this.handleTextArea}
                     placeholder={"Value"}
                   />
@@ -65,7 +65,7 @@ class Demo extends Component {
                   <TextBox
                     value={this.state.key}
                     name={"Value"}
-                    className={"input-box input-box-demo"}
+                    className={"input-box input-box-demo input-box-second-demo"}
                     // handleChange={this.handleTextArea}
                     placeholder={"Value"}
                   />
@@ -73,7 +73,7 @@ class Demo extends Component {
                     button-demo" type="submit" value="Update" />
                 </form>
 
-                <div className="divider"></div>
+                <div className="divider clear-left-demo"></div>
 
                 <form>
                   <TextBox
