@@ -20,5 +20,6 @@ module.exports = function(app) {
     .post(pollDetails.post_details);
 
   app.route('/api/demo')
-    .post(demo.demo_create);
+    .post(demo.demo_create)
+    .get(demo.demo_read);
 };
