@@ -312,3 +312,28 @@ textarea {
 .clear-left-demo {
   clear: left;
 }
+
+.data-demo {
+    font-family: Proxima Nova;
+    font-size: 16px;
+    font-weight: 100;
+    border-collapse: collapse;
+    width: 90%;
+}
+
+.data-demo td, .data-demo th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.data-demo tr:nth-child(even){background: #f2f2f2;}
+
+.data-demo tr:hover {background: #ddd;}
+
+.data-demo th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #8BD9F9;
+    color: white;
+}
