@@ -4,9 +4,57 @@ import TextBox from '../components/textbox';
 import Logo from '../components/logo'
 
 class Demo extends Component {
-  state = {
-    key: '',
-    value: ''
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ckey: "",
+      cvalue: "",
+      rkey: "",
+      ukey: "",
+      uvalue: "",
+      dkey: ""
+    };
+
+    this.handleCreateKey = this.handleCreateKey.bind(this);
+    this.handleCreateValue = this.handleCreateValue.bind(this);
+
+    this.handleCreate = this.handleCreate.bind(this);
+  }
+
+  handleCreateKey(e) {
+    let value = e.target.value;
+    this.setState(
+      prevState => ({
+        ...prevState,
+        ckey: value
+      })
+    );
+  }
+
+  handleCreateValue(e) {
+    let value = e.target.value;
+    this.setState(
+      prevState => ({
+        ...prevState,
+        cvalue: value
+      })
+    );
+  }
+
+  handleCreate(e) {
+    e.preventDefault();
+    let data = this.state;
+    alert(data.ckey);
+
+    fetch("/api/demo", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {"Content-Type": "application/json"}
+    })
+    .then(response => response.json())
+    .then(response => console.log('Success:', JSON.stringify(response)))
+    .catch(error => console.error('Error:', error));
   };
 
   render() {
@@ -16,20 +64,20 @@ class Demo extends Component {
           <div className="main-div-demo">
             <div className="split-demo left-demo">
               <div className="left-margin-demo">
-                <form>
+                <form onSubmit={this.handleCreate}>
                   <TextBox
                     title={"Create"}
-                    value={this.state.key}
+                    value={this.state.ckey}
                     name={"key"}
                     className={"input-box input-box-demo"}
-                    // handleChange={this.handleTextArea}
+                    handleChange={this.handleCreateKey}
                     placeholder={"Key"}
                   />
                   <TextBox
-                    value={this.state.key}
+                    value={this.state.cvalue}
                     name={"Value"}
                     className={"input-box input-box-demo input-box-second-demo"}
-                    // handleChange={this.handleTextArea}
+                    handleChange={this.handleCreateValue}
                     placeholder={"Value"}
                   />
                   <input className="button-black button-black-transparent
@@ -41,7 +89,7 @@ class Demo extends Component {
                 <form>
                   <TextBox
                     title={"Read"}
-                    value={this.state.key}
+                    value={this.state.rkey}
                     name={"key"}
                     className={"input-box input-box-demo"}
                     // handleChange={this.handleTextArea}
@@ -56,14 +104,14 @@ class Demo extends Component {
                 <form>
                   <TextBox
                     title={"Update"}
-                    value={this.state.key}
+                    value={this.state.ukey}
                     name={"key"}
                     className={"input-box input-box-demo"}
                     // handleChange={this.handleTextArea}
                     placeholder={"Key"}
                   />
                   <TextBox
-                    value={this.state.key}
+                    value={this.state.uvalue}
                     name={"Value"}
                     className={"input-box input-box-demo input-box-second-demo"}
                     // handleChange={this.handleTextArea}
@@ -78,7 +126,7 @@ class Demo extends Component {
                 <form>
                   <TextBox
                     title={"Delete"}
-                    value={this.state.key}
+                    value={this.state.dkey}
                     name={"key"}
                     className={"input-box input-box-demo"}
                     // handleChange={this.handleTextArea}
