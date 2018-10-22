@@ -11,16 +11,27 @@ exports.demo_create = (req, res) => {
   let key = req.body.ckey;
   let value = req.body.cvalue;
 
-  let sql = "INSERT INTO `ballot`.`demo` (`key`, `value`) VALUES ('" + key + "', '" + value + "')";
+  let sql = "INSERT INTO `ballot`.`demo` (`key`, `value`)" +
+            "VALUES ('" + key + "', '" + value + "'); " +
+            "SELECT * from `ballot`.`demo`";
   con.query(sql, (err, result) => {
     if (err) throw err;
+    let data = result[1];
+    console.log(data);
+    console.log('change');
+    res.send({ result: data });
   });
 
 };
 
 exports.demo_read = (req, res) => {
-  console.log(req.query);
-  res.send({ value: 'yash' });
+  let key = req.query.key;
+  let sql = "SELECT * from `ballot`.`demo` as tab WHERE tab.key = '" + key + "'";
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log(result);
+    res.send({ result: result });
+  });
 }
 
 exports.demo_table = (req, res) => {

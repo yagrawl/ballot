@@ -4,5 +4,6 @@ exports.con = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "password",
-  database: "ballot"
+  database: "ballot",
+  multipleStatements: true
 });

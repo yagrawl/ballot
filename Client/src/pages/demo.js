@@ -75,7 +75,9 @@ class Demo extends Component {
       body: JSON.stringify(data),
       headers: {"Content-Type": "application/json"}
     })
-    .then(response => response.json())
+    .then(response => {
+      console.log(response.result);
+    })
     .then(response => console.log('Success:', JSON.stringify(response)))
     .catch(error => console.error('Error:', error));
   };
