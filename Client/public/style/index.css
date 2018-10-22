@@ -341,3 +341,40 @@ textarea {
     background-color: #389BC2;
     color: white;
 }
+
+@media screen and (max-width: 620px) {
+  .split-demo {
+      width: 100%;
+      position: relative;
+  }
+
+  .button-demo {
+    width: 25%;
+    font-size: 16px;
+    margin-left: 0;
+    margin-right: 0;
+    text-align: center;
+  }
+}
+
+.input-box-option {
+  font-size: 20px;
+  color: #21252B;
+  width: 50%;
+  background: #F5F3F4;
+  border-radius: 10px;
+  margin-top: 3px;
+  margin-right: 5px;
+}
+
+.button-black-remove-option {
+  padding: 0px 8px;
+}
+
+.input-label-option {
+  margin-bottom: -10px;
+}
+
+.reduced-margin-bottom {
+  margin-bottom: -15px;
+}
