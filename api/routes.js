@@ -8,6 +8,7 @@ module.exports = function(app) {
   let ip = require('./controllers/ip');
   let list = require('./controllers/list');
   let pollDetails = require('./controllers/pollDetails');
+  let demo = require('./controllers/demo');
 
   app.route('/ip')
     .get(ip.get_ip);
@@ -17,4 +18,13 @@ module.exports = function(app) {
 
   app.route('/create/details')
     .post(pollDetails.post_details);
+
+  app.route('/api/demo')
+    .post(demo.demo_create)
+    .get(demo.demo_read)
+    .put(demo.demo_update)
+    .delete(demo.demo_delete);
+
+  app.route('/api/demo/table')
+    .get(demo.demo_table);
 };

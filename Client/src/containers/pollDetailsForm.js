@@ -46,7 +46,7 @@ class PollDetails extends Component {
 
   render() {
     return (
-      <form className="container-fluid" onSubmit={this.handleFormSubmit}>
+      <form onSubmit={this.handleFormSubmit}>
 
         <TextAreaBox
           title={"Question"}

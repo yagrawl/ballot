@@ -228,3 +228,116 @@ textarea {
 .not-found-header * .button {
   font-size: 16px;
 }
+
+/* Demo : styles */
+.main-div-demo {
+  margin-top: 100px;
+  margin-right: 5%;
+  margin-left: 5%;
+}
+
+.split-demo {
+    height: 100%;
+    width: 50%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.left-demo {
+    margin-top: 80px;
+    left: 0;
+}
+
+.right-demo {
+    right: 0;
+    background: #E7EAED;
+}
+
+.right-content {
+  margin-top: 20px;
+}
+
+.centered-demo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.left-margin-demo {
+  margin-left: 50px;
+}
+
+.input-box-demo {
+  width: 25%;
+  font-size: 18px;
+  display: inline-block;
+  float: left;
+  margin-bottom: 30px;
+}
+
+.input-box-second-demo {
+  margin-left: 10px;
+}
+
+.heading-demo {
+  font-family: Proxima Nova;
+  font-weight: 100;
+  font-size: 24px;
+  color: #21252B;
+}
+
+.inline-component-demo {
+  display: inline-block;
+}
+
+.button-demo {
+  display: inline;
+  width: 20%;
+  font-size: 16px;
+  margin-right: 50px;
+  margin-left: 20px;
+  float: right;
+  text-align: center;
+  padding-top: 6px;
+  padding-bottom: 8px;
+  float: right;
+  clear: right;
+}
+
+.clear-left-demo {
+  clear: left;
+}
+
+.data-demo {
+    font-family: Proxima Nova;
+    font-size: 16px;
+    font-weight: 100;
+    border-collapse: collapse;
+    width: 90%;
+}
+
+.data-demo td, .data-demo th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.data-demo tr:nth-child(even) {
+  background: #f2f2f2;
+}
+
+.data-demo tr:hover {
+  background: #ddd;
+}
+
+.data-demo th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #389BC2;
+    color: white;
+}
