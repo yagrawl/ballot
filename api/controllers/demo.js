@@ -18,15 +18,35 @@ exports.demo_create = (req, res) => {
     if (err) throw err;
     let data = result[1];
     console.log(data);
-    console.log('change2');
-    res.send({ result: data });
   });
-
 };
 
 exports.demo_read = (req, res) => {
   let key = req.query.key;
   let sql = "SELECT * from `ballot`.`demo` as tab WHERE tab.key = '" + key + "'";
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log(result);
+    res.send({ result: result });
+  });
+}
+
+exports.demo_update = (req, res) => {
+  let key = req.body.ukey;
+  let value = req.body.uvalue;
+
+  let sql = "UPDATE `ballot`.`demo` SET `value` = '" + value +
+            "' WHERE `key` = '" + key + "'";
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log(result);
+    res.send({ result: result });
+  });
+}
+
+exports.demo_delete = (req, res) => {
+  let key = req.query.key;
+  let sql = "DELETE from `ballot`.`demo` WHERE `key` = '" + key + "'";
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log(result);

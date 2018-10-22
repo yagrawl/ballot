@@ -21,7 +21,9 @@ module.exports = function(app) {
 
   app.route('/api/demo')
     .post(demo.demo_create)
-    .get(demo.demo_read);
+    .get(demo.demo_read)
+    .put(demo.demo_update)
+    .delete(demo.demo_delete);
 
   app.route('/api/demo/table')
     .get(demo.demo_table);
