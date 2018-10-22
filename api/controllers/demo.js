@@ -2,6 +2,7 @@ const SqlString = require('sqlstring');
 const SQL = require('sql-template-strings');
 const db = require('../models/connection');
 const con = db.con;
+const database = process.env.DB_NAME || "ballot";
 
 con.connect(err => {
   if (err) throw err;
@@ -11,9 +12,9 @@ exports.demo_create = (req, res) => {
   let key = req.body.ckey;
   let value = req.body.cvalue;
 
-  let sql = "INSERT INTO `ballot`.`demo` (`key`, `value`)" +
+  let sql = "INSERT INTO `" + database + "`.`demo` (`key`, `value`)" +
             "VALUES ('" + key + "', '" + value + "'); " +
-            "SELECT * from `ballot`.`demo`";
+            "SELECT * from `" + database + "`.`demo`";
   con.query(sql, (err, result) => {
     if (err) throw err;
     let data = result[1];
@@ -23,7 +24,7 @@ exports.demo_create = (req, res) => {
 
 exports.demo_read = (req, res) => {
   let key = req.query.key;
-  let sql = "SELECT * from `ballot`.`demo` as tab WHERE tab.key = '" + key + "'";
+  let sql = "SELECT * from `" + database + "`.`demo` as tab WHERE tab.key = '" + key + "'";
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log(result);
@@ -35,7 +36,7 @@ exports.demo_update = (req, res) => {
   let key = req.body.ukey;
   let value = req.body.uvalue;
 
-  let sql = "UPDATE `ballot`.`demo` SET `value` = '" + value +
+  let sql = "UPDATE `" + database + "`.`demo` SET `value` = '" + value +
             "' WHERE `key` = '" + key + "'";
   con.query(sql, function (err, result) {
     if (err) throw err;
@@ -46,7 +47,7 @@ exports.demo_update = (req, res) => {
 
 exports.demo_delete = (req, res) => {
   let key = req.query.key;
-  let sql = "DELETE from `ballot`.`demo` WHERE `key` = '" + key + "'";
+  let sql = "DELETE from `" + database + "`.`demo` WHERE `key` = '" + key + "'";
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log(result);
@@ -55,7 +56,7 @@ exports.demo_delete = (req, res) => {
 }
 
 exports.demo_table = (req, res) => {
-  let sql = "SELECT * from `ballot`.`demo`";
+  let sql = "SELECT * from `" + database + "`.`demo`";
   con.query(sql, function (err, result) {
     if (err) throw err;
     res.send({ result: result });
