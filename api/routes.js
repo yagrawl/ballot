@@ -9,6 +9,7 @@ module.exports = function(app) {
   let list = require('./controllers/list');
   let create = require('./controllers/create');
   let demo = require('./controllers/demo');
+  let poll = require('./controllers/poll');
 
   app.route('/ip')
     .get(ip.get_ip);
@@ -16,9 +17,14 @@ module.exports = function(app) {
   app.route('/api/list')
     .get(list.get_list);
 
+  app.route('/api/create')
+    .post(create.poll_details);
+
   app.route('/api/poll_init')
-    .post(create.poll_details)
     .get(create.get_tags);
+
+  app.route('/api/poll/:poll_id')
+    .get(poll.get_poll);
 
   app.route('/api/demo')
     .post(demo.demo_create)
