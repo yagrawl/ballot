@@ -9,7 +9,8 @@ class PollForm extends Component {
     super(props);
 
     this.state = {
-      step: 1
+      step: 1,
+      poll_id: 'creating'
     };
 
     this.response = {
@@ -49,7 +50,15 @@ class PollForm extends Component {
         headers: {"Content-Type": "application/json"}
       })
       .then(response => response.json())
-      .then(response => console.log('Success:', JSON.stringify(response)))
+      .then(response => {
+          this.setState(
+            prevState => ({
+              ...prevState,
+              poll_id : JSON.stringify(response).poll_id
+            })
+          );
+        }
+      )
       .catch(error => console.error('Error:', error));
     }
   };
@@ -59,9 +68,12 @@ class PollForm extends Component {
   };
 
   nextStep = () => {
-    this.setState({
-      step : this.state.step + 1
-    })
+    this.setState(
+      prevState => ({
+        ...prevState,
+        step : this.state.step + 1
+      })
+    );
   };
 
   render() {
@@ -79,7 +91,9 @@ class PollForm extends Component {
                   returnValues={this.returnValues}
                 />
       case 3:
-        return <PollLink />
+        return (
+                <p className="input-label">Access poll at {this.state.poll_id}</p>
+              )
 		}
   }
 }

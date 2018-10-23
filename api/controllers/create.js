@@ -21,6 +21,8 @@ exports.poll_details = (req, res) => {
       if (err) throw err;
       console.log(data);
     });
+
+    res.send({ poll_id: poll.poll_id });
 };
 
 exports.get_tags = (req, res) => {

@@ -522,3 +522,11 @@ input:checked + .slider:before {
   -ms-transform: translateX(26px);
   transform: translateX(26px);
 }
+
+.poll-question-p {
+  font-family: Proxima Nova;
+  font-size: 30px;
+  font-weight: 100;
+  color: #515151;
+  text-align: center;
+}
