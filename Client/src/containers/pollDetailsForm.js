@@ -122,6 +122,30 @@ class PollDetails extends Component {
 		return elements
 	}
 
+  getInputBox() {
+    if(this.state.details.options.length >= 4) {
+      return (
+        <p className="error-msg">Maximum of 4 options supported.</p>
+      )
+    } else {
+      return (
+        <input
+            id="add"
+            type="text"
+            name="initvalue"
+            autoComplete="off"
+            maxLength="70"
+            onFocus={this.handleFocus}
+            onChange={this.handleChange}
+            onKeyPress={this.handleKeypress}
+            onBlur={this.handleBlur}
+            value={this.state.input}
+            className={"input-box input-box-option"}
+          />
+      )
+    }
+  }
+
   render() {
     return (
       <div>
@@ -139,19 +163,7 @@ class PollDetails extends Component {
           {this.makeAddedList()}
           <div className="reduced-margin-top"></div>
 
-    			<input
-    					id="add"
-    					type="text"
-    					name="initvalue"
-    					autoComplete="off"
-    				  maxLength="70"
-    					onFocus={this.handleFocus}
-    					onChange={this.handleChange}
-    					onKeyPress={this.handleKeypress}
-    					onBlur={this.handleBlur}
-    					value={this.state.input}
-              className={"input-box input-box-option"}
-    				/>
+          {this.getInputBox()}
 
   				<span id="helperspan" ref={el => (this.helperspan = el)}>
   					{this.state.input}

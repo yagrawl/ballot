@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 import PollDetails from '../containers/pollDetailsForm';
 import PollAttributes from '../containers/pollAttributesForm';
+import PollLink from '../containers/pollLink';
 
 class PollForm extends Component {
   constructor(props) {
@@ -29,10 +30,24 @@ class PollForm extends Component {
   }
 
   returnValues = (values) => {
+    this.response = Object.assign({}, this.response, values);
+    delete this.response.input;
+    delete this.response.options;
+
+    let data = this.response;
+
+    fetch("/api/poll_init", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {"Content-Type": "application/json"}
+    })
+    .then(response => response.json())
+    .then(response => console.log('Success:', JSON.stringify(response)))
+    .catch(error => console.error('Error:', error));
+  };
+
+  createPoll = (values) => {
     console.log(values);
-    return () => {
-      this.response = Object.assign({}, this.response, values);
-    }
   };
 
   nextStep = () => {
@@ -50,7 +65,13 @@ class PollForm extends Component {
                   returnValues={this.returnValues}
                 />
 			case 2:
-				return <PollAttributes />
+				return <PollAttributes
+                  nextStep={this.nextStep}
+                  response={this.response.details.question}
+                  returnValues={this.createPoll}
+                />
+      case 3:
+        return <PollLink />
 		}
   }
 }
