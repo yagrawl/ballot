@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 
-import TextAreaBox from '../components/textareabox';
+import TextBox from '../components/textbox';
+import Toggle from '../components/toggle';
 
 class PollAttributes extends Component {
   constructor(props) {
@@ -11,12 +12,17 @@ class PollAttributes extends Component {
         creator_id: "",
         creation_time: "",
         expiration_time: "",
-        feed_privacy: "",
-        analtyics_privacy: "",
+        feed_privacy: false,
+        analtyics_privacy: false,
         tags: [],
         ip_address: ""
-      }
+      },
+      duration: ""
     }
+
+    this.handleDurationChange = this.handleDurationChange.bind(this);
+    this.handleFeedPrivacyChange = this.handleFeedPrivacyChange.bind(this);
+    this.handleAnalyticsPrivacyChange = this.handleAnalyticsPrivacyChange.bind(this);
   }
 
   handleNext = (e) => {
@@ -26,15 +32,64 @@ class PollAttributes extends Component {
     this.props.nextStep();
   }
 
-  handleFeedPrivacyChange(e) {
-    console.log(e.target.value);
+  handleDurationChange = (e) => {
+    let value = e.target.value;
+    this.setState(
+      prevState => ({
+        ...prevState,
+        duration: value
+      })
+    );
+  }
+
+  handleFeedPrivacyChange() {
+    this.setState(
+      prevState => ({
+        attributes: {
+          ...prevState.attributes,
+          feed_privacy: !prevState.attributes.feed_privacy
+        }
+      })
+    );
+  }
+
+  handleAnalyticsPrivacyChange() {
+    this.setState(
+      prevState => ({
+        attributes: {
+          ...prevState.attributes,
+          analytics_privacy: !prevState.attributes.analytics_privacy
+        }
+      })
+    );
   }
 
   render() {
     return (
       <div>
         <form>
-          <p className="input-label">Poll Duration</p>
+          <TextBox
+            title={"Poll Duration"}
+            className={"input-box input-box-option"}
+            name={"duration"}
+            value={this.state.duration}
+            handleChange={this.handleDurationChange}
+            type={"number"}
+            placeholder={"Enter number of hours"}
+          />
+
+          <div>
+            <p className="input-label">Display your poll on feed?</p>
+            <Toggle value={this.state.attributes.feed_privacy}
+                  handleChange={this.handleFeedPrivacyChange} />
+          </div>
+
+          <div>
+            <p className="input-label">Display analytics on your poll after vote?</p>
+            <Toggle value={this.state.attributes.analtyics_privacy}
+                  handleChange={this.handleAnalyticsPrivacyChange} />
+          </div>
+
           <button className="button-black button-black-transparent"
             onClick={this.handleNext} >Create</button>
         </form>

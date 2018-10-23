@@ -68,7 +68,7 @@ class PollForm extends Component {
 				return <PollAttributes
                   nextStep={this.nextStep}
                   response={this.response.details.question}
-                  returnValues={this.createPoll}
+                  returnValues={this.returnValues}
                 />
       case 3:
         return <PollLink />
