@@ -16,8 +16,10 @@ module.exports = function(app) {
   app.route('/api/list')
     .get(list.get_list);
 
+  app.route('/api/create')
+    .post(create.poll_details);
+
   app.route('/api/poll_init')
-    .post(create.poll_details)
     .get(create.get_tags);
 
   app.route('/api/demo')

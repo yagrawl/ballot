@@ -13,7 +13,7 @@ class PollAttributes extends Component {
         creation_time: "",
         expiration_time: "",
         feed_privacy: false,
-        analtyics_privacy: false,
+        analytics_privacy: false,
         tags: [],
         ip_address: ""
       },
@@ -31,6 +31,21 @@ class PollAttributes extends Component {
     this.props.returnValues(this.state);
     this.props.nextStep();
   }
+
+  componentDidMount() {
+    this.callApi()
+      .then(res => this.setState({ ip_address: res.express }))
+      .catch(err => console.log(err));
+  }
+
+  callApi = async () => {
+    const response = await fetch('/ip');
+    const body = await response.json();
+
+    if (response.status !== 200) throw Error(body.message);
+
+    return body;
+  };
 
   handleDurationChange = (e) => {
     let value = e.target.value;

@@ -22,7 +22,7 @@ class PollForm extends Component {
         creation_time: "",
         expiration_time: "",
         feed_privacy: "",
-        analtyics_privacy: "",
+        analytics_privacy: "",
         tags: [],
         ip_address: ""
       }
@@ -36,14 +36,22 @@ class PollForm extends Component {
 
     let data = this.response;
 
-    fetch("/api/poll_init", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {"Content-Type": "application/json"}
-    })
-    .then(response => response.json())
-    .then(response => console.log('Success:', JSON.stringify(response)))
-    .catch(error => console.error('Error:', error));
+    if(data.hasOwnProperty('duration')) {
+      data.attributes.creation_time = new Date().getTime();
+      data.attributes.expiration_time = data.duration;
+      data.attributes.ip_address = data.ip_address;
+      delete data.ip_address;
+      delete data.duration;
+
+      fetch("/api/create", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {"Content-Type": "application/json"}
+      })
+      .then(response => response.json())
+      .then(response => console.log('Success:', JSON.stringify(response)))
+      .catch(error => console.error('Error:', error));
+    }
   };
 
   createPoll = (values) => {
