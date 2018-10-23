@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import ReactTransitionGroup, {CSSTransitionGroup} from 'react-transition-group';
 
 import TextAreaBox from '../components/textareabox';
 
@@ -12,19 +11,11 @@ class PollDetails extends Component {
         question: "",
         options: []
       },
-      currentcolor: [
-				"#531CB3",
-				"#7149EE",
-				"#B754FF",
-				"#ED4FEF",
-				"#ED49AB",
-				"#ED4FEF",
-				"#B754FF",
-				"#7149EE"
-			],
-      content_add: "add +",
-			width: 100,
-			myItems: [],
+      input: "add option",
+    }
+
+    this.helpers = {
+      width: 100
     }
 
     this.lastId = -1;
@@ -36,7 +27,7 @@ class PollDetails extends Component {
 		this.handleBlur = this.handleBlur.bind(this);
 		this.handleClick = this.handleClick.bind(this);
 
-		this.helperspan = null; 
+		this.helperspan = null;
   }
 
   handleNext = (e) => {
@@ -51,7 +42,7 @@ class PollDetails extends Component {
     this.setState(
       prevState => ({
         details: {
-          ...prevState.poll,
+          ...prevState.details,
           question: value
         }
       })
@@ -59,66 +50,68 @@ class PollDetails extends Component {
   }
 
   handleFocus(event) {
-		this.setState({ content_add: "" });
+		this.setState({ input: "" });
 	}
 
 	handleChange(event) {
 		const usr_input = event.target.value;
-		this.setState({ content_add: usr_input });
+		this.setState({ input: usr_input });
 	}
 
 	handleKeypress(event) {
-		if (event.key == "Enter") {
-			var newArray = this.state.myItems;
-			var currentcontent = this.state.content_add.trim();
+		if (event.key === "Enter") {
+			var newArray = this.state.details.options;
+			var currentcontent = this.state.input.trim();
 			if (!currentcontent) {
 				return;
 			}
 
-			var currentWidth = this.helperspan.offsetWidth;
 			newArray.push({
 				content: currentcontent,
-				id: ++this.lastId,
-				itemWidth: currentWidth + 2
+				id: ++this.lastId + 1,
 			});
 			this.setState({
-				myItems: newArray,
-				content_add: "",
+				options: newArray,
+				input: "",
 			});
 		}
 	}
 
 	handleBlur(event) {
-		this.setState({ content_add: "add +" });
+		this.setState({ input: "add option" });
 	}
 
 	handleClick(event) {
 		const idToRemove = Number(event.target.dataset["item"]);
-		const newArray = this.state.myItems.filter((listitem) => {return listitem.id !== idToRemove});
-		this.setState({ myItems: newArray });
+		const newArray = this.state.details.options.filter((listitem) => {
+      return listitem.id !== idToRemove
+    });
+    console.log(this.state);
+		this.setState(
+      prevState => ({
+        details: {
+          ...prevState.details,
+          options: newArray
+        }
+      })
+    );
 	}
 
-
-
 	componentDidUpdate(prevProps, prevState) {
-		if (prevState.content_add != this.state.content_add) {
-			console.log('did update, content:', this.helperspan.textContent, 'width', this.helperspan.offsetWidth);
+		if (prevState.input !== this.state.input) {
 			const helperWidth = this.helperspan.offsetWidth;
-			this.setState({ width: Math.max(50, helperWidth + 1) });
+      this.helpers.width = Math.max(50, helperWidth + 1);
 		}
 	}
 
 	makeAddedList() {
-
-		const elements =  this.state.myItems.map((listitem, index) => (
+		let elements =  this.state.details.options.map((listitem, index) => (
 			<li
 				key={listitem.id}
 				onClick={this.handleClick}
 				data-item={listitem.id}
 				style={{
-					backgroundColor: this.state.currentcolor[
-						index % this.state.currentcolor.length
-					],
+					backgroundColor: "#389BC2",
 					width: listitem.itemWidth
 				}}
         className={"option-li"}
@@ -127,7 +120,6 @@ class PollDetails extends Component {
 			</li>
 		));
 		return elements
-
 	}
 
   render() {
@@ -143,15 +135,9 @@ class PollDetails extends Component {
         />
 
         <div className="option-div">
-
-  				{/* <CSSTransitionGroup
-  					transitionName="item-transition"
-  					transitionEnterTimeout={500}
-  					transitionLeaveTimeout={210}
-  				>
-
-  				</CSSTransitionGroup> */}
+          <p className="input-label input-label-option">Options</p>
           {this.makeAddedList()}
+          <div className="reduced-margin-top"></div>
 
     			<input
     					id="add"
@@ -159,21 +145,20 @@ class PollDetails extends Component {
     					name="initvalue"
     					autoComplete="off"
     				  maxLength="70"
-              className="option-input"
     					onFocus={this.handleFocus}
     					onChange={this.handleChange}
     					onKeyPress={this.handleKeypress}
     					onBlur={this.handleBlur}
-    					value={this.state.content_add}
-    					style={{ width: this.state.width }}
+    					value={this.state.input}
+              className={"input-box input-box-option"}
     				/>
 
   				<span id="helperspan" ref={el => (this.helperspan = el)}>
-  					{this.state.content_add}
+  					{this.state.input}
   				</span>
 
   			</div>
-
+        <div className="divider"></div>
         <button className="button-black button-black-transparent"
           onClick={this.handleNext}>Next</button>
       </div>
