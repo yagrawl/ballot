@@ -11,14 +11,19 @@ con.connect(err => {
 exports.demo_create = (req, res) => {
   let key = req.body.ckey;
   let value = req.body.cvalue;
-
-  let sql = "INSERT INTO `" + database + "`.`demo` (`key`, `value`)" +
-            "VALUES ('" + key + "', '" + value + "'); " +
-            "SELECT * from `" + database + "`.`demo`";
-  con.query(sql, (err, result) => {
+  let check_sql = "SELECT * from `" + database + "`.`demo` as tab WHERE tab.key = '" + key + "'";
+  con.query(check_sql, function (err, result) {
     if (err) throw err;
-    let data = result[1];
-    console.log(data);
+    if(result.length === 0) {
+      let sql = "INSERT INTO `" + database + "`.`demo` (`key`, `value`)" +
+                "VALUES ('" + key + "', '" + value + "'); " +
+                "SELECT * from `" + database + "`.`demo`";
+      con.query(sql, (err, result) => {
+        if (err) throw err;
+        let data = result[1];
+        console.log(data);
+      });
+    }
   });
 };
 
