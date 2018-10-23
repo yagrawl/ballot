@@ -11,7 +11,7 @@ class PollForm extends Component {
       step: 1
     };
 
-    let response = {
+    this.response = {
       details: {
         question: "",
         options: []
@@ -28,6 +28,13 @@ class PollForm extends Component {
     }
   }
 
+  returnValues = (values) => {
+    console.log(values);
+    return () => {
+      this.response = Object.assign({}, this.response, values);
+    }
+  };
+
   nextStep = () => {
     this.setState({
       step : this.state.step + 1
@@ -37,7 +44,11 @@ class PollForm extends Component {
   render() {
     switch (this.state.step) {
 			case 1:
-				return <PollDetails nextStep={this.nextStep}/>
+				return <PollDetails
+                  nextStep={this.nextStep}
+                  response={this.response.details.question}
+                  returnValues={this.returnValues}
+                />
 			case 2:
 				return <PollAttributes />
 		}

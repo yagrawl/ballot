@@ -378,3 +378,83 @@ textarea {
 .reduced-margin-bottom {
   margin-bottom: -15px;
 }
+
+.option-input, .option-li, #helperspan {
+ display: inline-block;
+ font-size: 24px;
+ font-family: 'Raleway', sans-serif;
+ font-weight: 400;
+ text-align: left;
+ letter-spacing: 2px;
+}
+
+.option-input, .option-li {
+ vertical-align: bottom;
+ margin-right: 10px;
+ margin-top: 15px;
+ border-radius: 40px;
+ transition: translate .2s;
+}
+
+#helperspan {
+ white-space: pre;
+ visibility: hidden;
+ position: absolute;
+ pointer-events: none;
+
+}
+
+.option-input {
+ background-color: #2a2734;
+ border: 2px solid #7149ee;
+ color: #7149ee;
+ width: auto;
+ height: 48px;
+ padding: 0 20px;
+}
+
+.option-li {
+ color: #fff;
+ padding: 0 50px 0 20px;
+ list-style-type: none;
+ line-height: 50px;
+ font-weight: 300;
+ position: relative;
+ cursor: pointer;
+ user-select: none;
+ white-space: pre;
+}
+
+
+.option-li, .option-input { max-width: 80vw; }
+.option-li { overflow: hidden; text-overflow: ellipsis; }
+
+.option-li:hover {
+ transform: scale(1.05);
+}
+
+.option-li:after {
+ content: " ×";
+ color: #333;
+ font-weight: 400;
+ opacity: .6;
+ font-size: 30px;
+ line-height: 20px;
+ position: absolute;
+ right: 20px;
+ top: 14px;
+}
+
+.option-li:hover::after {
+ opacity: 1;
+}
+
+.option-input:focus,
+.option-input#add:focus {
+ outline: none;
+ width: 130px;
+}
+
+.option-div {
+ display: inline-block;
+}
