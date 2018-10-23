@@ -23,6 +23,8 @@ exports.demo_create = (req, res) => {
         let data = result[1];
         console.log(data);
       });
+    } else {
+      console.log('Entry already exists');
     }
   });
 };
