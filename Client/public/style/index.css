@@ -530,3 +530,45 @@ input:checked + .slider:before {
   color: #515151;
   text-align: center;
 }
+
+.poll-link {
+  font-family: Proxima Nova;
+  font-size: 20px;
+  font-weight: 100;
+  color: #4E8F85;
+  text-decoration: none !important;
+}
+
+.poll-link:link {
+  text-decoration: none !important;
+}
+
+.poll-link:hover {
+  color: #8BD9F9;
+}
+
+.poll-option-button {
+  background-color: white;
+  border: 1px solid #389BC2;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  padding: 8px 16px;
+  font-size: 24px;
+  font-family: Proxima Nova;
+  font-weight: 100;
+  margin: 4px 2px;
+  margin-top: 20px;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 30px;
+  color: #389BC2;
+  width: 50%;
+}
+
+.poll-option-button:hover {
+    background-color: #389BC2;
+    color: white;
+    outline: none;
+}
