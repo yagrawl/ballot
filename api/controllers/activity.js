@@ -26,10 +26,20 @@ exports.check_if_voted = (req, res) => {
             `WHERE act.ip_address = ${cm(ip)} AND act.poll_id = ${cm(poll)};`;
   con.query(sql, function (err, result) {
     if (err) throw err;
-    console.log(result);
     res.send({ details: result });
   });
 };
+
+exports.get_analytics = (req, res) => {
+  let poll_id = req.params.poll_id;
+  let sql = `SELECT * from ${database}.${at('activity')} as act ` +
+            `WHERE act.poll_id = ${cm(poll_id)};`;
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log(result);
+    res.send({ details: result });
+  });
+}
 
 const at = (input) => {
   let output = "`" + input + "`";

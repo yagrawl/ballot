@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 
+import PollAnalytics from '../containers/pollanalytics';
+
 class PollWidget extends Component {
   constructor(props) {
     super(props);
@@ -65,6 +67,14 @@ class PollWidget extends Component {
 
   handleVote(e) {
     let vote = e.target.value;
+
+    this.setState(
+      prevState => ({
+        ...prevState,
+        has_voted: true
+      })
+    );
+
     let data = {
       vote: e.target.value,
       poll_id: this.state.id,
@@ -79,7 +89,7 @@ class PollWidget extends Component {
     })
     .then(response => response.json())
     .then(response => {
-        console.log(response)
+        console.log(response);
       }
     )
     .catch(error => console.error('Error:', error));
@@ -108,7 +118,18 @@ class PollWidget extends Component {
     {
       if(this.state.has_voted) {
         return (
-            <p className="poll-question-p">You've already voted.</p>
+          <div>
+            <p className="poll-question-p">You've voted.</p>
+            <center>
+              <PollAnalytics
+              poll_id={this.state.id}
+              options={[this.state.response[0].option_1,
+                        this.state.response[0].option_2,
+                        this.state.response[0].option_3,
+                        this.state.response[0].option_4 ]}
+              />
+            </center>
+          </div>
         )
       } else {
         return (
