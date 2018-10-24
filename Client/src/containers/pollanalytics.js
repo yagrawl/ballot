@@ -26,16 +26,16 @@ class PollAnalytics extends Component {
           let stats = {1: 0, 2: 0, 3: 0, 4: 0 };
 
           for(let i = 0; i < data.details.length; i++) {
-            if(data.details[0].selection === "1") {
+            if(data.details[i].selection === "1") {
               stats[1] += 1;
             }
-            if(data.details[0].selection === "2") {
+            if(data.details[i].selection === "2") {
               stats[2] += 1;
             }
-            if(data.details[0].selection === "3") {
+            if(data.details[i].selection === "3") {
               stats[3] += 1;
             }
-            if(data.details[0].selection === "4") {
+            if(data.details[i].selection === "4") {
               stats[4] += 1;
             }
           }
@@ -55,15 +55,15 @@ class PollAnalytics extends Component {
 
   render() {
     let stats = this.state;
-
+    console.log(stats.stats);
     return (
       <div>
         <p className="input-label">Analytics</p>
         <RadialChart
-          data={[{angle: stats.opt_1, label: this.state.options[0]},
-                 {angle: stats.opt_2, label: this.state.options[1]},
-                 {angle: stats.opt_3, label: this.state.options[2]},
-                 {angle: stats.opt_4, label: this.state.options[3]}]}
+          data={[{angle: stats.stats.opt_1, label: this.state.options[0]},
+                 {angle: stats.stats.opt_2, label: this.state.options[1]},
+                 {angle: stats.stats.opt_3, label: this.state.options[2]},
+                 {angle: stats.stats.opt_4, label: this.state.options[3]}]}
           width={300}
           height={300}
         />
