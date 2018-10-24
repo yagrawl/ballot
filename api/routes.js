@@ -10,6 +10,7 @@ module.exports = function(app) {
   let create = require('./controllers/create');
   let demo = require('./controllers/demo');
   let poll = require('./controllers/poll');
+  let activity = require('./controllers/activity');
 
   app.route('/ip')
     .get(ip.get_ip);
@@ -31,6 +32,10 @@ module.exports = function(app) {
     .get(demo.demo_read)
     .put(demo.demo_update)
     .delete(demo.demo_delete);
+
+  app.route('/api/activity')
+    .post(activity.poll_vote)
+    .get(activity.check_if_voted);
 
   app.route('/api/demo/table')
     .get(demo.demo_table);
