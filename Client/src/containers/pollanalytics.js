@@ -17,53 +17,52 @@ class PollAnalytics extends Component {
       },
       options: this.props.options
     }
+
+    this.stats = {1: 0, 2: 0, 3: 0, 4: 0 };
   }
 
   componentDidMount() {
     fetch('/api/activity/analytics/' + this.state.id)
       .then(response => response.json())
       .then(data => {
-          let stats = {1: 0, 2: 0, 3: 0, 4: 0 };
 
           for(let i = 0; i < data.details.length; i++) {
             if(data.details[i].selection === "1") {
-              stats[1] += 1;
+              this.stats[1] += 1;
             }
             if(data.details[i].selection === "2") {
-              stats[2] += 1;
+              this.stats[2] += 1;
             }
             if(data.details[i].selection === "3") {
-              stats[3] += 1;
+              this.stats[3] += 1;
             }
             if(data.details[i].selection === "4") {
-              stats[4] += 1;
+              this.stats[4] += 1;
             }
           }
-
+          console.log('Stats Up: ', this.stats);
           this.setState(
             prevState => ({
               ...prevState,
-              opt_1: stats[1],
-              opt_2: stats[2],
-              opt_3: stats[3],
-              opt_4: stats[4]
+              opt_1: this.stats[1],
+              opt_2: this.stats[2],
+              opt_3: this.stats[3],
+              opt_4: this.stats[4]
             })
           );
-          console.log(this.state)
       });
   }
 
   render() {
-    let stats = this.state;
-    console.log(stats.stats);
+
     return (
       <div>
         <p className="input-label">Analytics</p>
         <RadialChart
-          data={[{angle: stats.stats.opt_1, label: this.state.options[0]},
-                 {angle: stats.stats.opt_2, label: this.state.options[1]},
-                 {angle: stats.stats.opt_3, label: this.state.options[2]},
-                 {angle: stats.stats.opt_4, label: this.state.options[3]}]}
+          data={[{angle: this.stats[1], label: this.state.options[0]},
+                 {angle: this.stats[2], label: this.state.options[1]},
+                 {angle: this.stats[3], label: this.state.options[2]},
+                 {angle: this.stats[4], label: this.state.options[3]}]}
           width={300}
           height={300}
         />
