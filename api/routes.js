@@ -37,6 +37,9 @@ module.exports = function(app) {
     .post(activity.poll_vote)
     .get(activity.check_if_voted);
 
+  app.route('/api/activity/analytics/:poll_id')
+    .get(activity.get_analytics);
+
   app.route('/api/demo/table')
     .get(demo.demo_table);
 };
