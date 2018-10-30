@@ -655,3 +655,12 @@ input:checked + .slider:before {
 .analytics-question {
   font-weight: 100;
 }
+
+.login-button-position {
+  max-height: 24px;
+  display: inline;
+  margin-top: 30px;
+  margin-right: 30px;
+  position: relative;
+  top: 50%;
+}
