@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import FacebookLogin from 'react-facebook-login';
 
 import logo from '../assets/imgs/logo.svg';
 
@@ -45,15 +44,7 @@ class Index extends Component {
           <Link to={'./create'}>
             <button className="button button-transparent">Create Poll</button>
           </Link>
-          <FacebookLogin
-            appId="2075066269470448"
-            autoLoad={true}
-            fields="name,email,picture"
-            callback={this.responseFacebook}
-            cssClass="button button-transparent"
-            icon=""
-          />
-          <p className="App-content">{this.state.response}</p>
+          <p className="App-content ip-center">{this.state.response}</p>
         </header>
       </div>
     );

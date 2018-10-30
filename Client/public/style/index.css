@@ -75,10 +75,15 @@ body {
 .logo-image {
   max-height: 24px;
   display: inline;
+  float: left;
   margin-top: 30px;
   margin-left: 30px;
   position: relative;
   top: 50%;
+}
+
+.cut-top {
+  clear: both;
 }
 
 .page-title {
@@ -659,8 +664,15 @@ input:checked + .slider:before {
 .login-button-position {
   max-height: 24px;
   display: inline;
-  margin-top: 30px;
+  float: right;
+  margin-top: 0px;
   margin-right: 30px;
   position: relative;
-  top: 50%;
+}
+
+.error-log-in {
+  font-family: Proxima Nova;
+  font-weight: 100;
+  font-size: 16px;
+  color: #AC4143;
 }
