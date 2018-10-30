@@ -4,6 +4,7 @@ const database = process.env.DB_NAME || "`ballot`";
 
 exports.get_poll = (req, res) => {
   let poll_id = req.params.poll_id;
+  console.log(poll_id);
 
   let sql = `SELECT * from ${database}.${at('polls')} as poll WHERE poll.poll_id = ${cm(poll_id)};`;
   con.query(sql, function (err, result) {
