@@ -644,3 +644,10 @@ input:checked + .slider:before {
   flex-direction: column;
   color: #8BD9F9;
 }
+
+.poll-widget-feed-cover {
+  background: white;
+  border-radius: 20px;
+  padding: 30px 30px;
+  margin-bottom: 50px;
+}
