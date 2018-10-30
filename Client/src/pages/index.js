@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import FacebookLogin from 'react-facebook-login';
 
 import logo from '../assets/imgs/logo.svg';
 
@@ -12,7 +13,11 @@ class Index extends Component {
       logged_in: false
     };
 
-    this.login = this.login.bind(this);
+    this.responseFacebook = this.responseFacebook.bind(this);
+  }
+
+  responseFacebook = (response) => {
+    console.log(response);
   }
 
   componentDidMount() {
@@ -30,17 +35,6 @@ class Index extends Component {
     return body;
   };
 
-  login() {
-    fetch('/auth/facebook')
-      .then(response => console.log(response))
-      .then(data => this.setState(
-        prevState => ({
-          ...prevState,
-          logged_in: true
-        })
-      ));
-  }
-
   render() {
 
     return (
@@ -51,7 +45,14 @@ class Index extends Component {
           <Link to={'./create'}>
             <button className="button button-transparent">Create Poll</button>
           </Link>
-              <button className="button button-transparent" onClick={this.login()}>Login</button>
+          <FacebookLogin
+            appId="2075066269470448"
+            autoLoad={true}
+            fields="name,email,picture"
+            callback={this.responseFacebook}
+            cssClass="button button-transparent"
+            icon=""
+          />
           <p className="App-content">{this.state.response}</p>
         </header>
       </div>
