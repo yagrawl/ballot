@@ -12,6 +12,7 @@ module.exports = function(app) {
   let poll = require('./controllers/poll');
   let activity = require('./controllers/activity');
   let feed = require('./controllers/feed');
+  let auth = require('./controllers/auth');
 
   app.route('/ip')
     .get(ip.get_ip);
@@ -43,6 +44,12 @@ module.exports = function(app) {
 
   app.route('/api/feed')
     .get(feed.get_feed_poll);
+
+  app.route('/auth/facebook')
+    .get(auth.get_auth);
+
+  app.route('/auth/facebook/callback')
+    .get(auth.get_callback);
 
   app.route('/api/demo/table')
     .get(demo.demo_table);
