@@ -90,7 +90,7 @@ class PollAttributes extends Component {
             value={this.state.duration}
             handleChange={this.handleDurationChange}
             type={"number"}
-            placeholder={"Enter number of hours"}
+            placeholder={"Enter number of days you want the poll to be active"}
           />
 
           <div>
