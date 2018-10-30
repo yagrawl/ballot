@@ -11,6 +11,7 @@ module.exports = function(app) {
   let demo = require('./controllers/demo');
   let poll = require('./controllers/poll');
   let activity = require('./controllers/activity');
+  let feed = require('./controllers/feed');
 
   app.route('/ip')
     .get(ip.get_ip);
@@ -39,6 +40,9 @@ module.exports = function(app) {
 
   app.route('/api/activity/analytics/:poll_id')
     .get(activity.get_analytics);
+
+  app.route('/api/feed')
+    .get(feed.get_feed_poll);
 
   app.route('/api/demo/table')
     .get(demo.demo_table);

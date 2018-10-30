@@ -20,6 +20,13 @@
       gtag('config', 'UA-65874311-11');
     </script>
 
+    <script>
+        var host = "theballot.herokuapp.com";
+        if ((host == location.hostname) && (location.protocol != "https:")) {
+            location.protocol = "https";
+        }
+    </script>
+
   </head>
   <body>
     <noscript>
