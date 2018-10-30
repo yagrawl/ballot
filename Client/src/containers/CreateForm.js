@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { Link } from 'react-router-dom';
 
 import PollDetails from '../containers/pollDetailsForm';
 import PollAttributes from '../containers/pollAttributesForm';
@@ -64,10 +63,6 @@ class PollForm extends Component {
     }
   };
 
-  createPoll = (values) => {
-    console.log(values);
-  };
-
   nextStep = () => {
     this.setState(
       prevState => ({
@@ -80,7 +75,6 @@ class PollForm extends Component {
   render() {
 
     let poll_details = this.state;
-    console.log(poll_details);
 
     switch (this.state.step) {
 			case 1:
@@ -96,12 +90,9 @@ class PollForm extends Component {
                   returnValues={this.returnValues}
                 />
       case 3:
-        return (
-                <p className="input-label">Your Poll is live
-                  <Link to={`poll/${poll_details.poll_id}`}>
-                  <span className="poll-link">&nbsp;Here</span>
-                  </Link></p>
-              )
+        return <PollLink
+                  pollid={poll_details.poll_id}
+                />
 		}
   }
 }
