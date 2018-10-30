@@ -15,6 +15,7 @@ class PollAnalytics extends Component {
         opt_3: 0,
         opt_4: 0
       },
+      question: this.props.question,
       options: this.props.options
     }
 
@@ -57,7 +58,7 @@ class PollAnalytics extends Component {
 
     return (
       <div>
-        <p className="input-label">Analytics</p>
+        <p className="input-label analytics-question">{this.state.question}</p>
         <RadialChart
           data={[{angle: this.stats[1], label: this.state.options[0]},
                  {angle: this.stats[2], label: this.state.options[1]},

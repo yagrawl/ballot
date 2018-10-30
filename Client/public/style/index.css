@@ -651,3 +651,7 @@ input:checked + .slider:before {
   padding: 30px 30px;
   margin-bottom: 50px;
 }
+
+.analytics-question {
+  font-weight: 100;
+}

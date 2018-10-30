@@ -122,6 +122,7 @@ class PollWidget extends Component {
             <center>
               <PollAnalytics
               poll_id={this.state.id}
+              question={this.state.response[0].question}
               options={[this.state.response[0].option_1,
                         this.state.response[0].option_2,
                         this.state.response[0].option_3,
