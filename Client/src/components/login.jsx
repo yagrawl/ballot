@@ -7,10 +7,8 @@ const Logo = (props) => (
     <FacebookLogin
       appId={"2075066269470448"}
       callback={props.callback}
-      scope={"public_profile"}
       cssClass={"button-black button-black-transparent"}
       textButton={"Login"}
-      size={"metro"}
     />
   </div>
 );

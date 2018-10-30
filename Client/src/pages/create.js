@@ -13,7 +13,8 @@ class Create extends Component {
       response: "",
       logged_in: false,
       user: {
-        name: "Log"
+        name: "Log",
+        image: ""
       }
     };
 
@@ -36,7 +37,7 @@ class Create extends Component {
         prevState => ({
           user: {
             ...prevState.user,
-            name: user.name
+            name: user.name,
           }
         })
       );
@@ -45,7 +46,11 @@ class Create extends Component {
 
   renderLoginButton() {
     if(this.state.logged_in) {
-        return (<p className="input-label">{this.state.user.name}</p>)
+        return (
+          <div className="login-button-position">
+            <p className="input-label">{this.state.user.name}</p>
+          </div>
+        )
     } else {
         return(<Login callback={this.responseFacebook}/>);
     }
