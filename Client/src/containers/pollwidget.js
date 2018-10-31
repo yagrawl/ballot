@@ -32,6 +32,7 @@ class PollWidget extends Component {
       },
       ip_address: "",
       has_voted: false,
+      is_logged_in: false
     }
 
     this.handleVote = this.handleVote.bind(this);

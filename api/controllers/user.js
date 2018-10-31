@@ -42,15 +42,31 @@ exports.log_user = (req, res) => {
 exports.get_user = (req, res) => {
   let user_id = req.params.user_id;
   console.log('User ID: ', user_id);
+  let data = {};
 
   let sql = `SELECT * from ${database}.${at('users')} as user ` +
             `WHERE user.user_id = ${cm(user_id)};`;
+  let get_polls_sql = `SELECT * from ${database}.${at('polls')} as polls ` +
+                      `WHERE polls.creator_id = ${cm(user_id)};`;
   console.log(sql);
   con.query(sql, function (err, result) {
     if (err) throw err;
-    result = result[0];
-    console.log(result);
-    res.send({ details: result });
+    let user_details = result[0];
+    console.log('User Details : ', user_details);
+    data.details = user_details;
+    con.query(get_polls_sql, function (err, result) {
+      if (err) throw err;
+      let user_polls = [];
+      if(result.length < 5) {
+        user_polls = result;
+      } else {
+        user_polls = result.slice(0, 5);
+      }
+      console.log('User Polls : ', user_polls);
+      data.polls = user_polls;
+      console.log('User : ', data);
+      res.send({details: data});
+    });
   });
 }
 

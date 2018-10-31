@@ -37,12 +37,6 @@ class Create extends Component {
         })
       );
 
-      let high_res_picture = user.picture.data.url
-      .replace("height=50&width=50", "height=720&width=720")
-      .replace("ext=1543540898&hash=AeRg3ohyaTi8GCHA", "ext=1543541429&hash=AeRWTsm5CHqZ1BRG");
-
-      console.log(high_res_picture);
-
       this.setState(
         prevState => ({
           user: {

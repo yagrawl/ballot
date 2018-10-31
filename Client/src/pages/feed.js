@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import PollWidget from '../containers/pollwidget'
 import Logo from '../components/logo'
 
-class Index extends Component {
+class Feed extends Component {
   constructor(props) {
     super(props);
 
@@ -48,4 +48,4 @@ class Index extends Component {
   }
 }
 
-export default Index;
+export default Feed;
