@@ -8,7 +8,7 @@ const polls = "`polls`"
 exports.poll_details = (req, res) => {
   let data = req.body;
   let poll = cleanCreatePollData(data);
-
+  console.log('poll data: ', data);
   let sql = `INSERT INTO ${database}` +
             `.${at('polls')} (${at('poll_id')}, ${at('question')}, ${at('creation_time')}, ` +
             `${at('expiration_time')}, ${at('feed_privacy')}, ${at('analytics_privacy')}, ` +
