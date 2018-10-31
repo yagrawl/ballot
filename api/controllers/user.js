@@ -39,6 +39,21 @@ exports.log_user = (req, res) => {
   });
 }
 
+exports.get_user = (req, res) => {
+  let user_id = req.params.user_id;
+  console.log('User ID: ', user_id);
+
+  let sql = `SELECT * from ${database}.${at('users')} as user ` +
+            `WHERE user.user_id = ${cm(user_id)};`;
+  console.log(sql);
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    result = result[0];
+    console.log(result);
+    res.send({ details: result });
+  });
+}
+
 //this function adds backtick to strings
 const at = (input) => {
   let output = "`" + input + "`";

@@ -8,7 +8,7 @@ exports.get_feed_poll = (req, res) => {
             `GROUP BY ${at('poll_id')};`;
   con.query(sql, function (err, result) {
     if (err) throw err;
-    result = result.sort(compare).slice(0, 3);
+    result = result.sort(compare).slice(0, 5);
     console.log(result);
     res.send({ details: result });
   });
