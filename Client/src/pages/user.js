@@ -55,7 +55,7 @@ class User extends Component {
     return (
       <div className="user-header">
         <div className="logo-block">
-          <Logo link="./"/>
+          <Logo link="../"/>
         </div>
         <div className="cut-top"></div>
         <div className="active-area">
