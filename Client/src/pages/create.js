@@ -5,6 +5,8 @@ import Logo from '../components/logo'
 import Login from '../components/login'
 import CreateForm from '../containers/CreateForm';
 
+import avatar from '../assets/imgs/default_avatar.png';
+
 class Create extends Component {
   constructor(props) {
     super(props);
@@ -14,7 +16,7 @@ class Create extends Component {
       logged_in: false,
       user: {
         name: "Log",
-        image: ""
+        image: avatar
       }
     };
 
@@ -45,10 +47,11 @@ class Create extends Component {
   }
 
   renderLoginButton() {
-    if(this.state.logged_in) {
+    if(!this.state.logged_in) {
         return (
           <div className="login-button-position">
-            <p className="input-label">{this.state.user.name}</p>
+            <img className="avatar-top" src={this.state.user.image}></img>
+            <p className="input-label user-name">{this.state.user.name}</p>
           </div>
         )
     } else {
