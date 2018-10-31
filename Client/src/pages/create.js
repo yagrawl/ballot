@@ -15,7 +15,7 @@ class Create extends Component {
       response: "",
       logged_in: false,
       user: {
-        id: "id",
+        id: "Unknown",
         name: "name",
         image: 'img',
         email: "email"
