@@ -13,13 +13,12 @@ class User extends Component {
   render() {
 
     let user_id = this.props.match.params.user_id;
-    console.log(user_id);
 
     return (
       <div>
         <Logo link=""/>
         <div className="active-area">
-          <p>User</p>
+          
         </div>
       </div>
     );

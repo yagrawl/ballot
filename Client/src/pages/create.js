@@ -37,17 +37,33 @@ class Create extends Component {
         })
       );
 
+      let high_res_picture = user.picture.data.url
+      .replace("height=50&width=50", "height=720&width=720")
+      .replace("ext=1543540898&hash=AeRg3ohyaTi8GCHA", "ext=1543541429&hash=AeRWTsm5CHqZ1BRG");
+
       this.setState(
         prevState => ({
           user: {
             ...prevState.user,
             id: user.id,
             name: user.name,
-            image: user.picture.data.url,
+            image: high_res_picture,
             email: user.email
           }
         })
       );
+
+      fetch("/api/user/log", {
+        method: "POST",
+        body: JSON.stringify(this.state.user),
+        headers: {"Content-Type": "application/json"}
+      })
+      .then(response => console.log(response))
+      .then(response => {
+          console.log(response);
+        }
+      )
+      .catch(error => console.error('Error:', error));
     }
   }
 
@@ -76,7 +92,9 @@ class Create extends Component {
   render() {
     return (
       <div>
-        <Logo link="./"/>
+        <div className="logo-block">
+          <Logo link="./"/>
+        </div>
         {this.renderLoginButton()}
         <div className="cut-top"></div>
         <header className="create-header">
