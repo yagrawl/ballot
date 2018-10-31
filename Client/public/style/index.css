@@ -656,6 +656,12 @@ input:checked + .slider:before {
   margin-bottom: 50px;
 }
 
+@media screen and (max-width: 620px) {
+  .poll-widget-feed-cover {
+    padding: 5px 5px;
+  }
+}
+
 .analytics-question {
   font-weight: 100;
 }
