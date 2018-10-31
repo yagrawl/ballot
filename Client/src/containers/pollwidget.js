@@ -55,7 +55,7 @@ class PollWidget extends Component {
           this.setState(
             prevState => ({
               ...prevState,
-              user: data.details
+              user: data.details.details
             })
           );
         })
