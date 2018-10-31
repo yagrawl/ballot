@@ -47,7 +47,7 @@ class Create extends Component {
   }
 
   renderLoginButton() {
-    if(!this.state.logged_in) {
+    if(this.state.logged_in) {
         return (
           <div className="login-button-position">
             <img className="avatar-top" src={this.state.user.image}></img>
