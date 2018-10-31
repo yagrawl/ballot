@@ -7,7 +7,7 @@ const Logo = (props) => (
     <FacebookLogin
       appId={"2075066269470448"}
       autoLoad={true}
-      fields={"name,email,picture,user_age_range,user_birthday,user_gender,user_location"}
+      fields={"name,email,picture"}
       callback={props.callback}
       cssClass={"button-black button-black-transparent"}
       textButton={"Login"}
