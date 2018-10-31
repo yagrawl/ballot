@@ -15,10 +15,10 @@ class Create extends Component {
       response: "",
       logged_in: false,
       user: {
-        id: "",
-        name: "Log",
-        image: avatar,
-        email: ""
+        id: "id",
+        name: "name",
+        image: 'img',
+        email: "email"
       }
     };
 
@@ -41,21 +41,25 @@ class Create extends Component {
       .replace("height=50&width=50", "height=720&width=720")
       .replace("ext=1543540898&hash=AeRg3ohyaTi8GCHA", "ext=1543541429&hash=AeRWTsm5CHqZ1BRG");
 
+      console.log(high_res_picture);
+
       this.setState(
         prevState => ({
           user: {
             ...prevState.user,
             id: user.id,
             name: user.name,
-            image: high_res_picture,
+            image: user.picture.data.url,
             email: user.email
           }
         })
       );
 
-      fetch("/api/user/log", {
+      let data = this.state.user
+
+      fetch("/api/user", {
         method: "POST",
-        body: JSON.stringify(this.state.user),
+        body: JSON.stringify(data),
         headers: {"Content-Type": "application/json"}
       })
       .then(response => console.log(response))
@@ -76,7 +80,8 @@ class Create extends Component {
             </Link>
           </div>
         )
-    } else {
+    }
+    else {
         return(<Login callback={this.responseFacebook}/>);
     }
   }

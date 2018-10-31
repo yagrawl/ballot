@@ -1,4 +1,3 @@
-const cryptoRandomString = require('crypto-random-string');
 const SQL = require('sql-template-strings');
 const db = require('../models/connection');
 const con = db.con;
@@ -6,7 +5,7 @@ const database = process.env.DB_NAME || "`ballot`";
 
 exports.log_user = (req, res) => {
   let data = req.body;
-  console.log(data);
+  console.log('log user (data):', data);
 
   let check_sql = `SELECT * from ${database}.${at('users')} as user ` +
                   `WHERE user.user_id = ${cm(data.id)};`;
@@ -21,11 +20,20 @@ exports.log_user = (req, res) => {
       con.query(sql, (err, result) => {
         if (err) throw err;
         let data = result[1];
-        console.log(data);
+        console.log('log user (insert):', data);
       });
     } else {
       console.log('Entry already exists');
-      console.log(result);
+      let log_count = result[0].log_count + 1;
+      let user_id = result[0].user_id;
+      let update_sql = `UPDATE ${database}.${at('users')} SET ` +
+                       `${at('log_count')} = ${cm(log_count)} ` +
+                       `WHERE (${at('user_id')} = ${cm(user_id)});`
+     con.query(update_sql, (err, result) => {
+       if (err) throw err;
+       let data = result;
+       console.log('log user (update):', data);
+     });
     }
     res.end();
   });
