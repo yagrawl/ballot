@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 
+import avatar from '../assets/imgs/default_avatar.png';
 import PollAnalytics from '../containers/pollanalytics';
 
 class PollWidget extends Component {
@@ -26,7 +27,7 @@ class PollWidget extends Component {
       user: {
         user_id: "",
         name: "",
-        profile_picture: "",
+        profile_picture: avatar,
         email: ""
       },
       ip_address: "",

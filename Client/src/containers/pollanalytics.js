@@ -51,6 +51,42 @@ class PollAnalytics extends Component {
               opt_4: this.stats[4]
             })
           );
+
+          if(this.stats[1] === 0) {
+            this.setState(
+              prevState => ({
+                ...prevState,
+                options: [0, this.state.options[1], this.state.options[2], this.state.options[3]]
+              })
+            )
+          }
+
+          if(this.stats[2] === 0) {
+            this.setState(
+              prevState => ({
+                ...prevState,
+                options: [this.state.options[0], 0, this.state.options[2], this.state.options[3]]
+              })
+            )
+          }
+
+          if(this.stats[3] === 0) {
+            this.setState(
+              prevState => ({
+                ...prevState,
+                options: [this.state.options[0], this.state.options[1], 0, this.state.options[3]]
+              })
+            )
+          }
+
+          if(this.stats[4] === 0) {
+            this.setState(
+              prevState => ({
+                ...prevState,
+                options: [this.state.options[0], this.state.options[1], this.state.options[2], 0]
+              })
+            )
+          }
       });
   }
 
@@ -60,12 +96,27 @@ class PollAnalytics extends Component {
       <div>
         <p className="input-label analytics-question">{this.state.question}</p>
         <RadialChart
-          data={[{angle: this.stats[1], label: this.state.options[0]},
-                 {angle: this.stats[2], label: this.state.options[1]},
-                 {angle: this.stats[3], label: this.state.options[2]},
-                 {angle: this.stats[4], label: this.state.options[3]}]}
+          data={[{angle: this.stats[1], label: this.state.options[0], color: "#0088FE"},
+                 {angle: this.stats[2], label: this.state.options[1], color: "#FF8042"},
+                 {angle: this.stats[3], label: this.state.options[2], color: "#00C49F"},
+                 {angle: this.stats[4], label: this.state.options[3], color: "#FFBB28"}]}
           width={300}
           height={300}
+          animation={true}
+          showLabels={true}
+          labelsRadiusMultiplier={0.96}
+          labelsStyle={{
+            fontSize: 14,
+            fontFamily: "Proxima Nova",
+            fontWeight: 200,
+            fill: "#282C34"
+          }}
+          colorType={'literal'}
+          colorDomain={[0, 100]}
+          colorRange={[0, 10]}
+          innerRadius={70}
+          radius={140}
+          padAngle={0.04}
         />
       </div>
     )

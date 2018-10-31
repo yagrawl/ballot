@@ -12,6 +12,7 @@ class PollDetails extends Component {
         options: []
       },
       input: "add option",
+      flag: 0,
     }
 
     this.helpers = {
@@ -30,8 +31,21 @@ class PollDetails extends Component {
 		this.helperspan = null;
   }
 
+  setMinimum(flag) {
+    if(flag) {
+      return (
+        <p className="error-msg">Minimum of 2 options required.</p>
+      )
+    }
+  }
+
   handleNext = (e) => {
     e.preventDefault()
+
+    if(this.state.details.options.length < 2) {
+       this.setState({ flag: 1 });
+       return;
+    }
 
     this.props.returnValues(this.state);
     this.props.nextStep();
@@ -156,6 +170,7 @@ class PollDetails extends Component {
           name={"question"}
           handleChange={this.handleQuestionChange}
           value={this.state.details.question}
+          required
         />
 
         <div className="option-div">
@@ -170,6 +185,7 @@ class PollDetails extends Component {
   				</span>
 
   			</div>
+        {this.setMinimum(this.state.flag)}
         <div className="divider"></div>
         <button className="button-black button-black-transparent"
           onClick={this.handleNext}>Next</button>
