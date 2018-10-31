@@ -14,7 +14,7 @@ class User extends Component {
 
     let user_id = this.props.match.params.user_id;
     console.log(user_id);
-    
+
     return (
       <div>
         <Logo link=""/>
@@ -26,4 +26,4 @@ class User extends Component {
   }
 }
 
-export default Poll;
+export default User;
