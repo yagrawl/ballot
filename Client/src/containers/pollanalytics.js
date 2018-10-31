@@ -104,7 +104,7 @@ class PollAnalytics extends Component {
           height={300}
           animation={true}
           showLabels={true}
-          labelsRadiusMultiplier={0.96}
+          labelsRadiusMultiplier={0.86}
           labelsStyle={{
             fontSize: 14,
             fontFamily: "Proxima Nova",
@@ -114,9 +114,9 @@ class PollAnalytics extends Component {
           colorType={'literal'}
           colorDomain={[0, 100]}
           colorRange={[0, 10]}
-          innerRadius={70}
+          innerRadius={0}
           radius={140}
-          padAngle={0.04}
+          padAngle={0.0}
         />
       </div>
     )
