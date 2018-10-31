@@ -15,8 +15,10 @@ class Create extends Component {
       response: "",
       logged_in: false,
       user: {
+        id: "",
         name: "Log",
-        image: avatar
+        image: avatar,
+        email: ""
       }
     };
 
@@ -39,8 +41,10 @@ class Create extends Component {
         prevState => ({
           user: {
             ...prevState.user,
+            id: user.id,
             name: user.name,
-            image: user.picture.data.url
+            image: user.picture.data.url,
+            email: user.email
           }
         })
       );
@@ -51,8 +55,9 @@ class Create extends Component {
     if(this.state.logged_in) {
         return (
           <div className="login-button-position">
-            <img className="avatar-top" src={this.state.user.image}></img>
-            <p className="input-label user-name">{this.state.user.name}</p>
+            <Link to={`user/${this.state.user.id}`}>
+              <img className="avatar-top" src={this.state.user.image}></img>
+            </Link>
           </div>
         )
     } else {
