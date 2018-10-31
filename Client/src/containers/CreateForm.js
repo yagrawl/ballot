@@ -19,7 +19,7 @@ class PollForm extends Component {
         options: []
       },
       attributes: {
-        creator_id: "",
+        creator_id: this.props.creator,
         creation_time: "",
         expiration_time: "",
         feed_privacy: "",

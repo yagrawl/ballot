@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router-dom';
 
 import PollAnalytics from '../containers/pollanalytics';
 
@@ -22,6 +23,12 @@ class PollWidget extends Component {
         poll_id: "",
         question: ""
       }],
+      user: {
+        user_id: "",
+        name: "",
+        profile_picture: "",
+        email: ""
+      },
       ip_address: "",
       has_voted: false,
     }
@@ -32,12 +39,26 @@ class PollWidget extends Component {
   componentDidMount() {
     fetch('/api/poll/' + this.state.id)
       .then(response => response.json())
-      .then(data => this.setState(
-        prevState => ({
-          ...prevState,
-          response: data.details
+      .then(data => {
+        this.setState(
+          prevState => ({
+            ...prevState,
+            response: data.details
+          })
+        );
+
+        fetch('/api/user/' + this.state.response[0].creator_id)
+        .then(response => response.json())
+        .then(data => {
+          this.setState(
+            prevState => ({
+              ...prevState,
+              user: data.details
+            })
+          );
         })
-      ));
+      }
+    );
 
     fetch('/ip')
     .then(response => response.json())
@@ -129,6 +150,9 @@ class PollWidget extends Component {
                         this.state.response[0].option_4 ]}
               />
             </center>
+            <Link to={`.././user/${this.state.response[0].creator_id}`}>
+              <img className="avatar-top" src={this.state.user.profile_picture}></img>
+            </Link>
           </div>
         )
       } else {
@@ -138,6 +162,9 @@ class PollWidget extends Component {
             <center>
               {this.renderOptions()}
             </center>
+            <Link to={`.././user/${this.state.response[0].creator_id}`} replace>
+              <img className="avatar-top" src={this.state.user.profile_picture}></img>
+            </Link>
           </div>
         )
       }

@@ -83,7 +83,7 @@ class Create extends Component {
 
   checkLogin() {
     if(this.state.logged_in) {
-        return (<CreateForm />)
+        return (<CreateForm creator={this.state.user.id} profile={this.state.user.image}/>)
     } else {
         return(<p className="error-log-in">Please log in to create a poll</p>);
     }
