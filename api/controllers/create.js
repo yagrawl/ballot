@@ -10,10 +10,10 @@ exports.poll_details = (req, res) => {
   let poll = cleanCreatePollData(data);
   console.log('poll data: ', data);
   let sql = `INSERT INTO ${database}` +
-            `.${at('polls')} (${at('poll_id')}, ${at('question')}, ${at('creation_time')}, ` +
+            `.${at('polls')} (${at('poll_id')}, ${at('creator_id')}, ${at('question')}, ${at('creation_time')}, ` +
             `${at('expiration_time')}, ${at('feed_privacy')}, ${at('analytics_privacy')}, ` +
             `${at('ip_address')}, ${at('option_1')}, ${at('option_2')}, ${at('option_3')}, ` +
-            `${at('option_4')}) VALUES (${cm(poll.poll_id)}, ${cm(poll.question)}, ` +
+            `${at('option_4')}) VALUES (${cm(poll.poll_id)}, ${cm(poll.creator_id)}, ${cm(poll.question)}, ` +
             `${cm(poll.creation_time)}, ${cm(poll.expiration_time)}, ${cm(poll.feed_privacy)}, ` +
             `${cm(poll.analytics_privacy)}, ${cm(poll.ip_address)}, ${cm(poll.options[0])}, ` +
             `${cm(poll.options[1])}, ${cm(poll.options[2])}, ${cm(poll.options[3])});`;
@@ -50,6 +50,7 @@ const cleanCreatePollData = (data) => {
   output.feed_privacy = data.attributes.feed_privacy;
   output.analytics_privacy = data.attributes.analytics_privacy;
   output.ip_address = data.attributes.ip_address;
+  output.creator_id = data.attributes.creator_id;
 
   return output;
 }

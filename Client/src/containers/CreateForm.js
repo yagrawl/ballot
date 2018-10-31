@@ -41,6 +41,7 @@ class PollForm extends Component {
       data.attributes.creation_time = new Date().getTime();
       data.attributes.expiration_time = data.duration;
       data.attributes.ip_address = data.ip_address;
+      data.attributes.creator_id = this.props.creator;
       delete data.ip_address;
       delete data.duration;
 
