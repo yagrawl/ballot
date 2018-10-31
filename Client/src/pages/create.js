@@ -57,17 +57,12 @@ class Create extends Component {
 
       let data = this.state.user
 
-      fetch("/api/user", {
+      fetch("/api/user/new", {
         method: "POST",
         body: JSON.stringify(data),
         headers: {"Content-Type": "application/json"}
       })
-      .then(response => console.log(response))
-      .then(response => {
-          console.log(response);
-        }
-      )
-      .catch(error => console.error('Error:', error));
+      .then(response => console.log(response));
     }
   }
 
