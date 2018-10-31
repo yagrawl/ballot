@@ -8,7 +8,7 @@ const polls = "`polls`"
 exports.poll_details = (req, res) => {
   let data = req.body;
   let poll = cleanCreatePollData(data);
-  console.log('poll data: ', data);
+  console.log('poll data: ', poll);
   let sql = `INSERT INTO ${database}` +
             `.${at('polls')} (${at('poll_id')}, ${at('creator_id')}, ${at('question')}, ${at('creation_time')}, ` +
             `${at('expiration_time')}, ${at('feed_privacy')}, ${at('analytics_privacy')}, ` +
@@ -17,6 +17,7 @@ exports.poll_details = (req, res) => {
             `${cm(poll.creation_time)}, ${cm(poll.expiration_time)}, ${cm(poll.feed_privacy)}, ` +
             `${cm(poll.analytics_privacy)}, ${cm(poll.ip_address)}, ${cm(poll.options[0])}, ` +
             `${cm(poll.options[1])}, ${cm(poll.options[2])}, ${cm(poll.options[3])});`;
+    console.log('Create Poll SQL: ', sql);
     con.query(sql, (err, result) => {
       if (err) throw err;
       console.log(data);
