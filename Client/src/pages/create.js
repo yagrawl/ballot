@@ -40,6 +40,7 @@ class Create extends Component {
           user: {
             ...prevState.user,
             name: user.name,
+            image: user.picture.data.url
           }
         })
       );
