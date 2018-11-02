@@ -11,6 +11,7 @@ class User extends Component {
       response: {
         details: {
           name: "",
+          profile_picture: ""
         },
         polls: []
       },
@@ -43,6 +44,8 @@ class User extends Component {
       <div className="poll-widget-feed-cover">
         <PollWidget
           poll_id={poll.poll_id}
+          isAuthed={this.props.isAuthed}
+          user={this.props.user}
         />
       </div>
     ));
@@ -58,6 +61,7 @@ class User extends Component {
         <div className="cut-top"></div>
         <div className="active-area">
           <div className="user-details">
+            <center><img className="user-profile-image" src={this.state.response.details.profile_picture}></img></center>
             <p className="user-profile-name">{this.state.response.details.name}</p>
           </div>
           {this.getUserFeed()}

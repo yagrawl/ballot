@@ -2,7 +2,10 @@ import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 
 import avatar from '../assets/imgs/default_avatar.png';
+import dots from '../assets/imgs/options.png';
+import bin from '../assets/imgs/delete.png';
 import PollAnalytics from '../containers/pollanalytics';
+import DropDown from '../components/dropdown';
 
 class PollWidget extends Component {
   constructor(props) {
@@ -36,6 +39,8 @@ class PollWidget extends Component {
     }
 
     this.handleVote = this.handleVote.bind(this);
+    this.checkDelete = this.checkDelete.bind(this);
+    this.removePoll = this.removePoll.bind(this);
   }
 
   componentDidMount() {
@@ -136,10 +141,21 @@ class PollWidget extends Component {
     return elements;
   }
 
+  checkDelete() {
+    if(this.props.user.id === this.state.response[0].creator_id) {
+      return (
+        <button className="delete-button" onClick={this.removePoll(this.state.response[0].poll_id)}>
+          <i className="poll-settings-img w3-xxlarge fa fa-close"></i>
+        </button>
+      );
+    }
+  }
+
   render() {
       if(this.state.has_voted) {
         return (
           <div>
+            {this.checkDelete()}
             <p className="poll-question-p">You've voted.</p>
             <center>
               <PollAnalytics
@@ -159,6 +175,7 @@ class PollWidget extends Component {
       } else {
         return (
           <div>
+            {this.checkDelete()}
             <p className="poll-question-p">{this.state.response[0].question}</p>
             <center>
               {this.renderOptions()}

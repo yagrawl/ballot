@@ -707,10 +707,22 @@ input:checked + .slider:before {
   display: inline-block;
 }
 
+.user-details {
+  align-items: center;
+  justify-content: center;
+}
+
 .user-profile-name {
   font-size: 36px;
   font-family: Proxima Nova;
   font-weight: 100;
+  color: #8BD9F9;
+  text-align: center;
+}
+
+.user-profile-image {
+  width: 250px;
+  border-radius: 125px;
   color: #8BD9F9;
 }
 
@@ -735,7 +747,14 @@ input:checked + .slider:before {
   margin-top: 10%;
 }
 
-/* Safari */
+.poll-settings-img {
+  max-width: 25px;
+  display: inline;
+  margin-top: 5%;
+  margin-right: 10%;
+  margin-left: 90%;
+}
+
 @-webkit-keyframes spin {
   0% { -webkit-transform: rotate(0deg); }
   100% { -webkit-transform: rotate(360deg); }
@@ -744,4 +763,14 @@ input:checked + .slider:before {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+.delete-button {
+    background-color: Transparent;
+    border: none;
+    cursor:pointer;
+    max-width: 35px;
+    display: inline;
+    margin-right: 15%;
+    margin-left: 85%;
 }

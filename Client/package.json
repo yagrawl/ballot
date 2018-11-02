@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "react": "^16.5.2",
+    "react-bootstrap": "^0.32.4",
     "react-datepicker": "^1.7.0",
     "react-dom": "^16.5.2",
     "react-facebook-login": "^4.1.1",
