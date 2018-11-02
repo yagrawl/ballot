@@ -99,7 +99,7 @@ class PollWidget extends Component {
     );
 
     let data = {
-      vote: e.target.value,
+      vote: vote,
       poll_id: this.state.id,
       ip_address: this.state.ip_address
     }
@@ -137,7 +137,6 @@ class PollWidget extends Component {
   }
 
   render() {
-    {
       if(this.state.has_voted) {
         return (
           <div>
@@ -153,7 +152,7 @@ class PollWidget extends Component {
               />
             </center>
             <Link to={`.././user/${this.state.response[0].creator_id}`}>
-              <img className="avatar-top" src={this.state.user.profile_picture}></img>
+              <img className="avatar-top" src={this.state.user.profile_picture} alt={"profile"}></img>
             </Link>
           </div>
         )
@@ -165,12 +164,11 @@ class PollWidget extends Component {
               {this.renderOptions()}
             </center>
             <Link to={`.././user/${this.state.response[0].creator_id}`} replace>
-              <img className="avatar-top" src={this.state.user.profile_picture}></img>
+              <img className="avatar-top" src={this.state.user.profile_picture} alt={"profile"}></img>
             </Link>
           </div>
         )
       }
-    }
   }
 }
 

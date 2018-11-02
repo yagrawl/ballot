@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
 import PollWidget from '../containers/pollwidget'
 import Logo from '../components/logo'
@@ -7,7 +6,9 @@ import Logo from '../components/logo'
 class Poll extends Component {
   constructor(props) {
     super(props);
-
+      this.state = {
+        
+      }
   }
 
   render() {

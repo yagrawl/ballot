@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
 import PollWidget from '../containers/pollwidget'
 import Logo from '../components/logo'
@@ -51,7 +50,6 @@ class User extends Component {
   }
 
   render() {
-    let user_id = this.props.match.params.user_id;
     return (
       <div className="user-header">
         <div className="logo-block">

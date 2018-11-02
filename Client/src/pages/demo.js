@@ -138,7 +138,7 @@ class Demo extends Component {
   handleRead(e) {
     e.preventDefault();
     let data = this.state.rkey;
-    let url = "/api/demo" + '?key=' + data;
+    let url = `/api/demo?key=${data}`;
 
     this.ReadApi(url)
     .then(res => {
@@ -189,7 +189,7 @@ class Demo extends Component {
   handleDelete(e) {
     e.preventDefault();
     let data = this.state.dkey;
-    let url = "/api/demo" + '?key=' + data;
+    let url = `/api/demo?key=${data}`;
 
     fetch(url, {
       method: "DELETE",

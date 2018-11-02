@@ -94,6 +94,8 @@ class PollForm extends Component {
         return <PollLink
                   pollid={poll_details.poll_id}
                 />
+      default:
+        return (<div></div>)
 		}
   }
 }
