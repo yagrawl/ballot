@@ -143,7 +143,7 @@ class PollWidget extends Component {
   checkDelete() {
     if(this.props.user.id === this.state.response[0].creator_id) {
       return (
-        <button className="delete-button" onClick={this.removePoll(this.state.response[0].poll_id)}>
+        <button className="delete-button">
           <i className="poll-settings-img w3-xxlarge fa fa-close"></i>
         </button>
       );
