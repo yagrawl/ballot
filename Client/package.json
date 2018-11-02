@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "ip": "^1.1.5",
     "react": "^16.5.2",
     "react-bootstrap": "^0.32.4",
     "react-datepicker": "^1.7.0",
+    "react-device-detect": "^1.6.1",
     "react-dom": "^16.5.2",
     "react-facebook-login": "^4.1.1",
     "react-router-dom": "^4.3.1",

@@ -12,6 +12,7 @@ module.exports = function(app) {
   let activity = require('./controllers/activity');
   let feed = require('./controllers/feed');
   let users = require('./controllers/user');
+  let event = require('./controllers/event');
 
   app.route('/ip')
     .get(ip.get_ip);
@@ -45,7 +46,10 @@ module.exports = function(app) {
     .post(users.log_user);
 
   app.route('/api/user/:user_id')
-    .get(users.get_user)
+    .get(users.get_user);
+
+  app.route('/api/event')
+    .post(event.add_event);
 
   app.route('/api/demo/table')
     .get(demo.demo_table);

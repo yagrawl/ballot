@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Route, Switch, Link } from 'react-router-dom';
 
+import { sendEvent } from './containers/event'
 import Login from './components/login'
 
 import Index from './pages/index';
@@ -55,6 +56,7 @@ class Routes extends Component {
       let data = this.state.user
       console.log('%cRoute Auth:', 'background: #222; color: #bada55');
       console.log('State: ', this.state);
+      sendEvent("User Logged In", "/route", this.state.user.id);
 
       fetch("/api/user/new", {
         method: "POST",

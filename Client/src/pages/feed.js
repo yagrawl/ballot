@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import PollWidget from '../containers/pollwidget'
 import Logo from '../components/logo'
 
+import { sendEvent } from '../containers/event'
+
 class Feed extends Component {
   constructor(props) {
     super(props);
@@ -15,12 +17,16 @@ class Feed extends Component {
   componentDidMount() {
     fetch('/api/feed')
       .then(response => response.json())
-      .then(data => this.setState(
-        prevState => ({
-          ...prevState,
-          response: data.details
-        })
-      ));
+      .then(data => {
+        this.setState(
+          prevState => ({
+            ...prevState,
+            response: data.details
+          })
+        )
+
+        sendEvent("Feed Accessed", "/feed", this.props.user.id);
+      });
   }
 
   getFeed() {

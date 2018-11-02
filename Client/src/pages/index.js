@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+import { sendEvent } from '../containers/event'
 import logo from '../assets/imgs/logo.svg';
 
 class Index extends Component {
@@ -12,6 +13,10 @@ class Index extends Component {
       logged_in: false
     };
 
+    this.events = {
+      event_1_status: false
+    }
+
     this.responseFacebook = this.responseFacebook.bind(this);
   }
 
@@ -21,7 +26,10 @@ class Index extends Component {
 
   componentDidMount() {
     this.callApi()
-      .then(res => this.setState({ response: res.express }))
+      .then(res => {
+        this.setState({ response: res.express });
+        sendEvent("Home Page Accessed", "/", this.props.user.id);
+      })
       .catch(err => console.log(err));
   }
 
@@ -30,12 +38,10 @@ class Index extends Component {
     const body = await response.json();
 
     if (response.status !== 200) throw Error(body.message);
-
     return body;
   };
 
   render() {
-
     return (
       <div className="App">
         <header className="App-header">
