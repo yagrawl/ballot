@@ -21,9 +21,9 @@ class Routes extends Component {
       logged_in: false,
       user: {
         id: "Unknown",
-        name: "name",
-        image: 'img',
-        email: "email"
+        name: "Ballot User",
+        image: "https://i.imgur.com/fMVORsK.png",
+        email: "theballot@gmail.com"
       }
     };
 
@@ -55,7 +55,7 @@ class Routes extends Component {
 
       let data = this.state.user
       console.log('%cRoute Auth:', 'background: #222; color: #bada55');
-      console.log('state: ', this.state);
+      console.log('State: ', this.state);
 
       fetch("/api/user/new", {
         method: "POST",
@@ -84,7 +84,7 @@ class Routes extends Component {
   render() {
     let auth = this.state;
     console.log('%cRoute Auth (render):', 'background: #222; color: #bada55');
-    console.log('Auth: ', auth)
+    console.log('State: ', auth)
     return (
       <div>
         <div className="login-button-up">

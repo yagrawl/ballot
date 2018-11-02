@@ -14,7 +14,8 @@ class Create extends Component {
 
   checkLogin() {
     console.log('%cCreate Auth:', 'background: #222; color: #bada55');
-    console.log('Auth: ', this.props.isAuthed);
+    console.log('IsAuth?: ', this.props.isAuthed);
+    console.log('User: ', this.props.user);
     if(this.props.isAuthed) {
         return (<CreateForm creator={this.props.user.id} profile={this.props.user.image}/>)
     } else {
