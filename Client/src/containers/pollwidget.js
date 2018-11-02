@@ -40,7 +40,6 @@ class PollWidget extends Component {
 
     this.handleVote = this.handleVote.bind(this);
     this.checkDelete = this.checkDelete.bind(this);
-    this.removePoll = this.removePoll.bind(this);
   }
 
   componentDidMount() {
