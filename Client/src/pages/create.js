@@ -17,7 +17,7 @@ class Create extends Component {
     console.log('IsAuth?: ', this.props.isAuthed);
     console.log('User: ', this.props.user);
     if(this.props.isAuthed) {
-        return (<CreateForm creator={this.props.user.id} profile={this.props.user.image}/>)
+        return (<CreateForm creator={this.props.user.id} profile={this.props.user.profile_picture}/>)
     } else {
         return(<p className="error-log-in">Please log in to create a poll</p>);
     }

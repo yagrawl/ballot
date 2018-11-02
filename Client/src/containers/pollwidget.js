@@ -28,7 +28,7 @@ class PollWidget extends Component {
         question: ""
       }],
       user: {
-        user_id: "",
+        id: "",
         name: "",
         profile_picture: avatar,
         email: ""

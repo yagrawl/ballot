@@ -21,7 +21,7 @@ class Routes extends Component {
       user: {
         id: "Unknown",
         name: "Ballot User",
-        image: "https://i.imgur.com/fMVORsK.png",
+        profile_picture: "https://i.imgur.com/fMVORsK.png",
         email: "theballot@gmail.com"
       }
     };
@@ -46,7 +46,7 @@ class Routes extends Component {
             ...prevState.user,
             id: user.id,
             name: user.name,
-            image: `https://graph.facebook.com/v3.2/${user.id}/picture?height=400&width=400`,
+            profile_picture: `https://graph.facebook.com/v3.2/${user.id}/picture?height=400&width=400`,
             email: user.email
           }
         })
@@ -70,7 +70,7 @@ class Routes extends Component {
         return (
           <div className="login-button-position">
             <Link to={`user/${this.state.user.id}`}>
-              <img className="avatar-top" src={this.state.user.image} alt={"profile"}></img>
+              <img className="avatar-top" src={this.state.user.profile_picture} alt={"profile"}></img>
             </Link>
           </div>
         )
