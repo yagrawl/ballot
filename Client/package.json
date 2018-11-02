@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "ip": "^1.1.5",
+    "public-ip": "^2.4.0",
     "react": "^16.5.2",
     "react-bootstrap": "^0.32.4",
     "react-datepicker": "^1.7.0",
