@@ -167,7 +167,7 @@ class PollWidget extends Component {
               />
             </center>
             <Link to={`.././user/${this.state.response[0].creator_id}`}>
-              <img className="avatar-top" src={this.state.user.profile_picture} alt={"profile"}></img>
+              <img className="avatar-top" src={`https://graph.facebook.com/v3.2/${this.state.response[0].creator_id}/picture?height=400&width=400`} alt={"profile"}></img>
             </Link>
           </div>
         )
@@ -180,7 +180,7 @@ class PollWidget extends Component {
               {this.renderOptions()}
             </center>
             <Link to={`.././user/${this.state.response[0].creator_id}`} replace>
-              <img className="avatar-top" src={this.state.user.profile_picture} alt={"profile"}></img>
+              <img className="avatar-top" src={`https://graph.facebook.com/v3.2/${this.state.response[0].creator_id}/picture?height=400&width=400`} alt={"profile"}></img>
             </Link>
           </div>
         )
