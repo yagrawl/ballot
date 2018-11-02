@@ -22,6 +22,8 @@ class Poll extends Component {
           <div className="poll-widget-poll-cover">
             <PollWidget
               poll_id={poll_id}
+              isAuthed={this.props.isAuthed}
+              user={this.props.user}
             />
           </div>
         </div>

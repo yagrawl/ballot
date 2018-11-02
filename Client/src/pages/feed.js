@@ -28,6 +28,8 @@ class Feed extends Component {
       <div className="poll-widget-feed-cover">
         <PollWidget
           poll_id={poll.poll_id}
+          isAuthed={this.props.isAuthed}
+          user={this.props.user}
         />
       </div>
     ));
