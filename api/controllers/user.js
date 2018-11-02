@@ -17,7 +17,7 @@ exports.log_user = (req, res) => {
                 `.${add.bt('users')} (${add.bt('user_id')}, ${add.bt('name')}, ${add.bt('profile_picture')}, ` +
                 `${add.bt('email')}, ` +
                 `${add.bt('log_count')}) VALUES (${add.cm(data.id)}, ${add.cm(data.name)}, ` +
-                `${add.cm(data.image)}, ${add.cm(data.email)}, ${add.cm(1)});`
+                `${add.cm(data.profile_picture)}, ${add.cm(data.email)}, ${add.cm(1)});`
       con.query(sql, (err, result) => {
         if (err) throw err;
         let data = result[1];
