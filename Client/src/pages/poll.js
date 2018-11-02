@@ -7,7 +7,7 @@ class Poll extends Component {
   constructor(props) {
     super(props);
       this.state = {
-        
+
       }
   }
 
@@ -19,9 +19,11 @@ class Poll extends Component {
       <div>
         <Logo link=""/>
         <div className="active-area">
-          <PollWidget
-            poll_id={poll_id}
-          />
+          <div className="poll-widget-poll-cover">
+            <PollWidget
+              poll_id={poll_id}
+            />
+          </div>
         </div>
       </div>
     );

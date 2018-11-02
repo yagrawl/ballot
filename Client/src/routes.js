@@ -46,7 +46,7 @@ class Routes extends Component {
             ...prevState.user,
             id: user.id,
             name: user.name,
-            image: user.picture.data.url,
+            image: `https://graph.facebook.com/v3.2/${user.id}/picture?height=400&width=400`,
             email: user.email
           }
         })

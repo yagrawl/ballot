@@ -695,6 +695,7 @@ input:checked + .slider:before {
   margin-top: 20px;
   display: inline-block;
   margin-right: 10px;
+  border: 2px solid #8BD9F9;
   border-radius: 25px;
 }
 
@@ -715,7 +716,7 @@ input:checked + .slider:before {
 
 .login-button-up {
   position: fixed;
-  top: 20px;
+  top: 10px;
   right: 20px;
   z-index: 1;
 }
