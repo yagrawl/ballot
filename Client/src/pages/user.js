@@ -61,7 +61,7 @@ class User extends Component {
         <div className="cut-top"></div>
         <div className="active-area">
           <div className="user-details">
-            <center><img className="user-profile-image" src={this.state.response.details.profile_picture}></img></center>
+            <center><img className="user-profile-image" src={`https://graph.facebook.com/v3.2/${this.props.match.params.user_id}/picture?height=400&width=400`}></img></center>
             <p className="user-profile-name">{this.state.response.details.name}</p>
           </div>
           {this.getUserFeed()}
