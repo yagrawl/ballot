@@ -9,6 +9,7 @@ import Create from './pages/create';
 import Poll from './pages/poll';
 import User from './pages/user';
 import Feed from './pages/feed';
+import Stats from './pages/stats';
 import Demo from './pages/demo';
 import NotFound from './pages/notfound';
 
@@ -84,8 +85,6 @@ class Routes extends Component {
 
   render() {
     let auth = this.state;
-    console.log('%cRoute Auth (render):', 'background: #222; color: #bada55');
-    console.log('State: ', auth)
     return (
       <div>
         <div className="login-button-up">
@@ -107,6 +106,9 @@ class Routes extends Component {
           <Route path="/feed"
                  render={(props) =>
                    <Feed {...props} isAuthed={auth.logged_in} user={auth.user} />} />
+          <Route path="/stats"
+                 render={(props) =>
+                   <Stats {...props} isAuthed={auth.logged_in} user={auth.user} />} />
           <Route path="/demo"
                  render={(props) =>
                    <Demo {...props} isAuthed={auth.logged_in} user={auth.user} />} />

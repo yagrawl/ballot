@@ -35,7 +35,8 @@ class User extends Component {
           response: data.details
         })
       )
-      console.log(this.state);
+      console.log('%cUser:', 'background: #E06C75; color: white');
+      console.log('User Data: ', data.details);
     });
   }
 

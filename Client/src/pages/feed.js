@@ -18,14 +18,15 @@ class Feed extends Component {
     fetch('/api/feed')
       .then(response => response.json())
       .then(data => {
+        console.log(data);
         this.setState(
           prevState => ({
             ...prevState,
             response: data.details
           })
-        )
-
-        sendEvent("Feed Accessed", "/feed", this.props.user.id);
+        );
+        console.log('%cFeed: ', 'background: #769564; color: white');
+        console.log('Feed State: ', this.props)
       });
   }
 

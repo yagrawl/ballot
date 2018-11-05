@@ -733,6 +733,21 @@ input:checked + .slider:before {
   z-index: 1;
 }
 
+@media screen and (max-width: 620px) {
+  .login-button-up {
+    position: fixed;
+    top: 3px;
+    right: 3px;
+    z-index: 5;
+  }
+
+  .login-button-position {
+    max-height: 16px;
+    margin-top: 0px;
+    margin-right: 10px;
+  }
+}
+
 .loader {
   border: 8px solid #f3f3f3;
   border-radius: 50%;
