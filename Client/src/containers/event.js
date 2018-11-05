@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ip from 'ip';
 import {
   osVersion,
   osName,
@@ -9,15 +8,9 @@ import {
 } from 'react-device-detect';
 
 export const sendEvent = (eventName, eventRoute, eventCreatorId) => {
-  fetch('/ip')
-  .then(response => response.json())
-  .then(data => {
-    let ip = data.express;
-
     let event = {
       event_name: eventName,
       event_time: new Date().getTime(),
-      event_creator_ip: ip,
       event_creator_id: eventCreatorId,
       event_route: eventRoute,
       event_device: {
@@ -38,5 +31,4 @@ export const sendEvent = (eventName, eventRoute, eventCreatorId) => {
       headers: {"Content-Type": "application/json"}
     })
     .then(response => console.log('New User Added: ', response));
-  });
 }

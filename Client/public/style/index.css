@@ -805,6 +805,15 @@ input:checked + .slider:before {
     margin-top: -5%;
 }
 
+@media screen and (max-width: 620px) {
+  .stats-active-area {
+      max-width: 95%;
+      margin-right: auto;
+      margin-left: auto;
+      margin-top: -5%;
+  }
+}
+
 .stats-count-box {
   background-color: white;
   height: 100px;

@@ -5,6 +5,7 @@ const database = process.env.DB_NAME || "`ballot`";
 
 exports.add_event = (req, res) => {
   let data = req.body;
+  data.event_creator_ip = req.headers['x-forwarded-for'].toString().split(',')[0];
   console.log('Event Data : ', data);
 
   let sql = `INSERT INTO ${database}` +
