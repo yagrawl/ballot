@@ -16,10 +16,10 @@ exports.add_event = (req, res) => {
             `${add.cm(data.event_device.browser_version)}, ${add.cm(data.event_device.engine)}, ${add.cm(data.event_device.os)}, ` +
             `${add.cm(data.event_device.os_version)});`;
 
-  console.log('EVENT SQL: ', sql);
+  //console.log('EVENT SQL: ', sql);
 
   con.query(sql, (err, result) => {
     if (err) throw err;
-    console.log(data);
+    //console.log(data);
   });
 };
