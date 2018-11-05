@@ -6,6 +6,7 @@ import dots from '../assets/imgs/options.png';
 import bin from '../assets/imgs/delete.png';
 import PollAnalytics from '../containers/pollanalytics';
 import DropDown from '../components/dropdown';
+import Loader from '../components/loader'
 
 class PollWidget extends Component {
   constructor(props) {
@@ -35,7 +36,8 @@ class PollWidget extends Component {
       },
       ip_address: "",
       has_voted: false,
-      is_logged_in: false
+      is_logged_in: false,
+      poll_loaded: false
     }
 
     this.handleVote = this.handleVote.bind(this);
@@ -49,7 +51,8 @@ class PollWidget extends Component {
         this.setState(
           prevState => ({
             ...prevState,
-            response: data.details
+            response: data.details,
+            poll_loaded: true
           })
         );
 
@@ -151,6 +154,7 @@ class PollWidget extends Component {
   }
 
   render() {
+    if(this.state.poll_loaded){
       if(this.state.has_voted) {
         return (
           <div>
@@ -185,6 +189,9 @@ class PollWidget extends Component {
           </div>
         )
       }
+    } else {
+      return <Loader />
+    }
   }
 }
 

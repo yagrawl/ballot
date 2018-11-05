@@ -10,7 +10,33 @@ class Feed extends Component {
     super(props);
 
     this.state = {
-      response: []
+      response: [],
+      user: {
+        id: "Unknown",
+        name: "Ballot User",
+        profile_picture: "https://i.imgur.com/fMVORsK.png",
+        email: "theballot@gmail.com"
+      },
+    }
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+   if(nextProps.user.id !== prevState.user.id) {
+     console.log('Sent Event');
+     sendEvent("Feed Accessed Logged In", "/feed", nextProps.user.id);
+     return { UserUpdate: nextProps.user};
+   }
+    else return null;
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if(prevProps.user !== this.props.user){
+      this.setState(
+        prevState => ({
+          ...prevState,
+          user: this.props.user
+        })
+      );
     }
   }
 
@@ -27,6 +53,7 @@ class Feed extends Component {
         );
         console.log('%cFeed: ', 'background: #769564; color: white');
         console.log('Feed State: ', this.props)
+        sendEvent("Feed Accessed Logged In", "/feed", this.props.user.id);
       });
   }
 

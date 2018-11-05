@@ -3,13 +3,17 @@ import React, { Component } from 'react';
 import Logo from '../components/logo'
 import CreateForm from '../containers/CreateForm';
 
+import { sendEvent } from '../containers/event'
+
 class Create extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      response: ""
+      response: "",
     };
+
+    sendEvent("Create Accessed", "/create", this.props.user.id);
   }
 
   checkLogin() {
