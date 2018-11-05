@@ -805,15 +805,6 @@ input:checked + .slider:before {
     margin-top: -5%;
 }
 
-@media screen and (max-width: 620px) {
-  .stats-active-area {
-      max-width: 95%;
-      margin-right: auto;
-      margin-left: auto;
-      margin-top: -5%;
-  }
-}
-
 .stats-count-box {
   background-color: white;
   height: 100px;
@@ -842,4 +833,20 @@ input:checked + .slider:before {
   font-size: 48px;
   color: #8BD9F9;
   margin-top: 0px;
+}
+
+@media screen and (max-width: 620px) {
+  .stats-active-area {
+      width: 95%;
+      margin-right: auto;
+      margin-left: auto;
+      margin-top: -5%;
+  }
+
+  .stats-count {
+    float: left;
+    margin-left: 20px;
+    margin-right: 20px;
+    text-align: center;
+  }
 }
