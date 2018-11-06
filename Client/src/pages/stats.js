@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import GoogleMapReact from 'google-map-react';
 
 import Logo from '../components/logo'
 import Loader from '../components/loader'
 
 import { sendEvent } from '../containers/event'
+import Maps from '../containers/map'
 
 class Stats extends Component {
   constructor(props) {
@@ -88,6 +90,7 @@ class Stats extends Component {
                 <p className="stats-count-label">IPs</p>
               </div>
             </div>
+            <Maps />
           </div>
         </div>
       );
