@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import GoogleMapReact from 'google-map-react';
 
 import Logo from '../components/logo'
 import Loader from '../components/loader'
