@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStroopwafel } from '@fortawesome/free-solid-svg-icons';
 
 import Logo from '../components/logo'
 import Loader from '../components/loader'
@@ -67,29 +70,28 @@ class Stats extends Component {
   render() {
     if(this.state.stats_loaded) {
       return (
-        <div className="stats-header">
-          <Logo link=""/>
+        <div className="stats">
+          <div className="stats-header">
+            <Logo link=""/>
+          </div>
           <div className="stats-active-area">
-            <p className="user-profile-name">Stats</p>
             <div className="stats-count-box">
-              <div className="stats-count">
-                <p className="stats-count-count">{this.state.response.vote_count}</p>
-                <p className="stats-count-label">Votes</p>
-              </div>
-              <div className="stats-count">
-                <p className="stats-count-count">{this.state.response.poll_count}</p>
-                <p className="stats-count-label">Polls</p>
-              </div>
-              <div className="stats-count">
-                <p className="stats-count-count">{this.state.response.event_count}</p>
-                <p className="stats-count-label">Events</p>
-              </div>
-              <div className="stats-count">
-                <p className="stats-count-count">{this.state.response.ip_count}</p>
-                <p className="stats-count-label">IPs</p>
-              </div>
+              <p className="stats-count-count">{this.state.response.vote_count}</p>
+              <p className="stats-count-label">Votes</p>
             </div>
-            <Maps />
+            <div className="stats-count-box stats-count-box-top-last">
+              <p className="stats-count-count">{this.state.response.poll_count}</p>
+              <p className="stats-count-label">Polls</p>
+            </div>
+            <div className="stats-count-box-clear"></div>
+            <div className="stats-count-box">
+              <p className="stats-count-count">{this.state.response.event_count}</p>
+              <p className="stats-count-label">Events</p>
+            </div>
+            <div className="stats-count-box stats-count-box-last">
+              <p className="stats-count-count">{this.state.response.ip_count}</p>
+              <p className="stats-count-label">IPs</p>
+            </div>
           </div>
         </div>
       );

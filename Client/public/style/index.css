@@ -790,69 +790,6 @@ input:checked + .slider:before {
     margin-left: 85%;
 }
 
-.stats-header {
-  background-color: #F4F4F4;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  color: #8BD9F9;
-}
-
-.stats-active-area {
-    max-width: 90%;
-    margin-right: auto;
-    margin-left: auto;
-    margin-top: -5%;
-}
-
-.stats-count-box {
-  background-color: white;
-  height: 100px;
-  color: black;
-  border-radius: 5px;
-}
-
-.stats-count {
-  float: left;
-  margin-left: 20px;
-  margin-right: 20px;
-  text-align: center;
-}
-
-.stats-count-label {
-  font-family: Proxima Nova;
-  font-weight: 200;
-  font-size: 16px;
-  margin-top: -55px;
-  color: #292D34;
-}
-
-.stats-count-count {
-  font-family: Proxima Nova;
-  font-weight: 100;
-  font-size: 48px;
-  color: #8BD9F9;
-  margin-top: 0px;
-}
-
-@media screen and (max-width: 620px) {
-  .stats-active-area {
-      width: 95%;
-      margin-right: auto;
-      margin-left: auto;
-      margin-top: -5%
-      text-align: center;
-  }
-
-  .stats-count {
-    display: inline-block;
-    float: left;
-    margin-left: 12px;
-    margin-right: 12px;
-    text-align: center;
-  }
-}
-
 /* Map animation */
 .dot {
 	margin: auto auto;
@@ -981,4 +918,78 @@ input:checked + .slider:before {
 	 	transform:  scale(1) ;
 	 	background: rgba(32,150,243,0.0);
 	}
+}
+
+.map {
+  max-width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
+}
+
+/* Stat styling */
+.stats {
+  background-color: #F4F4F4;
+  min-height: 100vh;
+}
+
+.stats-header {
+  display: flex;
+  flex-direction: column;
+  color: #8BD9F9;
+}
+
+.stats-active-area {
+  margin: auto;
+  margin-top: 50px;
+  max-width: 95%;
+}
+
+.stats-count-box {
+  float: left;
+  width: 22%;
+  margin-right: 4%;
+  background-color: white;
+  border-radius: 5px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.stats-count-box-last {
+  margin-right: 0;
+}
+
+.stats-count-label {
+  font-family: Proxima Nova;
+  font-weight: 200;
+  font-size: 16px;
+  color: black;
+  margin: 0;
+}
+
+.stats-count-count {
+  font-family: Proxima Nova;
+  font-weight: 100;
+  font-size: 48px;
+  color: #8BD9F9;
+  margin: 0;
+}
+
+@media screen and (max-width: 620px) {
+  .stats-count-box-clear {
+    clear: left;
+  }
+
+  .stats-count-box {
+    float: left;
+    width: 48%;
+    margin-right: 2%;
+    background-color: white;
+    border-radius: 5px;
+    margin-top: 20px;
+  }
+
+  .stats-count-box-top-last {
+    margin-right: 0;
+  }
 }
