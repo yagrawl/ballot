@@ -18,7 +18,8 @@ class Stats extends Component {
         event_count: 0,
         poll_count: 0,
         ip_count: 0,
-        vote_count: 0
+        vote_count: 0,
+        ip_locations: []
       },
       user: {
         id: "Unknown",
@@ -94,7 +95,7 @@ class Stats extends Component {
             </div>
             <div className="stats-count-box-clear-end"></div>
           </div>
-            <Maps />
+            <Maps locations={this.state.response.ip_locations}/>
         </div>
       );
     }

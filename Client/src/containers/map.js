@@ -24,8 +24,8 @@ class Maps extends Component {
 
   initMap = () => {
     let map = new window.google.maps.Map(document.getElementById('map'), {
-      center: {lat: 37.0902, lng: -95.7129},
-      zoom: 4,
+      center: {lat: 21.4826, lng: 0.0077},
+      zoom: 2,
       disableDefaultUI: true,
       gestureHandling: 'none',
       zoomControl: false,
@@ -282,13 +282,15 @@ class Maps extends Component {
               ]
     });
 
-    let marker = new window.google.maps.Marker({
-          map: map,
-          animation: window.google.maps.Animation.DROP,
-          position: {lat: 37.0902, lng: -95.7129},
-          icon: pin,
-          optimized: false
-        });
+    let marker;
+    for(let i = 0; i < this.props.locations.length; i++) {
+      marker = new window.google.maps.Marker({
+            map: map,
+            position: {lat:parseInt(this.props.locations[i].lat) , lng: parseInt(this.props.locations[i].long)},
+            icon: pin,
+            optimized: false
+          });
+    }
   };
 
   render() {
