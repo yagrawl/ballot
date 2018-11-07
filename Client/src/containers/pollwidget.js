@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
+import Countdown from 'react-countdown-now';
 
 import avatar from '../assets/imgs/default_avatar.png';
 import dots from '../assets/imgs/options.png';
@@ -37,7 +38,8 @@ class PollWidget extends Component {
       ip_address: "",
       has_voted: false,
       is_logged_in: false,
-      poll_loaded: false
+      poll_loaded: false,
+      countdown: 1000
     }
 
     this.handleVote = this.handleVote.bind(this);
@@ -55,6 +57,12 @@ class PollWidget extends Component {
             poll_loaded: true
           })
         );
+
+        let expiration = parseInt(this.state.response[0].expiration_time)*24*60*60*1000;
+        let creation = parseInt(this.state.response[0].creation_time);
+
+        let countdown = (expiration + creation);
+        this.setState({countdown: countdown})
 
         fetch('/api/user/' + this.state.response[0].creator_id)
         .then(response => response.json())
@@ -173,6 +181,9 @@ class PollWidget extends Component {
             <Link to={`.././user/${this.state.response[0].creator_id}`}>
               <img className="avatar-top" src={`https://graph.facebook.com/v3.2/${this.state.response[0].creator_id}/picture?height=400&width=400`} alt={"profile"}></img>
             </Link>
+            <div className="poll-timer">
+              <Countdown date={this.state.countdown} />
+            </div>
           </div>
         )
       } else {
@@ -186,6 +197,9 @@ class PollWidget extends Component {
             <Link to={`.././user/${this.state.response[0].creator_id}`} replace>
               <img className="avatar-top" src={`https://graph.facebook.com/v3.2/${this.state.response[0].creator_id}/picture?height=400&width=400`} alt={"profile"}></img>
             </Link>
+            <div className="poll-timer">
+              <Countdown date={this.state.countdown} />
+            </div>
           </div>
         )
       }

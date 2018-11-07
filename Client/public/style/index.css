@@ -699,6 +699,16 @@ input:checked + .slider:before {
   border-radius: 25px;
 }
 
+.poll-timer {
+  display: inline-block;
+  margin-top: 40px;
+  margin-right: 10px;
+  float: right;
+  font-family: Proxima Nova;
+  font-weight: 100;
+  font-size: 24px;
+}
+
 .user-name {
   display: inline;
 }
