@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import Pin from '../components/mappin'
 import { sendEvent } from '../containers/event'
 
+import pin from '../assets/imgs/pin.svg'
+
 class Maps extends Component {
   constructor(props) {
     super(props);
@@ -25,6 +27,8 @@ class Maps extends Component {
       center: {lat: 37.0902, lng: -95.7129},
       zoom: 4,
       disableDefaultUI: true,
+      gestureHandling: 'none',
+      zoomControl: false,
       styles: [
                 {
                   "elementType": "geometry",
@@ -277,11 +281,19 @@ class Maps extends Component {
                 }
               ]
     });
-  }
+
+    let marker = new window.google.maps.Marker({
+          map: map,
+          animation: window.google.maps.Animation.DROP,
+          position: {lat: 37.0902, lng: -95.7129},
+          icon: pin,
+          optimized: false
+        });
+  };
 
   render() {
     return(
-      <main>
+      <main className="stats-map-wrapper">
         <div className="stats-map-div" id="map"></div>
       </main>
     )
