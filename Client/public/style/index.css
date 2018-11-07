@@ -980,7 +980,7 @@ input:checked + .slider:before {
 .stats-map-div {
   margin: auto;
   border-radius: 20px;
-  height: 70vh;
+  height: 80vh;
   margin-top: 50px;
   margin-bottom: 50px;
   width: 95%;
