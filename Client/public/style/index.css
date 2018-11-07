@@ -951,7 +951,6 @@ input:checked + .slider:before {
   margin-right: 4%;
   background-color: white;
   border-radius: 5px;
-  margin-top: 20px;
   text-align: center;
 }
 
@@ -973,6 +972,19 @@ input:checked + .slider:before {
   font-size: 48px;
   color: #8BD9F9;
   margin: 0;
+}
+
+.stats-map-div {
+  margin: auto;
+  border-radius: 20px;
+  height: 50vh;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  width: 95%;
+}
+
+.stats-count-box-clear-end {
+  clear: left;
 }
 
 @media screen and (max-width: 620px) {

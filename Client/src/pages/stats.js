@@ -92,7 +92,9 @@ class Stats extends Component {
               <p className="stats-count-count">{this.state.response.ip_count}</p>
               <p className="stats-count-label">IPs</p>
             </div>
+            <div className="stats-count-box-clear-end"></div>
           </div>
+            <Maps />
         </div>
       );
     }
