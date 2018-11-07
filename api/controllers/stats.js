@@ -14,7 +14,7 @@ exports.get_stats = (req, res) => {
             `SELECT COUNT(${add.bt('timestamp')}) AS vote_count ` +
             `FROM ${database}.${add.bt('activity')};` +
             `SELECT DISTINCT(${add.bt('ip')}), ${add.bt('lat')}, ${add.bt('long')} ` +
-            `FROM ballot.location;`;
+            `FROM ${database}.${add.bt('location')};`;
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log(result);
