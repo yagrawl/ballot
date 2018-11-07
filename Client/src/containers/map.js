@@ -283,7 +283,8 @@ class Maps extends Component {
     });
 
     let marker;
-    for(let i = 0; i < this.props.locations.length; i++) {
+    let i;
+    for(i = 0; i < this.props.locations.length; i++) {
       marker = new window.google.maps.Marker({
             map: map,
             position: {lat:parseInt(this.props.locations[i].lat) , lng: parseInt(this.props.locations[i].long)},
