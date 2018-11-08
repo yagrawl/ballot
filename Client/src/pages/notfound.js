@@ -46,7 +46,7 @@ class NotFound extends Component {
         <header className="not-found-header">
           <img src={notFoundArt} className="not-found-image" alt="not found graphic"/>
           <p>404 : NOT FOUND</p>
-          <Link to={'./'}>
+          <Link to={'../'}>
             <button className="button button-transparent">
               Go Back Home
             </button>

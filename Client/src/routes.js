@@ -72,7 +72,7 @@ class Routes extends Component {
     if(this.state.logged_in) {
         return (
           <div className="login-button-position">
-            <Link to={`user/${this.state.user.id}`}>
+            <Link to={`../user/${this.state.user.id}`}>
               <img className="avatar-top" src={this.state.user.profile_picture} alt={"profile"}></img>
             </Link>
           </div>
