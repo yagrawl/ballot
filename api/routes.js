@@ -51,7 +51,10 @@ module.exports = function(app) {
 
   app.route('/api/stats')
     .get(stats.get_stats);
-    
+
+  app.route('/api/google_maps_key')
+    .get(stats.get_map_key);
+
   app.route('/api/event')
     .post(event.add_event);
 

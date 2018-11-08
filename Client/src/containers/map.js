@@ -14,11 +14,16 @@ class Maps extends Component {
   }
 
   componentDidMount() {
-    this.loadMap();
+    fetch('/api/google_maps_key')
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        this.loadMap(data.key);
+      });
   }
 
-  loadMap = () => {
-    loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyAFEARFE9zYh8BMBZjRTBfUQCHpH9UbjEs&callback=initMap");
+  loadMap = (key) => {
+    loadScript(`https://maps.googleapis.com/maps/api/js?key=${key}&callback=initMap`);
     window.initMap = this.initMap;
   }
 
