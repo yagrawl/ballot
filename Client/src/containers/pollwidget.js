@@ -103,11 +103,17 @@ class PollWidget extends Component {
     });
   }
 
-  renderer = ({ hours, minutes, seconds, completed }) => {
+  renderer = ({ days, hours, minutes, seconds, completed }) => {
     if (completed) {
       return (<span>Poll Expired</span>);
     } else {
-      return <span>{hours}:{minutes}:{seconds}</span>;
+      if(days === 0) {
+        return <span>{hours}:{minutes}:{seconds}</span>;
+      } else if(days === 1) {
+        return <span>{days} day {hours} hours</span>;
+      } else {
+        return <span>{days} days {hours} hours</span>;
+      }
     }
   };
 
@@ -171,10 +177,13 @@ class PollWidget extends Component {
 
   addLabel() {
     if(this.state.countdown - Date.now() <= 0 && this.state.has_voted === false) {
-      return <p className="poll-question-p">Poll Expired.</p>
+      return <p className="poll-expired-p">Poll Expired.</p>
     }
     else if(this.state.countdown - Date.now() <= 0 && this.state.has_voted === true) {
-      return <p className="poll-question-p">You've Voted / Poll Expired.</p>
+      return (<div>
+                <p className="poll-question-p">You've Voted</p>
+                <p className="poll-expired-p poll-expired-p-both">Poll Expired.</p>
+             </div>)
     }
     else {
       return <p className="poll-question-p">You've voted.</p>

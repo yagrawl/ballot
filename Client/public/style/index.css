@@ -535,6 +535,18 @@ input:checked + .slider:before {
   text-align: center;
 }
 
+.poll-expired-p {
+  font-family: Proxima Nova;
+  font-size: 20px;
+  font-weight: 100;
+  color: #AC4143;
+  text-align: center;
+}
+
+.poll-expired-p-both {
+  margin-top: -20px;
+}
+
 .poll-link {
   font-family: Proxima Nova;
   font-size: 20px;
