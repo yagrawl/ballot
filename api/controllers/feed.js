@@ -10,7 +10,7 @@ exports.get_feed_poll = (req, res) => {
 
   con.query(sql, function (err, result) {
     if (err) throw err;
-    let top_polls = result.sort(add.compare).slice(0, 10);
+    let top_polls = result.sort(add.compare).slice(0, 5);
     res.send({ details: top_polls });
   });
 }
