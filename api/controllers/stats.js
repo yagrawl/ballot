@@ -1,6 +1,5 @@
 const db = require('../models/connection');
 const add = require('../models/helpers');
-const key = require('../models/keys');
 const con = db.con;
 const database = process.env.DB_NAME || "`ballot`";
 
@@ -31,5 +30,5 @@ exports.get_stats = (req, res) => {
 
 exports.get_map_key = (req, res) => {
   console.log('send key');
-  res.send({key: (process.env.GOOGLE_MAPS_KEY || key.google_maps_key)});
+  res.send({key: process.env.GOOGLE_MAPS_KEY});
 };
