@@ -103,6 +103,14 @@ class PollWidget extends Component {
     });
   }
 
+  renderer = ({ hours, minutes, seconds, completed }) => {
+    if (completed) {
+      return (<span>Poll Expired</span>);
+    } else {
+      return <span>{hours}:{minutes}:{seconds}</span>;
+    }
+  };
+
   handleVote(e) {
     let vote = e.target.value;
 
@@ -161,13 +169,25 @@ class PollWidget extends Component {
     }
   }
 
+  addLabel() {
+    if(this.state.countdown - Date.now() <= 0 && this.state.has_voted === false) {
+      return <p className="poll-question-p">Poll Expired.</p>
+    }
+    else if(this.state.countdown - Date.now() <= 0 && this.state.has_voted === true) {
+      return <p className="poll-question-p">You've Voted / Poll Expired.</p>
+    }
+    else {
+      return <p className="poll-question-p">You've voted.</p>
+    }
+  }
+
   render() {
     if(this.state.poll_loaded){
-      if(this.state.has_voted) {
+      if(this.state.has_voted || this.state.countdown - Date.now() <= 0) {
         return (
           <div>
             {this.checkDelete()}
-            <p className="poll-question-p">You've voted.</p>
+            {this.addLabel()}
             <center>
               <PollAnalytics
               poll_id={this.state.id}
@@ -182,7 +202,7 @@ class PollWidget extends Component {
               <img className="avatar-top" src={`https://graph.facebook.com/v3.2/${this.state.response[0].creator_id}/picture?height=400&width=400`} alt={"profile"}></img>
             </Link>
             <div className="poll-timer">
-              <Countdown date={this.state.countdown} />
+              <Countdown date={this.state.countdown} renderer={this.renderer}/>
             </div>
           </div>
         )
@@ -198,7 +218,7 @@ class PollWidget extends Component {
               <img className="avatar-top" src={`https://graph.facebook.com/v3.2/${this.state.response[0].creator_id}/picture?height=400&width=400`} alt={"profile"}></img>
             </Link>
             <div className="poll-timer">
-              <Countdown date={this.state.countdown} />
+              <Countdown date={this.state.countdown} renderer={this.renderer}/>
             </div>
           </div>
         )
