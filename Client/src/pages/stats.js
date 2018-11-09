@@ -1,5 +1,14 @@
 import React, { Component } from 'react';
-import {ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
+import {ResponsiveContainer,
+        BarChart,
+        Bar,
+        XAxis,
+        YAxis,
+        CartesianGrid,
+        Tooltip,
+        Legend,
+        RadialBarChart,
+        RadialBar } from 'recharts';
 
 import Logo from '../components/logo'
 import Loader from '../components/loader'
@@ -19,7 +28,8 @@ class Stats extends Component {
         vote_count: 0,
         ip_locations: [],
         browsers: [],
-        os: []
+        os: [],
+        routes: []
       },
       user: {
         id: "Unknown",
@@ -111,6 +121,17 @@ class Stats extends Component {
                   <XAxis dataKey="os" />
                   <Tooltip />
                   <Bar dataKey="os_count" fill="#3D5467" />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+          <div className="stats-active-area">
+            <div className="stats-full-graph-box">
+              <ResponsiveContainer width="90%" height={250}>
+                <BarChart data={this.state.response.routes}>
+                  <XAxis dataKey="event_route" />
+                  <Tooltip />
+                  <Bar dataKey="route_count" fill="#3D5467" />
                 </BarChart>
               </ResponsiveContainer>
             </div>

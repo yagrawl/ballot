@@ -20,10 +20,14 @@ exports.get_stats = (req, res) => {
             `GROUP BY ${add.bt('browser')};` +
             `SELECT ${add.bt('os')}, COUNT(${add.bt('os')}) AS os_count ` +
             `FROM ${database}.${add.bt('events')} ` +
-            `GROUP BY ${add.bt('os')};`;
+            `GROUP BY ${add.bt('os')};` +
+            `SELECT ${add.bt('event_route')}, COUNT(${add.bt('event_route')}) AS route_count ` +
+            `FROM ${database}.${add.bt('events')} ` +
+            `GROUP BY ${add.bt('event_route')};`;
 
   stats.browsers = [];
   stats.os = [];
+  stats.routes = [];
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log(result);
@@ -48,6 +52,17 @@ exports.get_stats = (req, res) => {
       os.os_count = result[5][i].os_count;
       stats.os.push(os);
     }
+
+    let route;
+    let fill = ['#8884d8', '#83a6ed', '#8dd1e1', '#82ca9d', '#a4de6c', '#d0ed57', '#ffc658']
+    for(let i = 0; i < result[6].length; i++) {
+      route = {};
+      route.event_route = result[6][i].event_route;
+      route.route_count = result[6][i].route_count;
+      route.fill = fill[i%7];
+      stats.routes.push(route);
+    }
+
     console.log('STATS: ', stats);
     res.send({result: stats});
   });

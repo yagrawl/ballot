@@ -1022,6 +1022,17 @@ input:checked + .slider:before {
   display: inline-block;
 }
 
+.stats-full-graph-box {
+  width: 100%;
+  background-color: white;
+  border-radius: 5px;
+  margin-bottom: 30px;
+  padding: auto;
+  padding-top: 5%;
+  padding-left: 5%;
+  display: inline-block;
+}
+
 .stats-map-div {
   margin: auto;
   border-radius: 20px;
