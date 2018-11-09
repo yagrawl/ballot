@@ -1022,6 +1022,33 @@ input:checked + .slider:before {
   display: inline-block;
 }
 
+.stats-3-graph-box {
+  width: 30%;
+  margin-right: 5%;
+  background-color: white;
+  border-radius: 5px;
+  margin-bottom: 30px;
+  padding: auto;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  display: inline-block;
+}
+
+.stats-3-graph-box-end {
+  padding-left: 4%;
+}
+
+.stats-3-graph-box-end {
+  width: 30%;
+  background-color: white;
+  border-radius: 5px;
+  margin-bottom: 30px;
+  padding: auto;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  display: inline-block;
+}
+
 .stats-full-graph-box {
   width: 100%;
   background-color: white;
@@ -1056,6 +1083,31 @@ input:checked + .slider:before {
   clear: left;
 }
 
+.stats-label {
+  font-family: Proxima Nova;
+  font-weight: 100;
+  font-size: 24px;
+  color: #3D5467;
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.stats-sublabel {
+  font-family: Proxima Nova;
+  font-weight: 100;
+  font-size: 16px;
+  color: #3D5467;
+  margin: 0;
+  text-align: center;
+  margin-bottom: 10px;
+  margin-left: -20px;
+}
+
+.location-label {
+  margin-left: 3%;
+  margin-bottom: -40px;
+}
+
 @media screen and (max-width: 620px) {
   .stats-count-box-clear {
     clear: left;
@@ -1079,6 +1131,15 @@ input:checked + .slider:before {
   }
 
   .stats-2-graph-box-end {
+    width: 100%;
+  }
+
+  .stats-3-graph-box {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .stats-3-graph-box-end {
     width: 100%;
   }
 

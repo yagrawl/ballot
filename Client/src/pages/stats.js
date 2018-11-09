@@ -8,7 +8,9 @@ import {ResponsiveContainer,
         Tooltip,
         Legend,
         RadialBarChart,
-        RadialBar } from 'recharts';
+        RadialBar,
+        PieChart, Pie,
+        Label } from 'recharts';
 
 import Logo from '../components/logo'
 import Loader from '../components/loader'
@@ -29,7 +31,10 @@ class Stats extends Component {
         ip_locations: [],
         browsers: [],
         os: [],
-        routes: []
+        routes: [],
+        feed_privacy: [],
+        analytics_privacy: [],
+        options: []
       },
       user: {
         id: "Unknown",
@@ -86,6 +91,7 @@ class Stats extends Component {
             <Logo link=""/>
           </div>
           <div className="stats-active-area">
+            <p className="stats-label">Main Counts</p>
             <div className="stats-count-box">
               <p className="stats-count-count">{this.state.response.vote_count}</p>
               <p className="stats-count-label">Votes</p>
@@ -106,6 +112,7 @@ class Stats extends Component {
             <div className="stats-count-box-clear-end"></div>
           </div>
           <div className="stats-active-area">
+            <p className="stats-label">Device Data</p>
             <div className="stats-2-graph-box">
               <ResponsiveContainer width="90%" height={250}>
                 <BarChart data={this.state.response.browsers}>
@@ -114,6 +121,7 @@ class Stats extends Component {
                   <Bar dataKey="browser_count" fill="#82ca9d" />
                 </BarChart>
               </ResponsiveContainer>
+              <p className="stats-sublabel">Browsers</p>
             </div>
             <div className="stats-2-graph-box-end">
               <ResponsiveContainer width="90%" height={250}>
@@ -123,9 +131,11 @@ class Stats extends Component {
                   <Bar dataKey="os_count" fill="#3D5467" />
                 </BarChart>
               </ResponsiveContainer>
+              <p className="stats-sublabel">Operating Systems</p>
             </div>
           </div>
           <div className="stats-active-area">
+            <p className="stats-label">Endpoint Data</p>
             <div className="stats-full-graph-box">
               <ResponsiveContainer width="90%" height={250}>
                 <BarChart data={this.state.response.routes}>
@@ -134,8 +144,54 @@ class Stats extends Component {
                   <Bar dataKey="route_count" fill="#3D5467" />
                 </BarChart>
               </ResponsiveContainer>
+              <p className="stats-sublabel">Routes</p>
             </div>
           </div>
+          <div className="stats-active-area">
+            <p className="stats-label">Poll Attributes Data</p>
+            <div className="stats-3-graph-box">
+              <ResponsiveContainer width="90%" height={250}>
+                <PieChart>
+                  <Pie dataKey="feed_privacy_count"
+                       isAnimationActive={true}
+                       data={this.state.response.feed_privacy}
+                       cx="50%" cy="50%"
+                       nameKey="feed_privacy"
+                       innerRadius="50%"
+                       outerRadius="100%" />
+                  <Tooltip/>
+                </PieChart>
+              </ResponsiveContainer>
+              <p className="stats-sublabel">Feed Privacy</p>
+            </div>
+            <div className="stats-3-graph-box stats-3-graph-box-end">
+              <ResponsiveContainer width="90%" height={250}>
+                <BarChart data={this.state.response.options}>
+                  <XAxis dataKey="option_no">
+                  </XAxis>
+                  <Tooltip />
+                  <Bar dataKey="poll_count" fill="#5158BB" />
+                </BarChart>
+              </ResponsiveContainer>
+              <p className="stats-sublabel">Number of Options</p>
+            </div>
+            <div className="stats-3-graph-box-end">
+              <ResponsiveContainer width="90%" height={250}>
+                <PieChart>
+                  <Pie dataKey="analytics_privacy_count"
+                       isAnimationActive={true}
+                       data={this.state.response.analytics_privacy}
+                       cx="50%" cy="50%"
+                       nameKey="analytics_privacy"
+                       innerRadius="50%"
+                       outerRadius="100%"/>
+                  <Tooltip/>
+                </PieChart>
+              </ResponsiveContainer>
+              <p className="stats-sublabel">Analytics Privacy</p>
+            </div>
+          </div>
+            <p className="stats-label location-label">Location Data</p>
             <Maps locations={this.state.response.ip_locations}/>
         </div>
       );

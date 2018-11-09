@@ -23,11 +23,26 @@ exports.get_stats = (req, res) => {
             `GROUP BY ${add.bt('os')};` +
             `SELECT ${add.bt('event_route')}, COUNT(${add.bt('event_route')}) AS route_count ` +
             `FROM ${database}.${add.bt('events')} ` +
-            `GROUP BY ${add.bt('event_route')};`;
+            `GROUP BY ${add.bt('event_route')};` +
+            `SELECT ${add.bt('feed_privacy')}, COUNT(${add.bt('feed_privacy')}) AS feed_privacy_count ` +
+            `FROM ${database}.${add.bt('polls')} ` +
+            `GROUP BY ${add.bt('feed_privacy')};` +
+            `SELECT ${add.bt('analytics_privacy')}, COUNT(${add.bt('analytics_privacy')}) AS analytics_privacy_count ` +
+            `FROM ${database}.${add.bt('polls')} ` +
+            `GROUP BY ${add.bt('analytics_privacy')};` +
+            `SELECT COUNT(${add.bt('option_3')}) AS opt3_count ` +
+            `FROM ${database}.${add.bt('polls')} ` +
+            `WHERE option_3 = 'NULL';` +
+            `SELECT COUNT(${add.bt('option_4')}) AS opt4_count ` +
+            `FROM ${database}.${add.bt('polls')} ` +
+            `WHERE option_4 = 'NULL';`;
 
   stats.browsers = [];
   stats.os = [];
   stats.routes = [];
+  stats.feed_privacy = [];
+  stats.analytics_privacy = [];
+  stats.options = [];
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log(result);
@@ -62,6 +77,46 @@ exports.get_stats = (req, res) => {
       route.fill = fill[i%7];
       stats.routes.push(route);
     }
+
+    let feed;
+    fill = ['#2f4b7c', '#f95d6a'];
+    for(let i = 0; i < result[7].length; i++) {
+      feed = {};
+      feed.feed_privacy = result[7][i].feed_privacy;
+      feed.feed_privacy_count = result[7][i].feed_privacy_count;
+      feed.fill = fill[i];
+      stats.feed_privacy.push(feed);
+    }
+
+    let analytics;
+    fill = ['#665191', '#ffa600'];
+    for(let i = 0; i < result[8].length; i++) {
+      analytics = {};
+      analytics.analytics_privacy = result[8][i].analytics_privacy;
+      analytics.analytics_privacy_count = result[8][i].analytics_privacy_count;
+      analytics.fill = fill[i];
+      stats.analytics_privacy.push(analytics);
+    }
+
+    let options_3 = result[9][0].opt3_count;
+    let options_4 = result[10][0].opt4_count;
+
+    console.log('3 options: ', options_3);
+    console.log('4 options: ', options_4);
+    let opts = {};
+    opts.option_no = '2 options';
+    opts.poll_count = options_3;
+    stats.options.push(opts);
+
+    opts = {};
+    opts.option_no = '3 options';
+    opts.poll_count = options_4 - options_3;
+    stats.options.push(opts);
+
+    opts = {};
+    opts.option_no = '4 options';
+    opts.poll_count = stats.poll_count - options_4;
+    stats.options.push(opts);
 
     console.log('STATS: ', stats);
     res.send({result: stats});
