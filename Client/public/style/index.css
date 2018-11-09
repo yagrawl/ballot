@@ -999,6 +999,29 @@ input:checked + .slider:before {
   margin: 0;
 }
 
+.stats-2-graph-box {
+  width: 48%;
+  margin-right: 4%;
+  background-color: white;
+  border-radius: 5px;
+  margin-bottom: 30px;
+  padding: auto;
+  padding-top: 5%;
+  padding-left: 5%;
+  display: inline-block;
+}
+
+.stats-2-graph-box-end {
+  width: 48%;
+  background-color: white;
+  border-radius: 5px;
+  margin-bottom: 30px;
+  padding: auto;
+  padding-top: 5%;
+  padding-left: 5%;
+  display: inline-block;
+}
+
 .stats-map-div {
   margin: auto;
   border-radius: 20px;
@@ -1039,4 +1062,13 @@ input:checked + .slider:before {
   .stats-count-box-top-last {
     margin-right: 0;
   }
+
+  .stats-2-graph-box {
+    width: 100%;
+  }
+
+  .stats-2-graph-box-end {
+    width: 100%;
+  }
+
 }

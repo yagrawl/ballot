@@ -8,13 +8,22 @@ exports.get_stats = (req, res) => {
   // Get event count
   let sql = `SELECT COUNT(${add.bt('event_time')}) AS event_count, ` +
             `COUNT(DISTINCT ${add.bt('event_creator_ip')}) AS ip_count ` +
-            `FROM ${database}.${add.bt('events')}; ` +
+            `FROM ${database}.${add.bt('events')};` +
             `SELECT COUNT(${add.bt('poll_id')}) AS poll_count ` +
-            `FROM ${database}.${add.bt('polls')}; ` +
+            `FROM ${database}.${add.bt('polls')};` +
             `SELECT COUNT(${add.bt('timestamp')}) AS vote_count ` +
             `FROM ${database}.${add.bt('activity')};` +
             `SELECT DISTINCT(${add.bt('ip')}), ${add.bt('lat')}, ${add.bt('long')} ` +
-            `FROM ${database}.${add.bt('location')};`;
+            `FROM ${database}.${add.bt('location')};` +
+            `SELECT ${add.bt('browser')}, COUNT(${add.bt('browser')}) AS browser_count ` +
+            `FROM ${database}.${add.bt('events')} ` +
+            `GROUP BY ${add.bt('browser')};` +
+            `SELECT ${add.bt('os')}, COUNT(${add.bt('os')}) AS os_count ` +
+            `FROM ${database}.${add.bt('events')} ` +
+            `GROUP BY ${add.bt('os')};`;
+
+  stats.browsers = [];
+  stats.os = [];
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log(result);
@@ -23,6 +32,22 @@ exports.get_stats = (req, res) => {
     stats.poll_count = result[1][0].poll_count;
     stats.vote_count = result[2][0].vote_count;
     stats.ip_locations = result[3];
+
+    let browser;
+    for(let i = 0; i < result[4].length; i++) {
+      browser = {};
+      browser.browser = result[4][i].browser;
+      browser.browser_count = result[4][i].browser_count;
+      stats.browsers.push(browser);
+    }
+
+    let os;
+    for(let i = 0; i < result[5].length; i++) {
+      os = {};
+      os.os = result[5][i].os;
+      os.os_count = result[5][i].os_count;
+      stats.os.push(os);
+    }
     console.log('STATS: ', stats);
     res.send({result: stats});
   });

@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStroopwafel } from '@fortawesome/free-solid-svg-icons';
+import {ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
 
 import Logo from '../components/logo'
 import Loader from '../components/loader'
@@ -19,7 +17,9 @@ class Stats extends Component {
         poll_count: 0,
         ip_count: 0,
         vote_count: 0,
-        ip_locations: []
+        ip_locations: [],
+        browsers: [],
+        os: []
       },
       user: {
         id: "Unknown",
@@ -94,6 +94,26 @@ class Stats extends Component {
               <p className="stats-count-label">IPs</p>
             </div>
             <div className="stats-count-box-clear-end"></div>
+          </div>
+          <div className="stats-active-area">
+            <div className="stats-2-graph-box">
+              <ResponsiveContainer width="90%" height={250}>
+                <BarChart data={this.state.response.browsers}>
+                  <XAxis dataKey="browser" />
+                  <Tooltip />
+                  <Bar dataKey="browser_count" fill="#82ca9d" />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+            <div className="stats-2-graph-box-end">
+              <ResponsiveContainer width="90%" height={250}>
+                <BarChart data={this.state.response.os}>
+                  <XAxis dataKey="os" />
+                  <Tooltip />
+                  <Bar dataKey="os_count" fill="#3D5467" />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
           </div>
             <Maps locations={this.state.response.ip_locations}/>
         </div>
