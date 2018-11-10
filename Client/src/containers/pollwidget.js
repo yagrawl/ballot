@@ -119,7 +119,7 @@ class PollWidget extends Component {
 
   handleVote(e) {
     let vote = e.target.value;
-
+    localStorage.setItem(this.state.id, vote);
     this.setState(
       prevState => ({
         ...prevState,
@@ -176,10 +176,13 @@ class PollWidget extends Component {
   }
 
   addLabel() {
-    if(this.state.countdown - Date.now() <= 0 && this.state.has_voted === false) {
+    let check_localStore = localStorage.hasOwnProperty(this.state.id);
+    let vote_check = (check_localStore || this.state.has_voted);
+
+    if(this.state.countdown - Date.now() <= 0 && !(vote_check)) {
       return <p className="poll-expired-p">Poll Expired.</p>
     }
-    else if(this.state.countdown - Date.now() <= 0 && this.state.has_voted === true) {
+    else if(this.state.countdown - Date.now() <= 0 && vote_check) {
       return (<div>
                 <p className="poll-question-p">You've Voted</p>
                 <p className="poll-expired-p poll-expired-p-both">Poll Expired.</p>
