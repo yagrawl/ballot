@@ -35,7 +35,14 @@ exports.get_stats = (req, res) => {
             `WHERE option_3 = 'NULL';` +
             `SELECT COUNT(${add.bt('option_4')}) AS opt4_count ` +
             `FROM ${database}.${add.bt('polls')} ` +
-            `WHERE option_4 = 'NULL';`;
+            `WHERE option_4 = 'NULL';` +
+            `SELECT ${add.bt('expiration_time')} ` +
+            `FROM ${database}.${add.bt('polls')};` +
+            `SELECT COUNT(${add.bt('user_id')}) AS all_users ` +
+            `FROM ${database}.${add.bt('users')};` +
+            `SELECT COUNT(${add.bt('log_count')}) AS returning_users ` +
+            `FROM ${database}.${add.bt('users')} ` +
+            `WHERE ${add.bt('log_count')} > 1;`;
 
   stats.browsers = [];
   stats.os = [];
@@ -43,6 +50,8 @@ exports.get_stats = (req, res) => {
   stats.feed_privacy = [];
   stats.analytics_privacy = [];
   stats.options = [];
+  stats.expiration_time = [];
+  stats.returning_users = [];
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log(result);
@@ -101,8 +110,6 @@ exports.get_stats = (req, res) => {
     let options_3 = result[9][0].opt3_count;
     let options_4 = result[10][0].opt4_count;
 
-    console.log('3 options: ', options_3);
-    console.log('4 options: ', options_4);
     let opts = {};
     opts.option_no = '2 options';
     opts.poll_count = options_3;
@@ -117,6 +124,49 @@ exports.get_stats = (req, res) => {
     opts.option_no = '4 options';
     opts.poll_count = stats.poll_count - options_4;
     stats.options.push(opts);
+
+    let expiration_time_buckets = {'<5 days': 0,
+                                   '6 - 10 days': 0,
+                                   '11 - 15 days': 0,
+                                   '16 - 20 days': 0,
+                                   '21 - 25 days': 0,
+                                   '>25 days': 0};
+    for(let i = 0; i < result[11].length; i++) {
+      let expire_time = parseInt(result[11][i].expiration_time);
+      if(expire_time <= 5) {
+        expiration_time_buckets['<5 days'] += 1
+      } else if(expire_time <= 10) {
+        expiration_time_buckets['6 - 10 days'] += 1
+      } else if(expire_time <= 15) {
+        expiration_time_buckets['11 - 15 days'] += 1
+      } else if(expire_time <= 20) {
+        expiration_time_buckets['16 - 20 days'] += 1
+      } else if(expire_time <= 25) {
+        expiration_time_buckets['21 - 25 days'] += 1
+      } else {
+        expiration_time_buckets['>25 days'] += 1
+      }
+    }
+
+    let expire_time;
+    for(let val in expiration_time_buckets) {
+      let expire_time = {};
+      expire_time.duration = val;
+      expire_time.count = expiration_time_buckets[val];
+      stats.expiration_time.push(expire_time);
+    }
+
+    let users = {};
+    users.name = 'Non-Returning Users';
+    users.count = result[12][0].all_users - result[13][0].returning_users;
+    users.fill = '#8884d8';
+    stats.returning_users.push(users);
+
+    users = {};
+    users.name = 'Returning Users';
+    users.count = result[13][0].returning_users;
+    users.fill = '#f95d6a';
+    stats.returning_users.push(users);
 
     console.log('STATS: ', stats);
     res.send({result: stats});

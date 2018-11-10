@@ -34,7 +34,9 @@ class Stats extends Component {
         routes: [],
         feed_privacy: [],
         analytics_privacy: [],
-        options: []
+        options: [],
+        expiration_time: [],
+        returning_users: []
       },
       user: {
         id: "Unknown",
@@ -189,6 +191,28 @@ class Stats extends Component {
                 </PieChart>
               </ResponsiveContainer>
               <p className="stats-sublabel">Analytics Privacy</p>
+            </div>
+          </div>
+          <div className="stats-active-area">
+            <p className="stats-label">Poll Data</p>
+            <div className="stats-2-graph-box">
+              <ResponsiveContainer width="90%" height={250}>
+                <BarChart data={this.state.response.expiration_time}>
+                  <XAxis dataKey="duration" />
+                  <Tooltip />
+                  <Bar dataKey="count" fill="#F2CD5D" />
+                </BarChart>
+              </ResponsiveContainer>
+              <p className="stats-sublabel">Expiration Time</p>
+            </div>
+            <div className="stats-2-graph-box-end">
+              <ResponsiveContainer width="90%" height={250}>
+                <RadialBarChart innerRadius="20%" outerRadius="90%" data={this.state.response.returning_users} startAngle={360} endAngle={0}>
+                  <RadialBar minAngle={15} label={{ fill: '#666', position: 'insideStart' }} background clockWise={true} dataKey='count' />
+                  <Tooltip label="name"/>
+                </RadialBarChart>
+              </ResponsiveContainer>
+              <p className="stats-sublabel">Returning Users</p>
             </div>
           </div>
             <p className="stats-label location-label">Location Data</p>
