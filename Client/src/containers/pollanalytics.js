@@ -1,6 +1,19 @@
 import React, {Component} from 'react';
 
 import { RadialChart } from 'react-vis';
+import {ResponsiveContainer,
+        BarChart,
+        Bar,
+        XAxis,
+        YAxis,
+        CartesianGrid,
+        Tooltip,
+        Legend,
+        RadialBarChart,
+        RadialBar,
+        PieChart, Pie,
+        Label, LabelList } from 'recharts';
+
 import '../../node_modules/react-vis/dist/style.css';
 
 class PollAnalytics extends Component {
@@ -95,29 +108,23 @@ class PollAnalytics extends Component {
     return (
       <div>
         <p className="input-label analytics-question">{this.state.question}</p>
-        <RadialChart
-          data={[{angle: this.stats[1], label: this.state.options[0], color: "#0088FE"},
-                 {angle: this.stats[2], label: this.state.options[1], color: "#FF8042"},
-                 {angle: this.stats[3], label: this.state.options[2], color: "#00C49F"},
-                 {angle: this.stats[4], label: this.state.options[3], color: "#FFBB28"}]}
-          width={300}
-          height={300}
-          animation={true}
-          showLabels={true}
-          labelsRadiusMultiplier={0.86}
-          labelsStyle={{
-            fontSize: 14,
-            fontFamily: "Proxima Nova",
-            fontWeight: 200,
-            fill: "#282C34"
-          }}
-          colorType={'literal'}
-          colorDomain={[0, 100]}
-          colorRange={[0, 10]}
-          innerRadius={0}
-          radius={140}
-          padAngle={0.0}
-        />
+        <ResponsiveContainer width="90%" height={250}>
+          <PieChart>
+            <Pie dataKey="angle"
+                 isAnimationActive={true}
+                 data={[{angle: this.stats[1], label: this.state.options[0], fill: "#8884d8"},
+                        {angle: this.stats[2], label: this.state.options[1], fill: "#f95d6a"},
+                        {angle: this.stats[3], label: this.state.options[2], fill: "#00C49F"},
+                        {angle: this.stats[4], label: this.state.options[3], fill: "#ffc658"}]}
+                 cx="50%" cy="50%"
+                 nameKey="label"
+                 innerRadius="0%"
+                 outerRadius="100%">
+                 <LabelList dataKey="label" position="outside"/>
+            </Pie>
+            <Tooltip/>
+          </PieChart>
+        </ResponsiveContainer>
       </div>
     )
   }
