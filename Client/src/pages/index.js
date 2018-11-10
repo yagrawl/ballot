@@ -76,6 +76,11 @@ class Index extends Component {
           <Link to={'./create'}>
             <button className="button button-transparent">Create Poll</button>
           </Link>
+          <div className="index-links">
+            <a href="/feed"><span className="index-link">Feed</span></a>
+            <span className="index-link">&nbsp;&nbsp;&sdot;&nbsp;&nbsp;</span>
+            <a href="/stats"><span className="index-link">Platform Stats</span></a>
+          </div>
           <p className="App-content ip-center">{this.state.response}</p>
         </header>
       </div>

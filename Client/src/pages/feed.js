@@ -74,7 +74,7 @@ class Feed extends Component {
     console.log('Feed: ', this.state);
     return (
       <div className="feed-header">
-        <Logo link=""/>
+        <Logo link="/"/>
         <div className="active-area">
           {this.getFeed()}
         </div>

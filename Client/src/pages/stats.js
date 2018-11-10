@@ -88,7 +88,7 @@ class Stats extends Component {
       return (
         <div className="stats">
           <div className="stats-header">
-            <Logo link=""/>
+            <Logo link="/"/>
           </div>
           <div className="stats-active-area">
             <p className="stats-label">Main Counts</p>

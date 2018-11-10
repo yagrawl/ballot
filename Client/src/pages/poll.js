@@ -16,7 +16,7 @@ class Poll extends Component {
 
     return (
       <div>
-        <Logo link=""/>
+        <Logo link="/"/>
         <div className="active-area">
           <div className="poll-widget-poll-cover">
             <PollWidget

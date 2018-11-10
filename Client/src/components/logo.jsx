@@ -5,11 +5,11 @@ import logo from '../assets/imgs/logo.png';
 
 const Logo = (props) => (
   <div>
-    <Link to={props.link}>
+    <a href={props.link}>
       <div className="setup-navbar">
         <img src={logo} className="logo-image" alt="logo" />
       </div>
-    </Link>
+    </a>
   </div>
 );
 

@@ -92,6 +92,22 @@ body {
   color: #8BD9F9;
 }
 
+.index-links {
+  display: inline;
+}
+
+.index-link {
+  font-family: Proxima Nova;
+  font-weight: 100;
+  font-size: 16px;
+  color: #8BD9F9;
+  text-decoration: none;
+}
+
+.index-links:hover {
+  text-decoration: none;
+}
+
 .active-area {
     max-width: 580px;
     margin: 6vh auto;
