@@ -28,11 +28,11 @@ exports.cleanCreatePollData = (data) => {
   output.options = [];
 
   for(let i = 0; i < options_cleaner.length; i++) {
-    output.options.push(options_cleaner[i].content);
+    output.options.push(cleanComma(options_cleaner[i].content));
   }
 
   output.poll_id = cryptoRandomString(6);
-  output.question = data.details.question;
+  output.question = cleanComma(data.details.question);
 
   for(let i = 0; i <= 4 - output.options.length; i++) {
     output.options.push('NULL');
@@ -46,4 +46,12 @@ exports.cleanCreatePollData = (data) => {
   output.creator_id = data.attributes.creator_id;
 
   return output;
+}
+
+let cleanComma = (input) => {
+  return input.replace(/'/g, "§");
+}
+
+exports.fixComma = (input) => {
+  return input.replace(/§/g, "'");
 }
