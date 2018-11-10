@@ -98,6 +98,15 @@ class PollWidget extends Component {
             })
           );
         }
+
+        if(localStorage.hasOwnProperty(this.state.id)) {
+          this.setState(
+            prevState => ({
+              ...prevState,
+              has_voted: true
+            })
+          );
+        }
       })
       .catch(err => console.log(err))
     });
@@ -176,13 +185,10 @@ class PollWidget extends Component {
   }
 
   addLabel() {
-    let check_localStore = localStorage.hasOwnProperty(this.state.id);
-    let vote_check = (check_localStore || this.state.has_voted);
-
-    if(this.state.countdown - Date.now() <= 0 && !(vote_check)) {
+    if(this.state.countdown - Date.now() <= 0 && !(this.state.has_voted)) {
       return <p className="poll-expired-p">Poll Expired.</p>
     }
-    else if(this.state.countdown - Date.now() <= 0 && vote_check) {
+    else if(this.state.countdown - Date.now() <= 0 && this.state.has_voted) {
       return (<div>
                 <p className="poll-question-p">You've Voted</p>
                 <p className="poll-expired-p poll-expired-p-both">Poll Expired.</p>
