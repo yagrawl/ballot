@@ -1,18 +1,9 @@
 import React, {Component} from 'react';
 
-import { RadialChart } from 'react-vis';
 import {ResponsiveContainer,
-        BarChart,
-        Bar,
-        XAxis,
-        YAxis,
-        CartesianGrid,
         Tooltip,
-        Legend,
-        RadialBarChart,
-        RadialBar,
         PieChart, Pie,
-        Label, LabelList } from 'recharts';
+        LabelList } from 'recharts';
 
 import '../../node_modules/react-vis/dist/style.css';
 

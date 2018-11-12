@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import PollWidget from '../containers/pollwidget'
 import Logo from '../components/logo'
+import PollDenied from '../components/pollDenied'
 
 import { sendEvent } from '../containers/event'
 
@@ -17,6 +18,8 @@ class Feed extends Component {
         profile_picture: "https://i.imgur.com/fMVORsK.png",
         email: "theballot@gmail.com"
       },
+      incognito_detected: false,
+      vpn_detected: false
     }
   }
 
@@ -41,6 +44,35 @@ class Feed extends Component {
   }
 
   componentDidMount() {
+    let fs = window.RequestFileSystem || window.webkitRequestFileSystem;
+    fs(window.TEMPORARY, 100, (fs) => {
+      this.setState(
+        prevState => ({
+          ...prevState,
+          incognito_detected: false
+        })
+      );
+    }, (err) => {
+      this.setState(
+        prevState => ({
+          ...prevState,
+          incognito_detected: true
+        })
+      );
+    });
+
+    fetch('/ip/check_vpn')
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        this.setState(
+          prevState => ({
+            ...prevState,
+            vpn_detected: data.is_vpn
+          })
+        );
+      });
+
     fetch('/api/feed')
       .then(response => response.json())
       .then(data => {
@@ -55,6 +87,18 @@ class Feed extends Component {
         console.log('Feed State: ', this.props)
         sendEvent("Feed Accessed Logged In", "/feed", this.props.user.id);
       });
+  }
+
+  checkPollConditions() {
+    if(this.state.incognito_detected && this.state.vpn_detected) {
+      return <PollDenied reason={"IV"} />
+    } else if(this.state.incognito_detected && !(this.state.vpn_detected)) {
+      return <PollDenied reason={"I"} />
+    } else if(!(this.state.incognito_detected) && this.state.vpn_detected) {
+      return <PollDenied reason={"V"} />
+    } else {
+      return this.getFeed();
+    }
   }
 
   getFeed() {
@@ -76,7 +120,7 @@ class Feed extends Component {
       <div className="feed-header">
         <Logo link="/"/>
         <div className="active-area">
-          {this.getFeed()}
+          {this.checkPollConditions()}
         </div>
       </div>
     );

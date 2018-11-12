@@ -3,10 +3,7 @@ import { Link } from 'react-router-dom';
 import Countdown from 'react-countdown-now';
 
 import avatar from '../assets/imgs/default_avatar.png';
-import dots from '../assets/imgs/options.png';
-import bin from '../assets/imgs/delete.png';
 import PollAnalytics from '../containers/pollanalytics';
-import DropDown from '../components/dropdown';
 import Loader from '../components/loader'
 
 class PollWidget extends Component {
@@ -43,7 +40,6 @@ class PollWidget extends Component {
     }
 
     this.handleVote = this.handleVote.bind(this);
-    this.checkDelete = this.checkDelete.bind(this);
   }
 
   componentDidMount() {
@@ -174,16 +170,6 @@ class PollWidget extends Component {
     return elements;
   }
 
-  checkDelete() {
-    if(this.props.user.id === this.state.response[0].creator_id) {
-      return (
-        <button className="delete-button">
-          <i className="poll-settings-img w3-xxlarge fa fa-close"></i>
-        </button>
-      );
-    }
-  }
-
   addLabel() {
     if(this.state.countdown - Date.now() <= 0 && !(this.state.has_voted)) {
       return <p className="poll-expired-p">Poll Expired.</p>
@@ -204,7 +190,6 @@ class PollWidget extends Component {
       if(this.state.has_voted || this.state.countdown - Date.now() <= 0) {
         return (
           <div>
-            {this.checkDelete()}
             {this.addLabel()}
             <center>
               <PollAnalytics
@@ -227,7 +212,6 @@ class PollWidget extends Component {
       } else {
         return (
           <div>
-            {this.checkDelete()}
             <p className="poll-question-p">{this.state.response[0].question}</p>
             <center>
               {this.renderOptions()}

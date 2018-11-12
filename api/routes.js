@@ -18,6 +18,9 @@ module.exports = function(app) {
   app.route('/ip')
     .get(ip.get_ip);
 
+  app.route('/ip/check_vpn')
+    .get(ip.check_vpn);
+
   app.route('/api/create')
     .post(create.poll_details);
 

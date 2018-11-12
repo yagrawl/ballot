@@ -3,14 +3,10 @@ import {ResponsiveContainer,
         BarChart,
         Bar,
         XAxis,
-        YAxis,
-        CartesianGrid,
         Tooltip,
-        Legend,
         RadialBarChart,
         RadialBar,
-        PieChart, Pie,
-        Label } from 'recharts';
+        PieChart, Pie } from 'recharts';
 
 import Logo from '../components/logo'
 import Loader from '../components/loader'

@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 
-import Pin from '../components/mappin'
-import { sendEvent } from '../containers/event'
-
 import pin from '../assets/imgs/pin.svg'
 
 class Maps extends Component {
