@@ -97,21 +97,17 @@ class Feed extends Component {
     } else if(!(this.state.incognito_detected) && this.state.vpn_detected) {
       return <PollDenied reason={"V"} />
     } else {
-      return this.getFeed();
+      let elements = this.state.response.map((poll, index) => (
+        <div className="poll-widget-feed-cover">
+          <PollWidget
+            poll_id={poll.poll_id}
+            isAuthed={this.props.isAuthed}
+            user={this.props.user}
+          />
+        </div>
+      ));
+      return elements;
     }
-  }
-
-  getFeed() {
-    let elements = this.state.response.map((poll, index) => (
-      <div className="poll-widget-feed-cover">
-        <PollWidget
-          poll_id={poll.poll_id}
-          isAuthed={this.props.isAuthed}
-          user={this.props.user}
-        />
-      </div>
-    ));
-    return elements;
   }
 
   render() {
