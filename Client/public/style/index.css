@@ -1160,3 +1160,26 @@ input:checked + .slider:before {
   }
 
 }
+
+.poll-denied-div {
+  text-align: center;
+}
+
+.poll-denied-detection {
+  font-family: Proxima Nova;
+  font-weight: 100;
+  font-size: 24px;
+  color: #389BC2;
+}
+
+.poll-denied-image {
+  height: 300px;
+  margin: auto;
+}
+
+.poll-denied-instruction {
+  font-family: Proxima Nova;
+  font-weight: 200;
+  font-size: 16px;
+  color: #8BD9F9;
+}
