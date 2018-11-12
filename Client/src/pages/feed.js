@@ -45,21 +45,23 @@ class Feed extends Component {
 
   componentDidMount() {
     let fs = window.RequestFileSystem || window.webkitRequestFileSystem;
-    fs(window.TEMPORARY, 100, (fs) => {
-      this.setState(
-        prevState => ({
-          ...prevState,
-          incognito_detected: false
-        })
-      );
-    }, (err) => {
-      this.setState(
-        prevState => ({
-          ...prevState,
-          incognito_detected: true
-        })
-      );
-    });
+    if (fs) {
+      fs(window.TEMPORARY, 100, (fs) => {
+        this.setState(
+          prevState => ({
+            ...prevState,
+            incognito_detected: false
+          })
+        );
+      }, (err) => {
+        this.setState(
+          prevState => ({
+            ...prevState,
+            incognito_detected: true
+          })
+        );
+      });
+    }
 
     fetch('/ip/check_vpn')
       .then(response => response.json())

@@ -59,6 +59,11 @@ body {
   color: #8BD9F9;
 }
 
+.mobile-overflow {
+  overflow-x: hidden;
+  width: 100%;
+}
+
 .App-content {
   font-size: 20px;
   font-family: Proxima Nova;
