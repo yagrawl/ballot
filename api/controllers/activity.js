@@ -39,3 +39,26 @@ exports.get_analytics = (req, res) => {
     res.send({ details: result });
   });
 }
+
+exports.get_pre_analytics = (req, res) => {
+  let poll_id = req.params.poll_id;
+  let sql = `SELECT ${add.bt('selection')} AS opt, COUNT(${add.bt('selection')}) AS vote_count ` +
+            `from ${database}.${add.bt('activity')} as act ` +
+            `WHERE act.poll_id = ${add.cm(poll_id)} ` +
+            `GROUP BY ${add.bt('selection')};`;
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    let stats = {'1': '0%', '2': '0%', '3': '0%', '4': '0%'};
+    let total_votes = 0;
+    for(let i = 0; i < result.length; i++) {
+      total_votes += result[i].vote_count;
+    }
+
+    for(let i = 0; i < result.length; i++) {
+      stats[result[i].opt] = ((result[i].vote_count/total_votes)*100).toString() + '%';
+    }
+
+    console.log('vote stats: ', stats);
+    res.send({ details: stats });
+  });
+}

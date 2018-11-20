@@ -43,6 +43,9 @@ module.exports = function(app) {
   app.route('/api/activity/analytics/:poll_id')
     .get(activity.get_analytics);
 
+  app.route('/api/activity/pre_analytics/:poll_id')
+    .get(activity.get_pre_analytics);
+
   app.route('/api/feed')
     .get(feed.get_feed_poll);
 

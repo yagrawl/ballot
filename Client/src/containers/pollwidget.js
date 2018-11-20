@@ -13,7 +13,7 @@ class PollWidget extends Component {
     this.state = {
       id: props.poll_id,
       response: [{
-        analytics_privacy: "",
+        analytics_privacy: "false",
         creation_time: "",
         creator_id: "",
         expiration_time: "",
@@ -33,10 +33,10 @@ class PollWidget extends Component {
         email: ""
       },
       stats: {
-        1: 0,
-        2: 0,
-        3: 0,
-        4: 0
+        '1': '0%',
+        '2': '0%',
+        '3': '0%',
+        '4': '0%'
       },
       ip_address: "",
       has_voted: false,
@@ -49,6 +49,18 @@ class PollWidget extends Component {
   }
 
   componentDidMount() {
+    fetch('/api/activity/pre_analytics/' + this.state.id)
+      .then(response => response.json())
+      .then(data => {
+        this.setState(
+          prevState => ({
+            ...prevState,
+            stats: data.details
+          })
+        )
+        console.log('Poll pre analytics: ', this.state);
+      });
+
     fetch('/api/poll/' + this.state.id)
       .then(response => response.json())
       .then(data => {
@@ -169,12 +181,21 @@ class PollWidget extends Component {
     if(this.state.response[0].option_4 !== 'NULL')
       options.push(this.state.response[0].option_4);
 
-    let elements = options.map((value, index) => (
-        <button value={index + 1}
-                onClick={this.handleVote}
-                style={{background: `linear-gradient(to right, #8BD9F9 51%, white 31%)`}}
-                className="poll-option-button">{value}</button>
-    ));
+    let elements;
+
+    if(this.state.response[0].analytics_privacy == 'true') {
+      elements = options.map((value, index) => (
+          <button value={index + 1}
+                  onClick={this.handleVote}
+                  style={{background: `linear-gradient(to right, rgb(139,217,249, 0.25) ${this.state.stats[index + 1]}, white ${this.state.stats[index + 1]})`}}
+                  className="poll-option-button-analytics">{value}</button>
+      ));
+    } else {
+      elements = options.map((value, index) => (
+        <button value={index + 1} onClick={this.handleVote} className="poll-option-button">{value}</button>
+      ));
+    }
+
 
     return elements;
   }
