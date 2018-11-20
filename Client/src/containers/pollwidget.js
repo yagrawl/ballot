@@ -32,6 +32,12 @@ class PollWidget extends Component {
         profile_picture: avatar,
         email: ""
       },
+      stats: {
+        1: 0,
+        2: 0,
+        3: 0,
+        4: 0
+      },
       ip_address: "",
       has_voted: false,
       is_logged_in: false,
@@ -164,7 +170,10 @@ class PollWidget extends Component {
       options.push(this.state.response[0].option_4);
 
     let elements = options.map((value, index) => (
-        <button value={index + 1} onClick={this.handleVote} className="poll-option-button">{value}</button>
+        <button value={index + 1}
+                onClick={this.handleVote}
+                style={{background: `linear-gradient(to right, #8BD9F9 51%, white 31%)`}}
+                className="poll-option-button">{value}</button>
     ));
 
     return elements;

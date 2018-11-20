@@ -585,8 +585,7 @@ input:checked + .slider:before {
 }
 
 .poll-option-button {
-  background-color: white;
-  border: 1px solid #389BC2;
+  border: 1px solid #8BD9F9;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -605,7 +604,6 @@ input:checked + .slider:before {
 }
 
 .poll-option-button:hover {
-    background-color: #389BC2;
     color: white;
     outline: none;
 }
