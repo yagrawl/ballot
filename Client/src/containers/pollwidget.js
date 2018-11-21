@@ -192,7 +192,8 @@ class PollWidget extends Component {
       ));
     } else {
       elements = options.map((value, index) => (
-        <button value={index + 1} onClick={this.handleVote} className="poll-option-button">{value}</button>
+        <button value={index + 1} onClick={this.handleVote}
+                className="poll-option-button">{value}</button>
       ));
     }
 

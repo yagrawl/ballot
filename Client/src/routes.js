@@ -10,6 +10,7 @@ import Poll from './pages/poll';
 import User from './pages/user';
 import Feed from './pages/feed';
 import Stats from './pages/stats';
+import Search from './pages/search';
 import Demo from './pages/demo';
 import NotFound from './pages/notfound';
 
@@ -109,6 +110,9 @@ class Routes extends Component {
           <Route path="/stats"
                  render={(props) =>
                    <Stats {...props} isAuthed={auth.logged_in} user={auth.user} />} />
+          <Route path="/search"
+                render={(props) =>
+                  <Search {...props} isAuthed={auth.logged_in} user={auth.user} />} />
           <Route path="/demo"
                  render={(props) =>
                    <Demo {...props} isAuthed={auth.logged_in} user={auth.user} />} />

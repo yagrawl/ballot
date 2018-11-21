@@ -630,8 +630,8 @@ input:checked + .slider:before {
 }
 
 .poll-option-button-analytics:hover {
-    color: #389BC2;
-    outline: none;
+    color: #292D34;
+    background: linear-gradient(90deg, #389BC2 100%, white 100%);
 }
 
 
@@ -1216,4 +1216,35 @@ input:checked + .slider:before {
   font-size: 16px;
   color: #8BD9F9;
   max-width: 400px;
+}
+
+.input-box-search {
+  font-size: 20px;
+  color: #389BC2;
+  background: #4F5767;
+  border-radius: 10px;
+  width: 50%;
+  margin-left: 25%;
+  margin-right: 25%;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.input-box-search:placeholder {
+  font-size: 20px;
+  color: white;
+}
+
+.search-box {
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+@media screen and (max-width: 620px) {
+  .input-box-search {
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+
 }
