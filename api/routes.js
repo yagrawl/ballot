@@ -13,6 +13,7 @@ module.exports = function(app) {
   let feed = require('./controllers/feed');
   let users = require('./controllers/user');
   let stats = require('./controllers/stats');
+  let search = require('./controllers/search');
   let event = require('./controllers/event');
 
   app.route('/ip')
@@ -57,6 +58,9 @@ module.exports = function(app) {
 
   app.route('/api/stats')
     .get(stats.get_stats);
+
+  app.route('/api/search')
+    .get(search.get_search_poll);
 
   app.route('/api/google_maps_key')
     .get(stats.get_map_key);

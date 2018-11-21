@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import PollWidget from '../containers/pollwidget'
 import Logo from '../components/logo'
 import PollDenied from '../components/pollDenied'
-import TextBox from '../components/textbox';
 
 import { sendEvent } from '../containers/event'
 
@@ -19,10 +18,29 @@ class Search extends Component {
         profile_picture: "https://i.imgur.com/fMVORsK.png",
         email: "theballot@gmail.com"
       },
+      query: '',
       incognito_detected: false,
       vpn_detected: false
     }
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleKeypress = this.handleKeypress.bind(this);
   }
+
+  handleChange(e) {
+    let value = e.target.value;
+    this.setState(
+      prevState => ({
+        query: value
+      })
+    );
+  }
+
+  handleKeypress(event) {
+		if (event.key === "Enter") {
+			alert(this.state.query)
+		}
+	}
 
   static getDerivedStateFromProps(nextProps, prevState) {
    if(nextProps.user.id !== prevState.user.id) {
@@ -119,12 +137,17 @@ class Search extends Component {
       <div className="feed-header">
         <Logo link="/"/>
         <form>
-          <TextBox
-            className={"input-box input-box-search"}
-            name={"query"}
-            type={"text"}
-            placeholder={"Search"}
-          />
+          <input
+              id="searchbox"
+              type="text"
+              name="query"
+              autoComplete="off"
+              onChange={this.handleChange}
+              onKeyPress={this.handleKeypress}
+              value={this.state.query}
+              className={"input-box input-box-search"}
+              placeholder={"Search"}
+            />
         </form>
         <div className="active-area">
           {/* {this.checkPollConditions()} */}

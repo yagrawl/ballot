@@ -80,6 +80,8 @@ class Index extends Component {
             <a href="/feed"><span className="index-link">Feed</span></a>
             <span className="index-link">&nbsp;&nbsp;&sdot;&nbsp;&nbsp;</span>
             <a href="/stats"><span className="index-link">Platform Stats</span></a>
+            <span className="index-link">&nbsp;&nbsp;&sdot;&nbsp;&nbsp;</span>
+            <a href="/search"><span className="index-link">Search</span></a>
           </div>
           <p className="App-content ip-center">{this.state.response}</p>
         </header>
