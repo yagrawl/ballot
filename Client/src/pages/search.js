@@ -20,7 +20,8 @@ class Search extends Component {
       },
       query: '',
       incognito_detected: false,
-      vpn_detected: false
+      vpn_detected: false,
+      searched: false
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -31,6 +32,7 @@ class Search extends Component {
     let value = e.target.value;
     this.setState(
       prevState => ({
+        ...prevState,
         query: value
       })
     );
@@ -38,7 +40,17 @@ class Search extends Component {
 
   handleKeypress(event) {
 		if (event.key === "Enter") {
-			alert(this.state.query)
+      fetch(`/api/search?find=${this.state.query}`)
+        .then(response => response.json())
+        .then(data => {
+          this.setState(
+            prevState => ({
+              ...prevState,
+              searched: true,
+              response: data.details
+            })
+          );
+        });
 		}
 	}
 
@@ -93,64 +105,48 @@ class Search extends Component {
           })
         );
       });
-
-    fetch('/api/feed')
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-        this.setState(
-          prevState => ({
-            ...prevState,
-            response: data.details
-          })
-        );
-        console.log('%cFeed: ', 'background: #769564; color: white');
-        console.log('Feed State: ', this.props)
-        sendEvent("Feed Accessed Logged In", "/feed", this.props.user.id);
-      });
   }
 
   checkPollConditions() {
-    if(this.state.incognito_detected && this.state.vpn_detected) {
-      return <PollDenied reason={"IV"} />
-    } else if(this.state.incognito_detected && !(this.state.vpn_detected)) {
-      return <PollDenied reason={"I"} />
-    } else if(!(this.state.incognito_detected) && this.state.vpn_detected) {
-      return <PollDenied reason={"V"} />
-    } else {
-      let elements = this.state.response.map((poll, index) => (
-        <div className="poll-widget-feed-cover">
-          <PollWidget
-            poll_id={poll.poll_id}
-            isAuthed={this.props.isAuthed}
-            user={this.props.user}
-          />
-        </div>
-      ));
-      return elements;
+    if(this.state.searched) {
+      if(this.state.incognito_detected && this.state.vpn_detected) {
+        return <PollDenied reason={"IV"} />
+      } else if(this.state.incognito_detected && !(this.state.vpn_detected)) {
+        return <PollDenied reason={"I"} />
+      } else if(!(this.state.incognito_detected) && this.state.vpn_detected) {
+        return <PollDenied reason={"V"} />
+      } else {
+        let elements = this.state.response.map((poll, index) => (
+          <div className="poll-widget-feed-cover">
+            <PollWidget
+              poll_id={poll.poll_id}
+              isAuthed={this.props.isAuthed}
+              user={this.props.user}
+            />
+          </div>
+        ));
+        return elements;
+      }
     }
   }
 
   render() {
-    console.log('Feed: ', this.state);
     return (
       <div className="feed-header">
         <Logo link="/"/>
-        <form>
-          <input
-              id="searchbox"
-              type="text"
-              name="query"
-              autoComplete="off"
-              onChange={this.handleChange}
-              onKeyPress={this.handleKeypress}
-              value={this.state.query}
-              className={"input-box input-box-search"}
-              placeholder={"Search"}
-            />
-        </form>
+        <input
+            id="searchbox"
+            type="text"
+            name="query"
+            autoComplete="off"
+            onChange={this.handleChange}
+            onKeyPress={this.handleKeypress}
+            value={this.state.query}
+            className={"input-box input-box-search"}
+            placeholder={"Search"}
+          />
         <div className="active-area">
-          {/* {this.checkPollConditions()} */}
+          {this.checkPollConditions()}
         </div>
       </div>
     );
