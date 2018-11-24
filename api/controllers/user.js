@@ -42,14 +42,12 @@ exports.log_user = (req, res) => {
 
 exports.get_user = (req, res) => {
   let user_id = req.params.user_id;
-  console.log('User ID: ', user_id);
   let data = {};
 
   let sql = `SELECT * from ${database}.${add.bt('users')} as user ` +
             `WHERE user.user_id = ${add.cm(user_id)};`;
   let get_polls_sql = `SELECT * from ${database}.${add.bt('polls')} as polls ` +
                       `WHERE polls.creator_id = ${add.cm(user_id)};`;
-  console.log(sql);
   con.query(sql, function (err, result) {
     if (err) throw err;
     let user_details = result[0];

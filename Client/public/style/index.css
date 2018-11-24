@@ -1243,6 +1243,45 @@ input:checked + .slider:before {
   color: white;
 }
 
+.tag-selection {
+  width: 50%;
+  margin-left: 25%;
+  margin-right: 25%;
+}
+
+.radio-hide {
+  visibility: hidden;
+  height: 0;
+  width: 0;
+  opacity: 0;
+}
+
+.radio-pad {
+  display: inline-block;
+  text-align: center;
+  padding-left: 10px;
+  padding-right: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: transparent;
+  color: #389BC2;
+  border: 2px solid #389BC2;
+  border-radius: 20px;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 5px;
+}
+
+.radio-pad:hover {
+  background-color: #389BC2;
+  color: white;
+}
+
+input[type=radio]:checked + label {
+  background-color: #389BC2;
+  color: white;
+}
+
 .search-box {
   margin-bottom: 20px;
   margin-top: 10px;
@@ -1250,6 +1289,12 @@ input:checked + .slider:before {
 
 @media screen and (max-width: 620px) {
   .input-box-search {
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+
+  .tag-selection {
     width: 80%;
     margin-left: 10%;
     margin-right: 10%;

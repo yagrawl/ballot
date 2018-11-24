@@ -58,7 +58,6 @@ exports.get_pre_analytics = (req, res) => {
       stats[result[i].opt] = ((result[i].vote_count/total_votes)*100).toString() + '%';
     }
 
-    console.log('vote stats: ', stats);
     res.send({ details: stats });
   });
 }

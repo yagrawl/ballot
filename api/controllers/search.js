@@ -4,12 +4,22 @@ const con = db.con;
 const database = process.env.DB_NAME || "`ballot`";
 
 exports.get_search_poll = (req, res) => {
+  let tag = req.query.tag;
   let term = '%' + req.query.find + '%';
 
-  let sql = `SELECT ${add.bt('poll_id')} ` +
-            `FROM ${database}.${add.bt('polls')} ` +
-            `WHERE ${add.bt('question')} LIKE ${add.cm(term)}`;
-  console.log('search SQL : ', sql);
+  let sql = '';
+
+  if(tag === 'Select a Tag') {
+    sql = `SELECT ${add.bt('poll_id')} ` +
+          `FROM ${database}.${add.bt('polls')} ` +
+          `WHERE ${add.bt('question')} LIKE ${add.cm(term)}`;
+    console.log('search SQL : ', sql);
+  } else {
+    sql = `SELECT ${add.bt('poll_id')} ` +
+          `FROM ${database}.${add.bt('tags')} ` +
+          `WHERE tag=${add.cm(tag)};`;
+    console.log('search SQL with tag : ', sql);
+  }
 
   con.query(sql, function (err, result) {
     if (err) throw err;
