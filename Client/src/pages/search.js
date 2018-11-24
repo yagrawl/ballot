@@ -20,6 +20,7 @@ class Search extends Component {
       },
       query: '',
       tag: '',
+      searched: false
       incognito_detected: false,
       vpn_detected: false,
     }
@@ -43,6 +44,7 @@ class Search extends Component {
       this.setState(
         prevState => ({
           ...prevState,
+          searched: true,
           response: []
         })
       );
@@ -133,6 +135,8 @@ class Search extends Component {
         ));
         return elements;
       }
+    } else if(this.state.searched && this.state.response.length === 0) {
+      return <p>No Results</p>
     }
   }
 
