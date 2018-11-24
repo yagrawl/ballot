@@ -1277,9 +1277,8 @@ input:checked + .slider:before {
   color: white;
 }
 
-input[type=radio]:checked + label {
+input[type="radio"]:checked {
   background-color: #389BC2;
-  color: white;
 }
 
 .search-box {

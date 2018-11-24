@@ -27,7 +27,7 @@ exports.get_search_poll = (req, res) => {
     if(result.length > 15) {
       search_polls = result.sort(add.compare).slice(0, 15);
     } else {
-      search_polls = result.sort(add.compare).slice(0, 5);
+      search_polls = result.sort(add.compare);
     }
 
     res.send({ details: search_polls });
