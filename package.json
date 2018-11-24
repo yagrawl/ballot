@@ -9,6 +9,7 @@
     "heroku-postbuild": "cd Client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "dependencies": {
+    "apiai": "^4.0.3",
     "body-parser": "^1.18.3",
     "crypto-random-string": "^1.0.0",
     "dotenv": "^6.1.0",

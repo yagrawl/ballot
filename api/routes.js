@@ -25,9 +25,6 @@ module.exports = function(app) {
   app.route('/api/create')
     .post(create.poll_details);
 
-  app.route('/api/poll_init')
-    .get(create.get_tags);
-
   app.route('/api/poll/:poll_id')
     .get(poll.get_poll);
 
