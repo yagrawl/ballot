@@ -17,7 +17,7 @@ exports.get_search_poll = (req, res) => {
   } else {
     sql = `SELECT ${add.bt('poll_id')} ` +
           `FROM ${database}.${add.bt('tags')} ` +
-          `WHERE tag=${add.cm(tag)};`;
+          `WHERE ${add.bt('tag')}=${add.cm(tag)};`;
     console.log('search SQL with tag : ', sql);
   }
 
