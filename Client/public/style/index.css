@@ -715,6 +715,14 @@ input:checked + .slider:before {
   min-height: 100vh;
 }
 
+.search-header {
+  background-color: #282C34;
+  min-height: 100vh;
+  height: 100%;
+  flex-direction: column;
+  color: #8BD9F9;
+}
+
 .poll-widget-feed-cover {
   background: white;
   border-radius: 20px;
@@ -1246,5 +1254,4 @@ input:checked + .slider:before {
     margin-left: 10%;
     margin-right: 10%;
   }
-
 }

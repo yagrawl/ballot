@@ -13,7 +13,13 @@ exports.get_search_poll = (req, res) => {
 
   con.query(sql, function (err, result) {
     if (err) throw err;
-    let search_polls = result.sort(add.compare).slice(0, 5);
+    let search_polls;
+    if(result.length > 15) {
+      search_polls = result.sort(add.compare).slice(0, 15);
+    } else {
+      search_polls = result.sort(add.compare).slice(0, 5);
+    }
+
     res.send({ details: search_polls });
   });
 }

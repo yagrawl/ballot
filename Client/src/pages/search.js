@@ -19,6 +19,7 @@ class Search extends Component {
         email: "theballot@gmail.com"
       },
       query: '',
+      tag: '',
       incognito_detected: false,
       vpn_detected: false,
     }
@@ -132,30 +133,29 @@ class Search extends Component {
         ));
         return elements;
       }
-    } else {
-      return <p>Enter Search Term above</p>
     }
   }
 
   render() {
     return (
-      <div className="feed-header">
-        <Logo link="/"/>
-        <input
-            id="searchbox"
-            type="text"
-            name="query"
-            autoComplete="off"
-            onChange={this.handleChange}
-            onKeyPress={this.handleKeypress}
-            value={this.state.query}
-            className={"input-box input-box-search"}
-            placeholder={"Search"}
-          />
-        <div className="active-area">
-          {this.checkPollConditions()}
+        <div className="search-header">
+          <Logo link="/"/>
+          <input
+              id="searchbox"
+              type="text"
+              name="query"
+              autoComplete="off"
+              onChange={this.handleChange}
+              onKeyPress={this.handleKeypress}
+              value={this.state.query}
+              className={"input-box input-box-search"}
+              placeholder={"Search"}
+            />
+
+            <div className="active-area">
+              {this.checkPollConditions()}
+            </div>
         </div>
-      </div>
     );
   }
 }

@@ -100,7 +100,7 @@ class PollAttributes extends Component {
           </div>
 
           <div>
-            <p className="input-label">Display analytics on your poll after vote?</p>
+            <p className="input-label">Display analytics on your poll before vote?</p>
             <Toggle value={this.state.attributes.analtyics_privacy}
                   handleChange={this.handleAnalyticsPrivacyChange} />
           </div>
