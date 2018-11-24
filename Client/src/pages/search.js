@@ -20,6 +20,7 @@ class Search extends Component {
       },
       query: '',
       tag: 'Select a Tag',
+      tags: ['Food', 'Movie', 'Music', 'Technology', 'Travel', 'Misc'],
       searched: false,
       incognito_detected: false,
       vpn_detected: false,
@@ -27,7 +28,7 @@ class Search extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleKeypress = this.handleKeypress.bind(this);
-    this.tagChange = this.tagChange.bind(this);
+    this.handleTag = this.handleTag.bind(this);
   }
 
   handleChange(e) {
@@ -40,16 +41,17 @@ class Search extends Component {
     );
   }
 
-  tagChange(e) {
+  handleTag(event) {
+    let event_tag = event.target.value;
     this.setState(
       prevState => ({
         ...prevState,
-        tag: e.currentTarget.value,
+        tag: event_tag,
         response: []
       })
     );
 
-    fetch(`/api/search?find=${this.state.query}&tag=${e.currentTarget.value}`)
+    fetch(`/api/search?find=${this.state.query}&tag=${event_tag}`)
       .then(response => response.json())
       .then(data => {
         this.setState(
@@ -162,6 +164,14 @@ class Search extends Component {
     }
   }
 
+  drawTagButtons() {
+    let elements = this.state.tags.map((tag, index) => (
+      <button className="tag-button" onClick={this.handleTag} value={tag}>{tag}</button>
+    ));
+
+    return elements;
+  }
+
   render() {
     return (
         <div className="search-header">
@@ -179,49 +189,7 @@ class Search extends Component {
             />
 
             <div className="tag-selection">
-              <div className="radio-pad">
-                <label>
-                  <input type="radio" value="Food" checked={this.state.tag === "Food"}
-                   onChange={this.tagChange} className="radio-hide"/> Food
-                </label>
-              </div>
-
-              <div className="radio-pad">
-                <label>
-                  <input type="radio" value="Movie" checked={this.state.tag === "Movie"}
-                   onChange={this.tagChange} className="radio-hide"/> Movie
-                </label>
-              </div>
-
-              <div className="radio-pad">
-                <label>
-                  <input type="radio" value="Music" checked={this.state.tag === "Music"}
-                   onChange={this.tagChange} className="radio-hide"/> Music
-                </label>
-              </div>
-
-              <div className="radio-pad">
-                <label>
-                  <input type="radio" value="Technology" checked={this.state.tag === "Technology"}
-                   onChange={this.tagChange} className="radio-hide"/> Technology
-                </label>
-              </div>
-
-              <div className="radio-pad">
-                <label>
-                  <input type="radio" value="Travel" checked={this.state.tag === "Travel"}
-                   onChange={this.tagChange} className="radio-hide"/> Travel
-                </label>
-              </div>
-
-              <div className="radio-pad">
-                <label>
-                  <input type="radio" value="Misc" checked={this.state.tag === "Misc"}
-                   onChange={this.tagChange} className="radio-hide"/> Misc
-                </label>
-              </div>
-
-              <p className="poll-denied-detection">{this.state.tag}</p>
+              {this.drawTagButtons()}
             </div>
 
             <div className="active-area">

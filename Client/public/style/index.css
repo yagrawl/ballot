@@ -1277,8 +1277,25 @@ input:checked + .slider:before {
   color: white;
 }
 
-input[type="radio"]:checked {
+.tag-button {
+  display: inline-block;
+  text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: transparent;
+  color: #389BC2;
+  border: 2px solid #389BC2;
+  border-radius: 20px;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 5px;
+}
+
+.tag-button:hover, .tag-button:active {
   background-color: #389BC2;
+  color: white;
 }
 
 .search-box {
