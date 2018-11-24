@@ -20,7 +20,7 @@ class Search extends Component {
       },
       query: '',
       tag: '',
-      searched: false
+      searched: false,
       incognito_detected: false,
       vpn_detected: false,
     }
@@ -136,7 +136,7 @@ class Search extends Component {
         return elements;
       }
     } else if(this.state.searched && this.state.response.length === 0) {
-      return <p>No Results</p>
+      return <center><p className="poll-denied-detection">No Results</p></center>
     }
   }
 
