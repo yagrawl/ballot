@@ -21,7 +21,6 @@ class Search extends Component {
       query: '',
       incognito_detected: false,
       vpn_detected: false,
-      searched: false
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -40,13 +39,19 @@ class Search extends Component {
 
   handleKeypress(event) {
 		if (event.key === "Enter") {
+      this.setState(
+        prevState => ({
+          ...prevState,
+          response: []
+        })
+      );
+
       fetch(`/api/search?find=${this.state.query}`)
         .then(response => response.json())
         .then(data => {
           this.setState(
             prevState => ({
               ...prevState,
-              searched: true,
               response: data.details
             })
           );
@@ -108,7 +113,7 @@ class Search extends Component {
   }
 
   checkPollConditions() {
-    if(this.state.searched) {
+    if(this.state.response.length !== 0) {
       if(this.state.incognito_detected && this.state.vpn_detected) {
         return <PollDenied reason={"IV"} />
       } else if(this.state.incognito_detected && !(this.state.vpn_detected)) {
@@ -127,6 +132,8 @@ class Search extends Component {
         ));
         return elements;
       }
+    } else {
+      return <p>Enter Search Term above</p>
     }
   }
 
