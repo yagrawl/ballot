@@ -42,7 +42,7 @@ const get_tags = (input, poll_id) => {
       }
 
       sql = `INSERT INTO ${database}` +
-                `.${add.bt('tags')} (${add.bt('poll_id')}, ${add.bt('tags')}, ${add.bt('confidence')}) ` +
+                `.${add.bt('tags')} (${add.bt('poll_id')}, ${add.bt('tag')}, ${add.bt('confidence')}) ` +
                 `VALUES (${add.cm(poll_id)}, ${add.cm(tag)}, ${add.cm(confidence)});`;
 
       con.query(sql, (err, result) => {
