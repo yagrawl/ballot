@@ -5,7 +5,7 @@ const database = process.env.DB_NAME || "`ballot`";
 
 exports.get_stats = (req, res) => {
   let stats = {};
-  // Get event count
+
   let sql = `SELECT COUNT(${add.bt('event_time')}) AS event_count, ` +
             `COUNT(DISTINCT ${add.bt('event_creator_ip')}) AS ip_count ` +
             `FROM ${database}.${add.bt('events')};` +
@@ -42,7 +42,12 @@ exports.get_stats = (req, res) => {
             `FROM ${database}.${add.bt('users')};` +
             `SELECT COUNT(${add.bt('log_count')}) AS returning_users ` +
             `FROM ${database}.${add.bt('users')} ` +
-            `WHERE ${add.bt('log_count')} > 1;`;
+            `WHERE ${add.bt('log_count')} > 1;` +
+            `SELECT COUNT(${add.bt('poll_id')}) AS poll_count, ` +
+            `FROM_UNIXTIME(${add.bt('polls')}.${add.bt('creation_time')}/1000, ${add.cm('%m/%d')}) AS day ` +
+            `FROM ${database}.${add.bt('polls')} ` +
+            `GROUP BY (FROM_UNIXTIME(${add.bt('polls')}.${add.bt('creation_time')}/1000, ${add.cm('%m/%d')}));`;
+
   stats.browsers = [];
   stats.os = [];
   stats.routes = [];
@@ -51,6 +56,7 @@ exports.get_stats = (req, res) => {
   stats.options = [];
   stats.expiration_time = [];
   stats.returning_users = [];
+  stats.polls_time = [];
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log(result);
@@ -166,6 +172,14 @@ exports.get_stats = (req, res) => {
     users.count = result[13][0].returning_users;
     users.fill = '#f95d6a';
     stats.returning_users.push(users);
+
+    let polls_time;
+    for(let i = 0; i < result[14].length; i++) {
+      polls_time = {};
+      polls_time.day = result[14][i].day;
+      polls_time.poll_count = result[14][i].poll_count;
+      stats.polls_time.push(polls_time);
+    }
 
     console.log('STATS: ', stats);
     res.send({result: stats});

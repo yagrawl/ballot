@@ -32,7 +32,8 @@ class Stats extends Component {
         analytics_privacy: [],
         options: [],
         expiration_time: [],
-        returning_users: []
+        returning_users: [],
+        polls_time: []
       },
       user: {
         id: "Unknown",
@@ -209,6 +210,19 @@ class Stats extends Component {
                 </RadialBarChart>
               </ResponsiveContainer>
               <p className="stats-sublabel">Returning Users</p>
+            </div>
+          </div>
+          <div className="stats-active-area">
+            <p className="stats-label">Timeline Data</p>
+            <div className="stats-full-graph-box">
+              <ResponsiveContainer width="90%" height={250}>
+                <BarChart data={this.state.response.polls_time}>
+                  <XAxis dataKey="day" />
+                  <Tooltip />
+                  <Bar dataKey="poll_count" fill="#4E8F85" />
+                </BarChart>
+              </ResponsiveContainer>
+              <p className="stats-sublabel">Day</p>
             </div>
           </div>
             <p className="stats-label location-label">Location Data</p>
