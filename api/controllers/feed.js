@@ -9,7 +9,14 @@ exports.get_feed_poll = (req, res) => {
             `GROUP BY ${add.bt('poll_id')};`;
 
   con.query(sql, function (err, result) {
-    if (err) throw err;
+    try {
+      if (err) throw err;
+    } catch(error) {
+      if(error) {
+        console.log('SQL Parsing Error');
+      }
+    }
+    
     let top_polls = result.sort(add.compare).slice(0, 5);
     res.send({ details: top_polls });
   });

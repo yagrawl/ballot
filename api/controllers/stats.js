@@ -5,6 +5,17 @@ const database = process.env.DB_NAME || "`ballot`";
 
 exports.get_stats = (req, res) => {
   let stats = {};
+  stats.browsers = [];
+  stats.os = [];
+  stats.routes = [];
+  stats.feed_privacy = [];
+  stats.analytics_privacy = [];
+  stats.options = [];
+  stats.expiration_time = [];
+  stats.returning_users = [];
+  stats.polls_time = [];
+  stats.events_time = [];
+  stats.tags = [];
 
   let sql = `SELECT COUNT(${add.bt('event_time')}) AS event_count, ` +
             `COUNT(DISTINCT ${add.bt('event_creator_ip')}) AS ip_count ` +
@@ -55,20 +66,15 @@ exports.get_stats = (req, res) => {
             `FROM ${database}.${add.bt('tags')} ` +
             `GROUP BY (${add.bt('tag')});`;
 
-  stats.browsers = [];
-  stats.os = [];
-  stats.routes = [];
-  stats.feed_privacy = [];
-  stats.analytics_privacy = [];
-  stats.options = [];
-  stats.expiration_time = [];
-  stats.returning_users = [];
-  stats.polls_time = [];
-  stats.events_time = [];
-  stats.tags = [];
   con.query(sql, function (err, result) {
-    if (err) throw err;
-    console.log(result);
+    try {
+      if (err) throw err;
+    } catch(error) {
+      if(error) {
+        console.log('SQL Parsing Error');
+      }
+    }
+
     stats.event_count = result[0][0].event_count;
     stats.ip_count = result[0][0].ip_count;
     stats.poll_count = result[1][0].poll_count;
@@ -206,12 +212,10 @@ exports.get_stats = (req, res) => {
       stats.tags.push(tag_val);
     }
 
-    console.log('STATS: ', stats);
     res.send({result: stats});
   });
 }
 
 exports.get_map_key = (req, res) => {
-  console.log('send key');
   res.send({key: process.env.GOOGLE_MAPS_KEY});
 };

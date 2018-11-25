@@ -7,6 +7,7 @@ exports.get_ip = (req, res) => {
 
 exports.check_vpn = (req, res) => {
   let ip = req.headers['x-forwarded-for'].toString().split(',')[0];
+  
   request({
         method: 'GET',
         url: `http://v2.api.iphub.info/ip/${ip}`,
@@ -17,10 +18,11 @@ exports.check_vpn = (req, res) => {
     function (error, response, body) {
         let ip_data = JSON.parse(body);
         let vpn = false;
+
         if(ip_data.block === 1) {
           vpn = true;
         }
-        console.log(ip_data);
+
         res.send({is_vpn: vpn});
     });
 };

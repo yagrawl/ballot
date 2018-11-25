@@ -10,7 +10,6 @@ exports.poll_details = (req, res) => {
 
   get_tags(poll.question, poll.poll_id);
 
-  console.log('poll data: ', poll);
   let sql = `INSERT INTO ${database}` +
             `.${add.bt('polls')} (${add.bt('poll_id')}, ${add.bt('creator_id')}, ${add.bt('question')}, ${add.bt('creation_time')}, ` +
             `${add.bt('expiration_time')}, ${add.bt('feed_privacy')}, ${add.bt('analytics_privacy')}, ` +
@@ -19,10 +18,16 @@ exports.poll_details = (req, res) => {
             `${add.cm(poll.creation_time)}, ${add.cm(poll.expiration_time)}, ${add.cm(poll.feed_privacy)}, ` +
             `${add.cm(poll.analytics_privacy)}, ${add.cm(poll.ip_address)}, ${add.cm(poll.options[0])}, ` +
             `${add.cm(poll.options[1])}, ${add.cm(poll.options[2])}, ${add.cm(poll.options[3])});`;
-    console.log('Create Poll SQL: ', sql);
+
     con.query(sql, (err, result) => {
-      if (err) throw err;
-      console.log(data);
+      try {
+        if (err) throw err;
+      } catch(error) {
+        if(error) {
+          console.log('SQL Parsing Error');
+        }
+      }
+
     });
 
     res.send({ poll_id: poll.poll_id });
@@ -37,6 +42,7 @@ const get_tags = (input, poll_id) => {
   request.on('response', function(response) {
       let confidence = response.result.score;
       let tag = 'Misc';
+
       if(confidence > 0.2) {
         tag = response.result.metadata.intentName;
       }
@@ -46,7 +52,13 @@ const get_tags = (input, poll_id) => {
                 `VALUES (${add.cm(poll_id)}, ${add.cm(tag)}, ${add.cm(confidence)});`;
 
       con.query(sql, (err, result) => {
-        if (err) throw err;
+        try {
+          if (err) throw err;
+        } catch(error) {
+          if(error) {
+            console.log('SQL Parsing Error');
+          }
+        }
       });
   });
 
