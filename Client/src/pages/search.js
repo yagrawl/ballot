@@ -152,7 +152,7 @@ class Search extends Component {
               onKeyPress={this.handleKeypress}
               value={this.state.query}
               className={"input-box input-box-search"}
-              placeholder={"Search"}
+              placeholder={"Search Question"}
             />
 
             <div className="active-area">

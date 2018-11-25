@@ -4,7 +4,7 @@ const con = db.con;
 const database = process.env.DB_NAME || "`ballot`";
 
 exports.get_search_query_poll = (req, res) => {
-  let term = '%' + req.query.find + '%';
+  let term = '%' + req.query.find.replace(/'/g, "§") + '%';
 
   let sql = `SELECT ${add.bt('poll_id')} ` +
           `FROM ${database}.${add.bt('polls')} ` +
