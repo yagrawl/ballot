@@ -94,28 +94,40 @@ class PollAnalytics extends Component {
       });
   }
 
-  render() {
+  showAnalytics() {
+    console.log(this.stats);
+    if(this.stats[1] == 0 && this.stats[2] == 0 && this.stats[3] == 0 && this.stats[4] == 0) {
+      return <p className="poll-denied-detection">No Responses Recorded</p>
+    } else {
+      return (
+        <div>
+          <p className="input-label analytics-question">{this.state.question}</p>
+          <ResponsiveContainer width="90%" height={250}>
+            <PieChart>
+              <Pie dataKey="angle"
+                   isAnimationActive={true}
+                   data={[{angle: this.stats[1], label: this.state.options[0], fill: "#8884d8"},
+                          {angle: this.stats[2], label: this.state.options[1], fill: "#f95d6a"},
+                          {angle: this.stats[3], label: this.state.options[2], fill: "#00C49F"},
+                          {angle: this.stats[4], label: this.state.options[3], fill: "#ffc658"}]}
+                   cx="50%" cy="50%"
+                   nameKey="label"
+                   innerRadius="0%"
+                   outerRadius="100%">
+                   <LabelList dataKey="label" position="outside"/>
+              </Pie>
+              <Tooltip/>
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
+      )
+    }
+  }
 
+  render() {
     return (
       <div>
-        <p className="input-label analytics-question">{this.state.question}</p>
-        <ResponsiveContainer width="90%" height={250}>
-          <PieChart>
-            <Pie dataKey="angle"
-                 isAnimationActive={true}
-                 data={[{angle: this.stats[1], label: this.state.options[0], fill: "#8884d8"},
-                        {angle: this.stats[2], label: this.state.options[1], fill: "#f95d6a"},
-                        {angle: this.stats[3], label: this.state.options[2], fill: "#00C49F"},
-                        {angle: this.stats[4], label: this.state.options[3], fill: "#ffc658"}]}
-                 cx="50%" cy="50%"
-                 nameKey="label"
-                 innerRadius="0%"
-                 outerRadius="100%">
-                 <LabelList dataKey="label" position="outside"/>
-            </Pie>
-            <Tooltip/>
-          </PieChart>
-        </ResponsiveContainer>
+        {this.showAnalytics()}
       </div>
     )
   }
