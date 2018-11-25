@@ -28,7 +28,6 @@ class Index extends Component {
 
   static getDerivedStateFromProps(nextProps, prevState) {
    if(nextProps.user.id !== prevState.user.id) {
-     console.log('Sent Event');
      sendEvent("Home Page Accessed Logged In", "/index", nextProps.user.id);
      return { UserUpdate: nextProps.user};
    }

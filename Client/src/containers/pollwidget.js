@@ -58,7 +58,10 @@ class PollWidget extends Component {
             stats: data.details
           })
         )
-        console.log('Poll pre analytics: ', this.state);
+
+        console.log('%cPoll Pre Analytics:', 'background: #192039; color: white');
+        console.log('Poll Pre Stats: ', this.state);
+
       });
 
     fetch('/api/poll/' + this.state.id)
@@ -183,7 +186,7 @@ class PollWidget extends Component {
 
     let elements;
 
-    if(this.state.response[0].analytics_privacy == 'true') {
+    if(this.state.response[0].analytics_privacy === 'true') {
       elements = options.map((value, index) => (
           <button value={index + 1}
                   onClick={this.handleVote}

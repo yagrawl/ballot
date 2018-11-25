@@ -8,7 +8,7 @@ const PollDenied = (props) => {
   if(props.reason === 'IV') {
     return (
       <div className="poll-denied-div">
-        <img className="poll-denied-image" src={incognitovpn}></img>
+        <img className="poll-denied-image" src={incognitovpn} alt="incognito & vpn detected"></img>
         <p className="poll-denied-detection">Incognito Mode & VPN Detected</p>
         <p className="poll-denied-instruction">Please switch back to normal mode on the browser & turn off VPN to access the poll</p>
       </div>
@@ -18,7 +18,7 @@ const PollDenied = (props) => {
   if(props.reason === 'V') {
     return (
       <div className="poll-denied-div">
-        <img className="poll-denied-image" src={vpn}></img>
+        <img className="poll-denied-image" src={vpn} alt="vpn detected"></img>
         <p className="poll-denied-detection">VPN Detected</p>
         <p className="poll-denied-instruction">Please turn off VPN to access the poll</p>
       </div>
@@ -28,7 +28,7 @@ const PollDenied = (props) => {
   if(props.reason === 'I') {
     return (
       <div className="poll-denied-div">
-        <img className="poll-denied-image" src={incognito}></img>
+        <img className="poll-denied-image" src={incognito} alt="incognito detected"></img>
         <p className="poll-denied-detection">Incognito Mode Detected</p>
         <p className="poll-denied-instruction">Please switch back to normal mode on the browser to access the poll</p>
       </div>

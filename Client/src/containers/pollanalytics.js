@@ -45,7 +45,10 @@ class PollAnalytics extends Component {
               this.stats[4] += 1;
             }
           }
-          console.log('Stats Up: ', this.stats);
+
+          console.log('%cPoll Analytics:', 'background: #292D34; color: white');
+          console.log('Poll Stats: ', this.stats);
+
           this.setState(
             prevState => ({
               ...prevState,
@@ -95,8 +98,7 @@ class PollAnalytics extends Component {
   }
 
   showAnalytics() {
-    console.log(this.stats);
-    if(this.stats[1] == 0 && this.stats[2] == 0 && this.stats[3] == 0 && this.stats[4] == 0) {
+    if(this.stats[1] === 0 && this.stats[2] === 0 && this.stats[3] === 0 && this.stats[4] === 0) {
       return (
         <div>
           <p className="input-label analytics-question">{this.state.question}</p>

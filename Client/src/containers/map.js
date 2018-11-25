@@ -14,7 +14,6 @@ class Maps extends Component {
     fetch('/api/google_maps_key')
       .then(response => response.json())
       .then(data => {
-        console.log(data);
         this.loadMap(data.key);
       });
   }
@@ -293,6 +292,9 @@ class Maps extends Component {
             optimized: false
           });
     }
+
+    console.log('%cMap Loaded:', 'background: #F4BF75; color: #21252B');
+    console.log('Marker Details: ', marker);
   };
 
   render() {

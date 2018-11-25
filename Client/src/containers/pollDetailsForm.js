@@ -100,7 +100,7 @@ class PollDetails extends Component {
 		const newArray = this.state.details.options.filter((listitem) => {
       return listitem.id !== idToRemove
     });
-    console.log(this.state);
+        
 		this.setState(
       prevState => ({
         details: {

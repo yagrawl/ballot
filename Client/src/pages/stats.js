@@ -8,7 +8,7 @@ import {ResponsiveContainer,
         RadialBar,
         AreaChart, Area,
         RadarChart, Radar, PolarAngleAxis,
-        PolarGrid, PolarRadiusAxis,
+        PolarGrid,
         PieChart, Pie } from 'recharts';
 
 import Logo from '../components/logo'
@@ -54,7 +54,6 @@ class Stats extends Component {
     fetch('/api/stats')
       .then(response => response.json())
       .then(data => {
-        console.log(data);
         this.setState(
           prevState => ({
             ...prevState,
@@ -69,7 +68,6 @@ class Stats extends Component {
 
   static getDerivedStateFromProps(nextProps, prevState) {
    if(nextProps.user.id !== prevState.user.id) {
-     console.log('Sent Event');
      sendEvent("Stats Accessed", "/stats", nextProps.user.id);
      return { UserUpdate: nextProps.user};
    }

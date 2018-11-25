@@ -26,7 +26,7 @@ class PollLink extends Component {
     super(props);
 
     this.state = {
-      
+
     }
   }
 
@@ -34,7 +34,9 @@ class PollLink extends Component {
     let poll = this.props;
     let url = `https://theballot.herokuapp.com/poll/${poll.pollid}`;
     let title = `Vote on this poll!`;
-    console.log(this.props);
+
+    console.log('%cPoll Link:', 'background: #98C379; color: #1B1D23');
+    console.log('Link Details: ', this.props);
 
     return (
       <div>
