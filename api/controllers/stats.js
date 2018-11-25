@@ -46,7 +46,11 @@ exports.get_stats = (req, res) => {
             `SELECT COUNT(${add.bt('poll_id')}) AS poll_count, ` +
             `FROM_UNIXTIME(${add.bt('polls')}.${add.bt('creation_time')}/1000, ${add.cm('%m/%d')}) AS day ` +
             `FROM ${database}.${add.bt('polls')} ` +
-            `GROUP BY (FROM_UNIXTIME(${add.bt('polls')}.${add.bt('creation_time')}/1000, ${add.cm('%m/%d')}));`;
+            `GROUP BY (FROM_UNIXTIME(${add.bt('polls')}.${add.bt('creation_time')}/1000, ${add.cm('%m/%d')}));` +
+            `SELECT COUNT(${add.bt('event_id')}) AS event_count, ` +
+            `FROM_UNIXTIME(${add.bt('events')}.${add.bt('event_time')}/1000, ${add.cm('%m/%d')}) AS day ` +
+            `FROM ${database}.${add.bt('events')} ` +
+            `GROUP BY (FROM_UNIXTIME(${add.bt('events')}.${add.bt('event_time')}/1000, ${add.cm('%m/%d')}));`;
 
   stats.browsers = [];
   stats.os = [];
@@ -57,6 +61,7 @@ exports.get_stats = (req, res) => {
   stats.expiration_time = [];
   stats.returning_users = [];
   stats.polls_time = [];
+  stats.events_time = [];
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log(result);
@@ -179,6 +184,14 @@ exports.get_stats = (req, res) => {
       polls_time.day = result[14][i].day;
       polls_time.poll_count = result[14][i].poll_count;
       stats.polls_time.push(polls_time);
+    }
+
+    let events_time;
+    for(let i = 0; i < result[15].length; i++) {
+      events_time = {};
+      events_time.day = result[15][i].day;
+      events_time.event_count = result[15][i].event_count;
+      stats.events_time.push(events_time);
     }
 
     console.log('STATS: ', stats);

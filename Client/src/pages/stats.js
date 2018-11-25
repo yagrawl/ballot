@@ -6,6 +6,7 @@ import {ResponsiveContainer,
         Tooltip,
         RadialBarChart,
         RadialBar,
+        AreaChart, Area,
         PieChart, Pie } from 'recharts';
 
 import Logo from '../components/logo'
@@ -33,7 +34,8 @@ class Stats extends Component {
         options: [],
         expiration_time: [],
         returning_users: [],
-        polls_time: []
+        polls_time: [],
+        events_time: []
       },
       user: {
         id: "Unknown",
@@ -216,13 +218,23 @@ class Stats extends Component {
             <p className="stats-label">Timeline Data</p>
             <div className="stats-full-graph-box">
               <ResponsiveContainer width="90%" height={250}>
-                <BarChart data={this.state.response.polls_time}>
+                <AreaChart data={this.state.response.polls_time}>
                   <XAxis dataKey="day" />
                   <Tooltip />
-                  <Bar dataKey="poll_count" fill="#4E8F85" />
-                </BarChart>
+                  <Area type='monotone' dataKey='poll_count' stroke='#8884d8' fill='#8884d8' />
+                </AreaChart>
               </ResponsiveContainer>
-              <p className="stats-sublabel">Day</p>
+              <p className="stats-sublabel">Polls v/s Day</p>
+            </div>
+            <div className="stats-full-graph-box">
+              <ResponsiveContainer width="90%" height={250}>
+                <AreaChart data={this.state.response.events_time}>
+                  <XAxis dataKey="day" />
+                  <Tooltip />
+                  <Area type='monotone' dataKey='event_count' stroke='#82ca9d' fill='#82ca9d' />
+                </AreaChart>
+              </ResponsiveContainer>
+              <p className="stats-sublabel">Events v/s Day</p>
             </div>
           </div>
             <p className="stats-label location-label">Location Data</p>
