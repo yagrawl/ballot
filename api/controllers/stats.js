@@ -43,7 +43,6 @@ exports.get_stats = (req, res) => {
             `SELECT COUNT(${add.bt('log_count')}) AS returning_users ` +
             `FROM ${database}.${add.bt('users')} ` +
             `WHERE ${add.bt('log_count')} > 1;`;
-
   stats.browsers = [];
   stats.os = [];
   stats.routes = [];

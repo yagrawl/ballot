@@ -19,8 +19,6 @@ class Search extends Component {
         email: "theballot@gmail.com"
       },
       query: '',
-      tag: 'Select a Tag',
-      tags: ['Food', 'Movie', 'Music', 'Technology', 'Travel', 'Misc'],
       searched: false,
       incognito_detected: false,
       vpn_detected: false,
@@ -28,7 +26,6 @@ class Search extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleKeypress = this.handleKeypress.bind(this);
-    this.handleTag = this.handleTag.bind(this);
   }
 
   handleChange(e) {
@@ -41,28 +38,6 @@ class Search extends Component {
     );
   }
 
-  handleTag(event) {
-    let event_tag = event.target.value;
-    this.setState(
-      prevState => ({
-        ...prevState,
-        tag: event_tag,
-        response: []
-      })
-    );
-
-    fetch(`/api/search?find=${this.state.query}&tag=${event_tag}`)
-      .then(response => response.json())
-      .then(data => {
-        this.setState(
-          prevState => ({
-            ...prevState,
-            response: data.details
-          })
-        );
-      });
-  }
-
   handleKeypress(event) {
 		if (event.key === "Enter") {
       this.setState(
@@ -73,7 +48,7 @@ class Search extends Component {
         })
       );
 
-      fetch(`/api/search?find=${this.state.query}&tag=${this.state.tag}`)
+      fetch(`/api/search/query?find=${this.state.query}`)
         .then(response => response.json())
         .then(data => {
           this.setState(
@@ -164,14 +139,6 @@ class Search extends Component {
     }
   }
 
-  drawTagButtons() {
-    let elements = this.state.tags.map((tag, index) => (
-      <button className="tag-button" onClick={this.handleTag} value={tag}>{tag}</button>
-    ));
-
-    return elements;
-  }
-
   render() {
     return (
         <div className="search-header">
@@ -187,10 +154,6 @@ class Search extends Component {
               className={"input-box input-box-search"}
               placeholder={"Search"}
             />
-
-            <div className="tag-selection">
-              {this.drawTagButtons()}
-            </div>
 
             <div className="active-area">
               {this.checkPollConditions()}

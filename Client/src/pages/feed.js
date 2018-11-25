@@ -19,8 +19,35 @@ class Feed extends Component {
         email: "theballot@gmail.com"
       },
       incognito_detected: false,
-      vpn_detected: false
+      vpn_detected: false,
+      tag: 'Select a Tag',
+      tags: ['Food', 'Movie', 'Music', 'Technology', 'Travel', 'Misc'],
+      query: ''
     }
+
+    this.handleTag = this.handleTag.bind(this);
+  }
+
+  handleTag(event) {
+    let event_tag = event.target.value;
+    this.setState(
+      prevState => ({
+        ...prevState,
+        tag: event_tag,
+        response: []
+      })
+    );
+
+    fetch(`/api/search/tag?tag=${event_tag}`)
+      .then(response => response.json())
+      .then(data => {
+        this.setState(
+          prevState => ({
+            ...prevState,
+            response: data.details
+          })
+        );
+      });
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -112,11 +139,22 @@ class Feed extends Component {
     }
   }
 
+  drawTagButtons() {
+    let elements = this.state.tags.map((tag, index) => (
+      <button className="tag-button" onClick={this.handleTag} value={tag}>{tag}</button>
+    ));
+
+    return elements;
+  }
+
   render() {
     console.log('Feed: ', this.state);
     return (
       <div className="feed-header">
         <Logo link="/"/>
+        <div className="tag-selection">
+          {this.drawTagButtons()}
+        </div>
         <div className="active-area">
           {this.checkPollConditions()}
         </div>

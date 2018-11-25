@@ -56,8 +56,11 @@ module.exports = function(app) {
   app.route('/api/stats')
     .get(stats.get_stats);
 
-  app.route('/api/search')
-    .get(search.get_search_poll);
+  app.route('/api/search/query/')
+    .get(search.get_search_query_poll);
+
+  app.route('/api/search/tag/')
+    .get(search.get_search_tag_poll);
 
   app.route('/api/google_maps_key')
     .get(stats.get_map_key);

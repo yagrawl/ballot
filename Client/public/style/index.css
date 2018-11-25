@@ -1244,9 +1244,10 @@ input:checked + .slider:before {
 }
 
 .tag-selection {
-  width: 50%;
-  margin-left: 25%;
-  margin-right: 25%;
+  margin-top: 50px;
+  max-width: 40%;
+  margin-left: 30%;
+  margin-right: 30%;
 }
 
 .radio-hide {
@@ -1311,8 +1312,8 @@ input:checked + .slider:before {
   }
 
   .tag-selection {
-    width: 80%;
-    margin-left: 10%;
-    margin-right: 10%;
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
   }
 }
