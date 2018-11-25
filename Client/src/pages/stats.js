@@ -7,6 +7,8 @@ import {ResponsiveContainer,
         RadialBarChart,
         RadialBar,
         AreaChart, Area,
+        RadarChart, Radar, PolarAngleAxis,
+        PolarGrid, PolarRadiusAxis,
         PieChart, Pie } from 'recharts';
 
 import Logo from '../components/logo'
@@ -35,7 +37,8 @@ class Stats extends Component {
         expiration_time: [],
         returning_users: [],
         polls_time: [],
-        events_time: []
+        events_time: [],
+        tags: []
       },
       user: {
         id: "Unknown",
@@ -235,6 +238,20 @@ class Stats extends Component {
                 </AreaChart>
               </ResponsiveContainer>
               <p className="stats-sublabel">Events v/s Day</p>
+            </div>
+          </div>
+          <div className="stats-active-area">
+            <p className="stats-label">Tag Data</p>
+            <div className="stats-full-graph-box">
+              <ResponsiveContainer width="90%" height={250}>
+                <RadarChart data={this.state.response.tags}>
+                  <PolarGrid />
+                  <PolarAngleAxis dataKey="tag" />
+                  <Tooltip />
+                  <Radar type='monotone' dataKey='tag_count' stroke='#8BD9F9' fill='#8BD9F9' fillOpacity={0.6}/>
+                </RadarChart>
+              </ResponsiveContainer>
+              <p className="stats-sublabel">Tag Distribution</p>
             </div>
           </div>
             <p className="stats-label location-label">Location Data</p>
