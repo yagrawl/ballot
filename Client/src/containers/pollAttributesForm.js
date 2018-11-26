@@ -11,7 +11,7 @@ class PollAttributes extends Component {
       attributes: {
         creator_id: "",
         creation_time: "",
-        expiration_time: "",
+        expiration_time: "20",
         feed_privacy: false,
         analytics_privacy: false,
         tags: [],

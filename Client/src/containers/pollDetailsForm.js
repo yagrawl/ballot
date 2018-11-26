@@ -13,6 +13,7 @@ class PollDetails extends Component {
       },
       input: "add option",
       flag: 0,
+      question_flag: 0,
     }
 
     this.helpers = {
@@ -31,20 +32,39 @@ class PollDetails extends Component {
 		this.helperspan = null;
   }
 
-  setMinimum(flag) {
+  setMinimum(flag, question_flag) {
+    if(flag && question_flag) {
+      return (
+        <p className="error-msg">Minimum of 2 options and Question is required.</p>
+      )
+    }
     if(flag) {
       return (
         <p className="error-msg">Minimum of 2 options required.</p>
+      )
+    } if(question_flag) {
+      return (
+        <p className="error-msg">Question is required.</p>
       )
     }
   }
 
   handleNext = (e) => {
     e.preventDefault()
+    if(this.state.details.options.length < 2 && this.state.details.question.length === 0) {
+      this.setState({ question_flag: 1 });
+      this.setState({ flag: 1 });
+      return;
+    }
 
     if(this.state.details.options.length < 2) {
        this.setState({ flag: 1 });
        return;
+    }
+
+    if(this.state.details.question.length === 0) {
+      this.setState({ question_flag: 1 });
+      return;
     }
 
     this.props.returnValues(this.state);
@@ -100,7 +120,7 @@ class PollDetails extends Component {
 		const newArray = this.state.details.options.filter((listitem) => {
       return listitem.id !== idToRemove
     });
-        
+
 		this.setState(
       prevState => ({
         details: {
@@ -185,7 +205,7 @@ class PollDetails extends Component {
   				</span>
 
   			</div>
-        {this.setMinimum(this.state.flag)}
+        {this.setMinimum(this.state.flag, this.state.question_flag)}
         <div className="divider"></div>
         <button className="button-black button-black-transparent"
           onClick={this.handleNext}>Next</button>
