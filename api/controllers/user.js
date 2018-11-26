@@ -98,7 +98,8 @@ exports.log_user_ip = (req, res) => {
      let user_id = result[0].user_id;
      let update_sql = `UPDATE ${database}.${add.bt('ips')} SET ` +
                       `${add.bt('log_count')} = ${add.cm(log_count)} ` +
-                      `WHERE (${add.bt('user_id')} = ${add.cm(user_id)});`
+                      `WHERE ${add.bt('user_id')} = ${add.cm(user_id)} AND ` +
+                      `${add.bt('ip_address')} = ${add.cm(ip)}`;
 
     con.query(update_sql, (err, result) => {
       try {
