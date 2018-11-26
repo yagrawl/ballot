@@ -69,6 +69,16 @@ class Routes extends Component {
         console.log('%cNew User Added:', 'background: #F4BF75; color: #21252B');
         console.log('New User: ', response);
       });
+
+      fetch("/api/user/ip/new", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {"Content-Type": "application/json"}
+      })
+      .then(response => {
+        console.log('%cNew User IP Added:', 'background: #F4BF75; color: #21252B');
+        console.log('New User IP: ', response);
+      });
     }
   }
 

@@ -50,6 +50,9 @@ module.exports = function(app) {
   app.route('/api/user/new')
     .post(users.log_user);
 
+  app.route('/api/user/ip/new')
+    .post(users.log_user_ip);
+
   app.route('/api/user/:user_id')
     .get(users.get_user);
 
