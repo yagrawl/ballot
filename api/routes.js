@@ -56,6 +56,9 @@ module.exports = function(app) {
   app.route('/api/user/:user_id')
     .get(users.get_user);
 
+  app.route('/api/user/ip/:user_id')
+    .get(users.get_user_ip);
+
   app.route('/api/stats')
     .get(stats.get_stats);
 

@@ -21,6 +21,7 @@ class User extends Component {
         image: 'img',
         email: "email"
       },
+      ips: [],
       logged_in: false,
     }
   }
@@ -38,6 +39,19 @@ class User extends Component {
       console.log('%cUser:', 'background: #E06C75; color: white');
       console.log('User Data: ', data.details);
     });
+
+    fetch('/api/user/ip/' + this.props.match.params.user_id)
+      .then(response => response.json())
+      .then(data => {
+        this.setState(
+        prevState => ({
+          ...prevState,
+          ips: data.details
+        })
+      )
+      console.log('%cUser IPs:', 'background: #E06C75; color: white');
+      console.log('User Data IPs: ', data.details);
+    });
   }
 
   getUserFeed() {
@@ -53,6 +67,16 @@ class User extends Component {
     return elements;
   }
 
+  getUserIps() {
+    let elements = this.state.ips.map((ip, index) => (
+      <tr>
+        <td>{ip.ip_address}</td>
+        <td>{ip.log_count}</td>
+      </tr>
+    ));
+    return elements;
+  }
+
   render() {
     return (
       <div className="user-header">
@@ -64,6 +88,15 @@ class User extends Component {
           <div className="user-details">
             <center><img className="user-profile-image" src={`https://graph.facebook.com/v3.2/${this.props.match.params.user_id}/picture?height=400&width=400`} alt={"profile"}></img></center>
             <p className="user-profile-name">{this.state.response.details.name}</p>
+          </div>
+          <div className="ipaddress-table">
+            <table>
+              <tr>
+                <th>Logged IP Address(es)</th>
+                <th>Count</th>
+              </tr>
+              {this.getUserIps()}
+            </table>
           </div>
           {this.getUserFeed()}
         </div>

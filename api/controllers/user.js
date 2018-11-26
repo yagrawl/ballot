@@ -160,3 +160,23 @@ exports.get_user = (req, res) => {
     });
   });
 }
+
+exports.get_user_ip = (req, res) => {
+  let user_id = req.params.user_id;
+  let data = {};
+  let sql = `SELECT * from ${database}.${add.bt('ips')} as ips ` +
+            `WHERE ips.user_id = ${add.cm(user_id)};`;
+
+  con.query(sql, function (err, result) {
+    try {
+      if (err) throw err;
+    } catch(error) {
+      if(error) {
+        console.log('SQL Parsing Error');
+      }
+    }
+
+    data = result;
+    res.send({details: data});
+  });
+}

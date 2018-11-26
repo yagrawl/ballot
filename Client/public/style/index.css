@@ -1317,3 +1317,27 @@ input:checked + .slider:before {
     margin-right: 15%;
   }
 }
+
+.ipaddress-table {
+  margin-bottom: 50px;
+}
+
+table {
+  border-collapse: collapse;
+  border-radius: 0.5em;
+  overflow: hidden;
+  margin: auto;
+  text-align: center;
+}
+
+th {
+  font-weight: 100;
+  padding: 0.5em;
+  border-bottom: 0.5px solid #9DA5B4;
+  color: #9DA5B4;
+}
+
+td {
+  font-weight: 100;
+  padding: 0.5em;
+}
