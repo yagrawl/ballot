@@ -4,9 +4,15 @@ const con = db.con;
 const database = process.env.DB_NAME || "`ballot`";
 
 exports.get_feed_poll = (req, res) => {
-  let sql = `SELECT ${add.bt('poll_id')}, COUNT(${add.bt('poll_id')}) AS act_count ` +
+  let sql = `SELECT ${add.bt('poll_id')} ` +
             `FROM ${database}.${add.bt('activity')} AS act ` +
-            `GROUP BY ${add.bt('poll_id')};`;
+            `WHERE ${add.bt('poll_id')} IN (SELECT ${add.bt('poll_id')} ` +
+            `FROM ${database}.${add.bt('polls')} ` +
+            `WHERE ${add.bt('feed_privacy')} = 'true' AND ` +
+            `FROM_UNIXTIME((${add.bt('creation_time')} + ${add.bt('expiration_time')}` +
+            `*86400000)/1000, '20%y-%m-%d %h:%m:%s') > NOW()) ` +
+            `GROUP BY ${add.bt('poll_id')} ` +
+            `ORDER BY COUNT(${add.bt('poll_id')}) DESC`;
 
   con.query(sql, function (err, result) {
     try {
@@ -16,8 +22,8 @@ exports.get_feed_poll = (req, res) => {
         console.log('SQL Parsing Error');
       }
     }
-    
-    let top_polls = result.sort(add.compare).slice(0, 5);
+
+    let top_polls = result.sort(add.compare);
     res.send({ details: top_polls });
   });
 }
