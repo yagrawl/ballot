@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PollWidget from '../containers/pollwidget'
 import Logo from '../components/logo'
 import PollDenied from '../components/pollDenied'
+import UiError from '../components/uierror'
 
 import { sendEvent } from '../containers/event'
 
@@ -22,10 +23,15 @@ class Feed extends Component {
       vpn_detected: false,
       tag: 'Select a Tag',
       tags: ['Food', 'Movie', 'Music', 'Technology', 'Travel', 'Misc'],
-      query: ''
+      query: '',
+      uierror: false
     }
 
     this.handleTag = this.handleTag.bind(this);
+  }
+
+  componentDidCatch(error, info) {
+    this.setState({ uierror: true });
   }
 
   handleTag(event) {
@@ -147,17 +153,28 @@ class Feed extends Component {
     return elements;
   }
 
+  checkUiErrors() {
+    if(!this.state.uierror) {
+      return(
+        <div>
+          <div className="tag-selection">
+            {this.drawTagButtons()}
+          </div>
+          <div className="active-area">
+            {this.checkPollConditions()}
+          </div>
+        </div>
+      )
+    } else {
+      return (<UiError theme={"dark"}/>);
+    }
+  }
+
   render() {
-    console.log('Feed: ', this.state);
     return (
       <div className="feed-header">
         <Logo link="/"/>
-        <div className="tag-selection">
-          {this.drawTagButtons()}
-        </div>
-        <div className="active-area">
-          {this.checkPollConditions()}
-        </div>
+        {this.checkUiErrors()}
       </div>
     );
   }
