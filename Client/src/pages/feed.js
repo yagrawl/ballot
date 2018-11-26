@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {isMobile} from "react-device-detect";
 
 import PollWidget from '../containers/pollwidget'
 import Logo from '../components/logo'
@@ -78,22 +79,24 @@ class Feed extends Component {
 
   componentDidMount() {
     let fs = window.RequestFileSystem || window.webkitRequestFileSystem;
-    if (fs) {
-      fs(window.TEMPORARY, 100, (fs) => {
-        this.setState(
-          prevState => ({
-            ...prevState,
-            incognito_detected: false
-          })
-        );
-      }, (err) => {
-        this.setState(
-          prevState => ({
-            ...prevState,
-            incognito_detected: true
-          })
-        );
-      });
+    if(isMobile) {
+      if (fs) {
+        fs(window.TEMPORARY, 100, (fs) => {
+          this.setState(
+            prevState => ({
+              ...prevState,
+              incognito_detected: false
+            })
+          );
+        }, (err) => {
+          this.setState(
+            prevState => ({
+              ...prevState,
+              incognito_detected: true
+            })
+          );
+        });
+      }
     }
 
     fetch('/ip/check_vpn')
