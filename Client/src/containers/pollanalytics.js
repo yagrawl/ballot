@@ -101,7 +101,6 @@ class PollAnalytics extends Component {
     if(this.stats[1] === 0 && this.stats[2] === 0 && this.stats[3] === 0 && this.stats[4] === 0) {
       return (
         <div>
-          <p className="input-label analytics-question">{this.state.question}</p>
           <p className="poll-denied-detection">No Responses Recorded</p>
         </div>
       )
