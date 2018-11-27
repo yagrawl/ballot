@@ -10,7 +10,7 @@ class Poll extends Component {
   constructor(props) {
     super(props);
       this.state = {
-        incognito_detected: true,
+        incognito_detected: false,
         vpn_detected: false,
         has_loaded: false
       }
