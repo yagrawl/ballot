@@ -63,23 +63,7 @@ const get_tags = (input, poll_id) => {
   });
 
   request.on('error', function(error) {
-      let confidence = response.result.score;
-      let tag = 'Misc';
-
-      sql = `INSERT INTO ${database}` +
-                `.${add.bt('tags')} (${add.bt('poll_id')}, ${add.bt('tag')}, ${add.bt('confidence')}) ` +
-                `VALUES (${add.cm(poll_id)}, ${add.cm('Misc')}, ${add.cm('0.0000000')});`;
-
-      con.query(sql, (err, result) => {
-        try {
-          if (err) throw err;
-        } catch(error) {
-          if(error) {
-            console.log('SQL Parsing Error');
-          }
-        }
-      });
-      console.log(error);
+      console.log('API AI Error: ', error);
   });
 
   request.end();
