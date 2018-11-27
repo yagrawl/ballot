@@ -108,7 +108,6 @@ class PollAnalytics extends Component {
     } else {
       return (
         <div>
-          <p className="input-label analytics-question">{this.state.question}</p>
           <ResponsiveContainer width="90%" height={250}>
             <PieChart>
               <Pie dataKey="angle"

@@ -1341,3 +1341,19 @@ td {
   font-weight: 100;
   padding: 0.5em;
 }
+
+.poll-status {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 100;
+  font-size: 16px;
+	background-color: #C96165;
+  color: white;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	padding-left: 15px;
+	padding-right: 15px;
+	border-radius: 15px;
+  max-width: 200px;
+  text-align: center;
+  margin: auto;
+}

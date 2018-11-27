@@ -206,64 +206,59 @@ class PollWidget extends Component {
   }
 
   addLabel() {
-    if(this.state.countdown - Date.now() <= 0 && !(this.state.has_voted)) {
-      return <p className="poll-expired-p">Poll Expired.</p>
+    if(this.state.has_voted) {
+      return <span>You've voted.</span>
     }
-    else if(this.state.countdown - Date.now() <= 0 && this.state.has_voted) {
-      return (<div>
-                <p className="poll-question-p">You've Voted</p>
-                <p className="poll-expired-p poll-expired-p-both">Poll Expired.</p>
-             </div>)
+    else if(this.state.countdown - Date.now() <= 0 && !(this.state.has_voted)) {
+      return <span>Poll Expired.</span>
     }
     else {
-      return <p className="poll-question-p">You've voted.</p>
+      return <Countdown date={this.state.countdown} renderer={this.renderer}/>
     }
+  }
+
+  checkPollVote() {
+    if(this.state.has_voted || this.state.countdown - Date.now() <= 0) {
+      return (
+        <PollAnalytics
+        poll_id={this.state.id}
+        question={this.state.response[0].question}
+        options={[this.state.response[0].option_1,
+                  this.state.response[0].option_2,
+                  this.state.response[0].option_3,
+                  this.state.response[0].option_4 ]}
+        />
+      );
+    } else {
+      return this.renderOptions();
+    }
+  }
+
+  renderPoll() {
+      return (
+        <div>
+          <p className="poll-status poll-expired-p">
+            {this.addLabel()}
+          </p>
+          <p className="poll-question-p">{this.state.response[0].question}</p>
+          <center>
+            {this.checkPollVote()}
+          </center>
+          <Link to={`.././user/${this.state.response[0].creator_id}`}>
+            <img className="avatar-top" src={`https://graph.facebook.com/v3.2/${this.state.response[0].creator_id}/picture?height=400&width=400`} alt={"profile"}></img>
+          </Link>
+          <div className="poll-timer">
+            <span>{this.state.id}</span>
+          </div>
+          <hr></hr>
+          <ShareButtons url={`https://theballot.herokuapp.com/poll/${this.state.id}`} title={`Vote : ${this.state.response[0].question}`}/>
+        </div>
+      )
   }
 
   render() {
     if(this.state.poll_loaded){
-      if(this.state.has_voted || this.state.countdown - Date.now() <= 0) {
-        return (
-          <div>
-            {this.addLabel()}
-            <center>
-              <PollAnalytics
-              poll_id={this.state.id}
-              question={this.state.response[0].question}
-              options={[this.state.response[0].option_1,
-                        this.state.response[0].option_2,
-                        this.state.response[0].option_3,
-                        this.state.response[0].option_4 ]}
-              />
-            </center>
-            <Link to={`.././user/${this.state.response[0].creator_id}`}>
-              <img className="avatar-top" src={`https://graph.facebook.com/v3.2/${this.state.response[0].creator_id}/picture?height=400&width=400`} alt={"profile"}></img>
-            </Link>
-            <div className="poll-timer">
-              <Countdown date={this.state.countdown} renderer={this.renderer}/>
-            </div>
-            <hr></hr>
-            <ShareButtons url={`https://theballot.herokuapp.com/poll/${this.state.id}`} title={`Vote : ${this.state.response[0].question}`}/>
-          </div>
-        )
-      } else {
-        return (
-          <div>
-            <p className="poll-question-p">{this.state.response[0].question}</p>
-            <center>
-              {this.renderOptions()}
-            </center>
-            <Link to={`.././user/${this.state.response[0].creator_id}`} replace>
-              <img className="avatar-top" src={`https://graph.facebook.com/v3.2/${this.state.response[0].creator_id}/picture?height=400&width=400`} alt={"profile"}></img>
-            </Link>
-            <div className="poll-timer">
-              <Countdown date={this.state.countdown} renderer={this.renderer}/>
-            </div>
-            <hr></hr>
-            <ShareButtons url={`https://theballot.herokuapp.com/poll/${this.state.id}`} title={`Vote : ${this.state.response[0].question}`}/>
-          </div>
-        )
-      }
+      return this.renderPoll();
     } else {
       return <Loader />
     }

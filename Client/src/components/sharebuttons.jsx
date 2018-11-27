@@ -57,7 +57,7 @@ const ShareButtons = (props) => (
       <WhatsappShareButton
         url={props.url}
         title={props.title}
-        separator=": "
+        separator=":: "
         className="button-share-pointer">
         <WhatsappIcon size={32} round />
       </WhatsappShareButton>
