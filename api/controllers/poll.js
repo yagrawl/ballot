@@ -16,11 +16,16 @@ exports.get_poll = (req, res) => {
       }
     }
 
-    result[0].question = add.fixComma(result[0].question);
-    result[0].option_1 = add.fixComma(result[0].option_1);
-    result[0].option_2 = add.fixComma(result[0].option_2);
-    result[0].option_3 = add.fixComma(result[0].option_3);
-    result[0].option_4 = add.fixComma(result[0].option_4);
+    if(result.length === 0) {
+      console.log('Poll Not Found');
+    } else {
+      result[0].question = add.fixComma(result[0].question);
+      result[0].option_1 = add.fixComma(result[0].option_1);
+      result[0].option_2 = add.fixComma(result[0].option_2);
+      result[0].option_3 = add.fixComma(result[0].option_3);
+      result[0].option_4 = add.fixComma(result[0].option_4);
+    }
+
     res.send({ details: result });
   });
 };

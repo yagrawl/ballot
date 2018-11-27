@@ -11,7 +11,7 @@ exports.poll_vote = (req, res) => {
             `.${add.bt('activity')} (${add.bt('ip_address')}, ${add.bt('poll_id')}, ${add.bt('timestamp')}, ` +
             `${add.bt('selection')}) VALUES (${add.cm(data.ip_address)}, ${add.cm(data.poll_id)}, ` +
             `${add.cm(data.timestamp)}, ${add.cm(data.vote)});`;
-            
+
     con.query(sql, (err, result) => {
       try {
         if (err) throw err;

@@ -6,6 +6,7 @@ import avatar from '../assets/imgs/default_avatar.png';
 import PollAnalytics from '../containers/pollanalytics';
 import Tag from '../containers/tag';
 import Loader from '../components/loader';
+import PollNotFound from '../components/pollnotfound';
 import ShareButtons from '../components/sharebuttons';
 
 class PollWidget extends Component {
@@ -44,7 +45,8 @@ class PollWidget extends Component {
       has_voted: false,
       is_logged_in: false,
       poll_loaded: false,
-      countdown: 1000
+      countdown: 1000,
+      poll_found: true
     }
 
     this.handleVote = this.handleVote.bind(this);
@@ -69,66 +71,78 @@ class PollWidget extends Component {
     fetch('/api/poll/' + this.state.id)
       .then(response => response.json())
       .then(data => {
+
+        if(data.details.length === 0) {
+          this.setState(
+            prevState => ({
+              ...prevState,
+              poll_loaded: true,
+              poll_found: false
+            })
+          );
+        } else {
+          this.setState(
+            prevState => ({
+              ...prevState,
+              response: data.details,
+              poll_loaded: true
+            })
+          );
+
+          let expiration = parseInt(this.state.response[0].expiration_time)*24*60*60*1000;
+          let creation = parseInt(this.state.response[0].creation_time);
+
+          let countdown = (expiration + creation);
+          this.setState({countdown: countdown})
+
+          fetch('/api/user/' + this.state.response[0].creator_id)
+          .then(response => response.json())
+          .then(data => {
+            this.setState(
+              prevState => ({
+                ...prevState,
+                user: data.details.details
+              })
+            );
+          })
+        }
+      });
+
+      fetch('/ip')
+      .then(response => response.json())
+      .then(data => {
         this.setState(
           prevState => ({
             ...prevState,
-            response: data.details,
-            poll_loaded: true
+            ip_address: data.express
           })
         );
 
-        let expiration = parseInt(this.state.response[0].expiration_time)*24*60*60*1000;
-        let creation = parseInt(this.state.response[0].creation_time);
+        if(this.state.poll_found) {
+          fetch(`/api/activity?poll=${this.state.id}&ip=${this.state.ip_address}`)
+          .then(res => res.json())
+          .then(data => {
+            if(data.details.length !== 0) {
+              this.setState(
+                prevState => ({
+                  ...prevState,
+                  has_voted: true
+                })
+              );
+            }
 
-        let countdown = (expiration + creation);
-        this.setState({countdown: countdown})
-
-        fetch('/api/user/' + this.state.response[0].creator_id)
-        .then(response => response.json())
-        .then(data => {
-          this.setState(
-            prevState => ({
-              ...prevState,
-              user: data.details.details
-            })
-          );
-        })
-      }
-    );
-
-    fetch('/ip')
-    .then(response => response.json())
-    .then(data => {
-      this.setState(
-        prevState => ({
-          ...prevState,
-          ip_address: data.express
-        })
-      );
-
-      fetch(`/api/activity?poll=${this.state.id}&ip=${this.state.ip_address}`)
-      .then(res => res.json())
-      .then(data => {
-        if(data.details.length !== 0) {
-          this.setState(
-            prevState => ({
-              ...prevState,
-              has_voted: true
-            })
-          );
+            if(localStorage.hasOwnProperty(this.state.id)) {
+              this.setState(
+                prevState => ({
+                  ...prevState,
+                  has_voted: true
+                })
+              );
+            }
+          })
+          .catch(err => console.log(err))
         }
-
-        if(localStorage.hasOwnProperty(this.state.id)) {
-          this.setState(
-            prevState => ({
-              ...prevState,
-              has_voted: true
-            })
-          );
-        }
-      })
-      .catch(err => console.log(err))
-    });
+      });
   }
 
   renderer = ({ days, hours, minutes, seconds, completed }) => {
@@ -264,7 +278,11 @@ class PollWidget extends Component {
 
   render() {
     if(this.state.poll_loaded){
-      return this.renderPoll();
+      if(this.state.poll_found) {
+        return this.renderPoll();
+      } else {
+        return <PollNotFound />
+      }
     } else {
       return <Loader />
     }
