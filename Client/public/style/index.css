@@ -732,7 +732,17 @@ input:checked + .slider:before {
 
 @media screen and (max-width: 620px) {
   .poll-widget-feed-cover {
-    padding: 5px 5px;
+    padding: 30px 10px;
+    margin-bottom: 50px;
+    border-radius: 20px;
+  }
+
+  .buttons-list {
+    margin-top: 10px;
+  }
+
+  .button-share {
+    margin-right: 5px;
   }
 }
 
@@ -1371,4 +1381,56 @@ td {
 
 .poll-id-link {
   text-decoration: none;
+}
+
+.tag {
+	display: inline-block;
+
+  width: auto;
+	height: 24px;
+
+	background-color: #3B404C;
+	-webkit-border-radius: 3px 4px 4px 3px;
+	-moz-border-radius: 3px 4px 4px 3px;
+	border-radius: 3px 4px 4px 3px;
+
+	border-left: 1px solid #3B404C;
+
+	margin-left: 19px;
+
+	position: relative;
+
+	color: white;
+	font-weight: 100;
+	font-family: Proxima Nova;
+	font-size: 16px;
+	line-height: 24px;
+
+	padding: 0 10px 0 10px;
+}
+
+/* Makes the triangle */
+.tag:before {
+	content: "";
+	position: absolute;
+	display: block;
+	left: -12px;
+	width: 0;
+	height: 0;
+	border-top: 12px solid transparent;
+	border-bottom: 12px solid transparent;
+	border-right: 12px solid #3B404C;
+}
+
+/* Makes the circle */
+.tag:after {
+	content: "";
+	background-color: white;
+	border-radius: 50%;
+	width: 4px;
+	height: 4px;
+	display: block;
+	position: absolute;
+	left: -3px;
+	top: 10px;
 }

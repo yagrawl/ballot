@@ -1,6 +1,5 @@
 import React from 'react';
 
-import errorImgDark from '../assets/imgs/errordark.png';
 import errorImgLight from '../assets/imgs/errorlight.png';
 
 const UiError = (props) => {

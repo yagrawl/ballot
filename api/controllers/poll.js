@@ -24,3 +24,20 @@ exports.get_poll = (req, res) => {
     res.send({ details: result });
   });
 };
+
+exports.get_tag = (req, res) => {
+  let poll_id = req.params.poll_id;
+  let sql = `SELECT * from ${database}.${add.bt('tags')} as tags WHERE tags.poll_id = ${add.cm(poll_id)};`;
+
+  con.query(sql, function (err, result) {
+    try {
+      if (err) throw err;
+    } catch(error) {
+      if(error) {
+        console.log('SQL Parsing Error');
+      }
+    }
+
+    res.send({ details: result });
+  });
+};

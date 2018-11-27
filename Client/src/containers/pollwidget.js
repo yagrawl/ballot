@@ -4,8 +4,9 @@ import Countdown from 'react-countdown-now';
 
 import avatar from '../assets/imgs/default_avatar.png';
 import PollAnalytics from '../containers/pollanalytics';
-import Loader from '../components/loader'
-import ShareButtons from '../components/sharebuttons'
+import Tag from '../containers/tag';
+import Loader from '../components/loader';
+import ShareButtons from '../components/sharebuttons';
 
 class PollWidget extends Component {
   constructor(props) {
@@ -160,14 +161,13 @@ class PollWidget extends Component {
       ip_address: this.state.ip_address
     }
 
-    console.log(data);
     fetch("/api/activity", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {"Content-Type": "application/json"}
     })
     .then(response => {
-      console.log(response);
+      console.log('Activity Response: ', response);
     })
     .then(response => console.log('Success:', JSON.stringify(response)))
     .catch(error => console.error('Error:', error));
@@ -242,7 +242,9 @@ class PollWidget extends Component {
       return (
         <div>
           <p className="poll-expired-p">
-            {this.addLabel()}
+            <a className="poll-id-link" href={`../poll/${this.state.id}`}>
+              {this.addLabel()}
+            </a>
           </p>
           <p className="poll-question-p">{this.state.response[0].question}</p>
           <center>
@@ -252,7 +254,7 @@ class PollWidget extends Component {
             <img className="avatar-top" src={`https://graph.facebook.com/v3.2/${this.state.response[0].creator_id}/picture?height=400&width=400`} alt={"profile"}></img>
           </Link>
           <div className="poll-timer">
-            <a className="poll-id-link" href={`../poll/${this.state.id}`}><span>{this.state.id}</span></a>
+            <Tag poll_id={this.state.id} />
           </div>
           <hr></hr>
           <ShareButtons url={`https://theballot.herokuapp.com/poll/${this.state.id}`} title={`Vote : ${this.state.response[0].question}`}/>

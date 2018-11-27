@@ -28,6 +28,9 @@ module.exports = function(app) {
   app.route('/api/poll/:poll_id')
     .get(poll.get_poll);
 
+  app.route('/api/poll/tag/:poll_id')
+    .get(poll.get_tag);
+
   app.route('/api/demo')
     .post(demo.demo_create)
     .get(demo.demo_read)
