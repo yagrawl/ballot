@@ -207,13 +207,17 @@ class PollWidget extends Component {
 
   addLabel() {
     if(this.state.has_voted) {
-      return <span>You've voted.</span>
+      return <span className="poll-status-voted">You've voted</span>
     }
     else if(this.state.countdown - Date.now() <= 0 && !(this.state.has_voted)) {
-      return <span>Poll Expired.</span>
+      return <span className="poll-status-expired">Poll Expired</span>
     }
     else {
-      return <Countdown date={this.state.countdown} renderer={this.renderer}/>
+      return (
+          <span className="poll-status-timer">
+            <Countdown date={this.state.countdown} renderer={this.renderer}/>
+          </span>
+        )
     }
   }
 
@@ -237,7 +241,7 @@ class PollWidget extends Component {
   renderPoll() {
       return (
         <div>
-          <p className="poll-status poll-expired-p">
+          <p className="poll-expired-p">
             {this.addLabel()}
           </p>
           <p className="poll-question-p">{this.state.response[0].question}</p>
@@ -248,7 +252,7 @@ class PollWidget extends Component {
             <img className="avatar-top" src={`https://graph.facebook.com/v3.2/${this.state.response[0].creator_id}/picture?height=400&width=400`} alt={"profile"}></img>
           </Link>
           <div className="poll-timer">
-            <span>{this.state.id}</span>
+            <a className="poll-id-link" href={`../poll/${this.state.id}`}><span>{this.state.id}</span></a>
           </div>
           <hr></hr>
           <ShareButtons url={`https://theballot.herokuapp.com/poll/${this.state.id}`} title={`Vote : ${this.state.response[0].question}`}/>

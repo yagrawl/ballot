@@ -1342,11 +1342,10 @@ td {
   padding: 0.5em;
 }
 
-.poll-status {
+.poll-status-timer, .poll-status-voted, .poll-status-expired {
   font-family: 'Montserrat', sans-serif;
   font-weight: 100;
   font-size: 16px;
-	background-color: #C96165;
   color: white;
 	padding-top: 3px;
 	padding-bottom: 3px;
@@ -1356,4 +1355,20 @@ td {
   max-width: 200px;
   text-align: center;
   margin: auto;
+}
+
+.poll-status-timer {
+  background-color: #389BC2;
+}
+
+.poll-status-voted {
+	background-color: #618985;
+}
+
+.poll-status-expired {
+  background-color: #C96165;
+}
+
+.poll-id-link {
+  text-decoration: none;
 }
