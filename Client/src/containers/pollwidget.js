@@ -5,6 +5,7 @@ import Countdown from 'react-countdown-now';
 import avatar from '../assets/imgs/default_avatar.png';
 import PollAnalytics from '../containers/pollanalytics';
 import Loader from '../components/loader'
+import ShareButtons from '../components/sharebuttons'
 
 class PollWidget extends Component {
   constructor(props) {
@@ -241,6 +242,8 @@ class PollWidget extends Component {
             <div className="poll-timer">
               <Countdown date={this.state.countdown} renderer={this.renderer}/>
             </div>
+            <hr></hr>
+            <ShareButtons url={`https://theballot.herokuapp.com/poll/${this.state.id}`} title={`Vote : ${this.state.response[0].question}`}/>
           </div>
         )
       } else {
@@ -256,6 +259,8 @@ class PollWidget extends Component {
             <div className="poll-timer">
               <Countdown date={this.state.countdown} renderer={this.renderer}/>
             </div>
+            <hr></hr>
+            <ShareButtons url={`https://theballot.herokuapp.com/poll/${this.state.id}`} title={`Vote : ${this.state.response[0].question}`}/>
           </div>
         )
       }
