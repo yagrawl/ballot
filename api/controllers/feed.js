@@ -8,7 +8,7 @@ exports.get_feed_poll = (req, res) => {
             `FROM ${database}.${add.bt('activity')} AS act ` +
             `WHERE ${add.bt('poll_id')} IN (SELECT ${add.bt('poll_id')} ` +
             `FROM ${database}.${add.bt('polls')} ` +
-            `WHERE ${add.bt('feed_privacy')} = 'true' AND ` +
+            `WHERE ${add.bt('feed_privacy')} = 'true' AND ${add.bt('archieved')} = 'false' AND ` +
             `FROM_UNIXTIME((${add.bt('creation_time')} + ${add.bt('expiration_time')}` +
             `*86400000)/1000, '20%y-%m-%d %h:%m:%s') > NOW()) ` +
             `GROUP BY ${add.bt('poll_id')} ` +

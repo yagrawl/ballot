@@ -29,7 +29,8 @@ class Details extends Component {
         vote_timeline: [],
         has_loaded: true,
         is_authed: this.props.isAuthed,
-        user: this.props.user
+        user: this.props.user,
+        deleted: false,
       }
   }
 
@@ -85,11 +86,48 @@ class Details extends Component {
           <center>
             <hr></hr>
             <p className="stats-label">Creator Controls</p>
-            <button className="button-black button-black-transparent button-delete">Delete Poll</button>
+            {this.deletebutton()}
           </center>
         </div>
       )
     }
+  }
+
+  deletebutton() {
+    if(this.state.deleted === false) {
+      return (
+        <button onClick={this.handleDelete}
+                className="button-black button-black-transparent button-delete">
+                Delete Poll
+        </button>
+      )
+    } else {
+      return <span className="poll-status-expired move-40">Poll Deleted</span>
+    }
+  }
+
+  handleDelete = (e) => {
+    e.preventDefault();
+    let data = {"archieve": "true"};
+
+    fetch(`/api/poll/archieve/${this.state.id}`, {
+      method: "PUT",
+      body: JSON.stringify(data),
+      headers: {"Content-Type": "application/json"}
+    })
+    .then(response => {
+      console.log(response);
+    })
+    .then(response => {
+      console.log('Success:', JSON.stringify(response));
+      this.setState(
+        prevState => ({
+          ...prevState,
+          deleted: true,
+        })
+      )
+    })
+    .catch(error => console.error('Error:', error));
   }
 
   render() {

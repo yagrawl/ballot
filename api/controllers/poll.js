@@ -46,3 +46,16 @@ exports.get_tag = (req, res) => {
     res.send({ details: result });
   });
 };
+
+exports.archieve_poll = (req, res) => {
+  let poll_id = req.params.poll_id;
+  let sql = `UPDATE ${database}.${add.bt('polls')} SET ` +
+            `${add.bt('polls')}.${add.bt('archieved')} = ${add.cm('true')} ` +
+            `WHERE ${add.bt('polls')}.${add.bt('poll_id')} = ${add.cm(poll_id)};`;
+
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log(result);
+    res.send({ result: result });
+  });
+}
