@@ -2,13 +2,8 @@ import React, { Component } from 'react';
 import {isMobile} from "react-device-detect";
 import {ResponsiveContainer,
         Tooltip,
-        RadialBarChart,
-        RadialBar,
         AreaChart, Area,
-        XAxis,
-        RadarChart, Radar, PolarAngleAxis,
-        PolarGrid,
-        PieChart, Pie } from 'recharts';
+        XAxis} from 'recharts';
 
 import PollWidget from '../containers/pollwidget'
 import Logo from '../components/logo'
@@ -21,6 +16,15 @@ class Details extends Component {
     super(props);
       this.state = {
         id: this.props.match.params.poll_id,
+        poll_data: [{
+          question: '',
+          options: {},
+          creator_id: '',
+          feed_privacy: '',
+          analytics_privacy: '',
+          creation_time: '',
+          expiration_time: ''
+        }],
         vote_data: [],
         vote_timeline: [],
         has_loaded: true
@@ -34,10 +38,12 @@ class Details extends Component {
         this.setState(
         prevState => ({
           ...prevState,
+          poll_data: data.details.poll_data,
           vote_data: data.details.main_data,
           vote_timeline: data.details.timeline
         })
       )
+      console.log(this.state);
     });
    }
 
@@ -46,7 +52,7 @@ class Details extends Component {
       <tr>
         <td>{vote.ip_address}</td>
         <td>{vote.time}</td>
-        <td>{vote.selection}</td>
+        <td>{this.state.poll_data[0].options[vote.selection]}</td>
       </tr>
     ));
     return elements;
@@ -58,6 +64,18 @@ class Details extends Component {
         <div>
           <Logo link="/"/>
           <div className="active-area">
+            <p className="poll-question-p">{this.state.poll_data[0].question}</p>
+            <center>
+              <PollAnalytics
+              poll_id={this.state.id}
+              question={this.state.poll_data[0].question}
+              options={[this.state.poll_data[0].option_1,
+                        this.state.poll_data[0].option_2,
+                        this.state.poll_data[0].option_3,
+                        this.state.poll_data[0].option_4 ]}
+              />
+            </center>
+            <div className="poll-analytics-timeline-seperator"></div>
             <div className="ipaddress-table">
               <table>
                 <tr>

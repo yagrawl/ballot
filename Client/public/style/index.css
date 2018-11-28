@@ -1467,3 +1467,7 @@ td {
   float: right;
   margin-right: 20px;
 }
+
+.poll-analytics-timeline-seperator {
+  height: 30px;
+}
