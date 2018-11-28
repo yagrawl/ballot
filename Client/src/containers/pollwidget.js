@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Countdown from 'react-countdown-now';
 
 import avatar from '../assets/imgs/default_avatar.png';
+import more from '../assets/imgs/more.svg';
 import PollAnalytics from '../containers/pollanalytics';
 import Tag from '../containers/tag';
 import Loader from '../components/loader';
@@ -258,6 +259,9 @@ class PollWidget extends Component {
           <p className="poll-expired-p">
             <a className="poll-id-link" href={`../poll/${this.state.id}`}>
               {this.addLabel()}
+            </a>
+            <a className="poll-id-link" href={`../polldetails/${this.state.id}`}>
+              <img src={more} className="more-symbol"></img>
             </a>
           </p>
           <p className="poll-question-p">{this.state.response[0].question}</p>

@@ -7,6 +7,7 @@ import Login from './components/login'
 import Index from './pages/index';
 import Create from './pages/create';
 import Poll from './pages/poll';
+import Details from './pages/details';
 import User from './pages/user';
 import Feed from './pages/feed';
 import Stats from './pages/stats';
@@ -114,6 +115,9 @@ class Routes extends Component {
           <Route path="/poll/:poll_id"
                  render={(props) =>
                    <Poll {...props} isAuthed={auth.logged_in} user={auth.user} />} />
+          <Route path="/polldetails/:poll_id"
+                 render={(props) =>
+                   <Details {...props} isAuthed={auth.logged_in} user={auth.user} />} />
           <Route path="/user/:user_id"
                  render={(props) =>
                    <User {...props} isAuthed={auth.logged_in} user={auth.user} />} />
