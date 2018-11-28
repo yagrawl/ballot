@@ -10,6 +10,7 @@ module.exports = function(app) {
   let demo = require('./controllers/demo');
   let poll = require('./controllers/poll');
   let activity = require('./controllers/activity');
+  let details = require('./controllers/details');
   let feed = require('./controllers/feed');
   let users = require('./controllers/user');
   let stats = require('./controllers/stats');
@@ -40,6 +41,9 @@ module.exports = function(app) {
   app.route('/api/activity')
     .post(activity.poll_vote)
     .get(activity.check_if_voted);
+
+  app.route('/api/details/:poll_id')
+    .get(details.get_vote_details);
 
   app.route('/api/activity/analytics/:poll_id')
     .get(activity.get_analytics);
