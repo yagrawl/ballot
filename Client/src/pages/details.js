@@ -1,5 +1,14 @@
 import React, { Component } from 'react';
 import {isMobile} from "react-device-detect";
+import {ResponsiveContainer,
+        Tooltip,
+        RadialBarChart,
+        RadialBar,
+        AreaChart, Area,
+        XAxis,
+        RadarChart, Radar, PolarAngleAxis,
+        PolarGrid,
+        PieChart, Pie } from 'recharts';
 
 import PollWidget from '../containers/pollwidget'
 import Logo from '../components/logo'
@@ -12,7 +21,8 @@ class Details extends Component {
     super(props);
       this.state = {
         id: this.props.match.params.poll_id,
-        votes: [],
+        vote_data: [],
+        vote_timeline: [],
         has_loaded: true
       }
   }
@@ -24,17 +34,18 @@ class Details extends Component {
         this.setState(
         prevState => ({
           ...prevState,
-          votes: data.details
+          vote_data: data.details.main_data,
+          vote_timeline: data.details.timeline
         })
       )
     });
    }
 
   getVoteTimeline() {
-    let elements = this.state.votes.map((vote, index) => (
+    let elements = this.state.vote_data.map((vote, index) => (
       <tr>
         <td>{vote.ip_address}</td>
-        <td>{vote.timestamp}</td>
+        <td>{vote.time}</td>
         <td>{vote.selection}</td>
       </tr>
     ));
@@ -56,6 +67,16 @@ class Details extends Component {
                 </tr>
                 {this.getVoteTimeline()}
               </table>
+            </div>
+            <div className="stats-full-graph-box">
+              <ResponsiveContainer width="90%" height={250}>
+                <AreaChart data={this.state.vote_timeline}>
+                  <XAxis dataKey="time" />
+                  <Tooltip />
+                  <Area type='monotone' dataKey='vote_count' stroke='#82ca9d' fill='#82ca9d' />
+                </AreaChart>
+              </ResponsiveContainer>
+              <p className="stats-sublabel">Vote v/s Day</p>
             </div>
           </div>
         </div>
