@@ -27,8 +27,28 @@ class Details extends Component {
         }],
         vote_data: [],
         vote_timeline: [],
-        has_loaded: true
+        has_loaded: true,
+        is_authed: this.props.isAuthed,
+        user: this.props.user
       }
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+   if(nextProps.user.id !== prevState.user.id) {
+     return { UserUpdate: nextProps.user};
+   }
+    else return null;
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if(prevProps.user !== this.props.user){
+      this.setState(
+        prevState => ({
+          ...prevState,
+          user: this.props.user
+        })
+      );
+    }
   }
 
   componentDidMount() {
@@ -56,6 +76,20 @@ class Details extends Component {
       </tr>
     ));
     return elements;
+  }
+
+  creatorArea() {
+    if(this.state.user.id === this.state.poll_data[0].creator_id) {
+      return (
+        <div>
+          <center>
+            <hr></hr>
+            <p className="stats-label">Creator Controls</p>
+            <button className="button-black button-black-transparent button-delete">Delete Poll</button>
+          </center>
+        </div>
+      )
+    }
   }
 
   render() {
@@ -96,6 +130,7 @@ class Details extends Component {
               </ResponsiveContainer>
               <p className="stats-sublabel">Vote v/s Day</p>
             </div>
+            {this.creatorArea()}
           </div>
         </div>
       );

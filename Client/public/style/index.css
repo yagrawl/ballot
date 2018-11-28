@@ -174,6 +174,17 @@ body {
     outline: none;
 }
 
+.button-delete {
+  color: #AC4143;
+  border: 2px solid #AC4143;
+}
+
+.button-delete:hover {
+  background-color: #AC4143;
+  color: white;
+  outline: none;
+}
+
 .divider {
   margin-top: 30px;
 }
@@ -1392,6 +1403,7 @@ td {
   max-width: 200px;
   text-align: center;
   margin: auto;
+  margin-right: -40px;
 }
 
 .poll-status-timer {
@@ -1466,6 +1478,7 @@ td {
   max-width: 20px;
   float: right;
   margin-right: 20px;
+  display: inline;
 }
 
 .poll-analytics-timeline-seperator {
