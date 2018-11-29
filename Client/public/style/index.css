@@ -1406,6 +1406,10 @@ td {
   margin-right: -40px;
 }
 
+.poll-status-embed {
+  margin-right: 0;
+}
+
 .poll-status-timer {
   background-color: #389BC2;
 }
