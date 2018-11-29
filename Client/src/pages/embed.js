@@ -264,11 +264,6 @@ class Embed extends Component {
   renderPoll() {
       return (
         <div>
-          <p className="poll-expired-p">
-            <a className="poll-id-link" href={`../poll/${this.state.id}`} target="_blank">
-              {this.addLabel()}
-            </a>
-          </p>
           <p className="poll-question-p">{this.state.response[0].question}</p>
           <center>
             {this.checkPollVote()}
