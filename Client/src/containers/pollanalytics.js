@@ -98,13 +98,6 @@ class PollAnalytics extends Component {
   }
 
   showAnalytics() {
-    if(this.stats[1] === 0 && this.stats[2] === 0 && this.stats[3] === 0 && this.stats[4] === 0) {
-      return (
-        <div>
-          <p className="poll-denied-detection"></p>
-        </div>
-      )
-    } else {
       return (
           <ResponsiveContainer width="90%" height={this.props.size}>
             <PieChart>
@@ -124,7 +117,6 @@ class PollAnalytics extends Component {
             </PieChart>
           </ResponsiveContainer>
       )
-    }
   }
 
   render() {

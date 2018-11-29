@@ -1507,3 +1507,7 @@ td {
 .embed-poll-options {
   height: 250px;
 }
+
+.embed-poll-analytics {
+  margin-top: -20px;
+}
