@@ -1,14 +1,40 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 
-import ShareButtons from '../components/sharebuttons'
+import ShareButtons from '../components/sharebuttons';
+import EmbedCode from '../components/embedcode'
 
 class PollLink extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      embed: false
+    }
 
+    this.handleEmbed = this.handleEmbed.bind(this);
+  }
+
+  handleEmbed(e) {
+    this.setState(
+      prevState => ({
+        ...prevState,
+        embed: true
+      })
+    );
+  }
+
+  embedCode() {
+    if(this.state.embed === false) {
+      return (
+        <div className="embed-code-div">
+          <center>
+            <button class="button-black button-black-transparent" onClick={this.handleEmbed}>{`Embed < >`}</button>
+          </center>
+        </div>
+      );
+    } else {
+      return (<EmbedCode url={`https://theballot.herokuapp.com/embed/${this.props.pollid}`}/>)
     }
   }
 
@@ -29,6 +55,7 @@ class PollLink extends Component {
           </Link>
         </div>
         <ShareButtons url={url} title={title}/>
+        {this.embedCode()}
       </div>
     );
   }
