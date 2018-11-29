@@ -4,7 +4,7 @@ import Countdown from 'react-countdown-now';
 
 import avatar from '../assets/imgs/default_avatar.png';
 import more from '../assets/imgs/more.svg';
-import PollAnalytics from '../containers/pollanalytics';
+import PollEmbedAnalytics from '../containers/pollembedanalytics';
 import Tag from '../containers/tag';
 import Loader from '../components/loader';
 import PollNotFound from '../components/pollnotfound';
@@ -241,7 +241,7 @@ class Embed extends Component {
     if(this.state.has_voted || this.state.countdown - Date.now() <= 0) {
       return (
         <div className="embed-poll-analytics">
-        <PollAnalytics
+        <PollEmbedAnalytics
           poll_id={this.state.id}
           question={this.state.response[0].question}
           options={[this.state.response[0].option_1,
