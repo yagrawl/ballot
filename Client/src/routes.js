@@ -8,6 +8,7 @@ import Index from './pages/index';
 import Create from './pages/create';
 import Poll from './pages/poll';
 import Details from './pages/details';
+import Embed from './pages/embed';
 import User from './pages/user';
 import Feed from './pages/feed';
 import Stats from './pages/stats';
@@ -27,10 +28,12 @@ class Routes extends Component {
         name: "Ballot User",
         profile_picture: "https://i.imgur.com/fMVORsK.png",
         email: "theballot@gmail.com"
-      }
+      },
+      embed: false
     };
 
     this.responseFacebook = this.responseFacebook.bind(this);
+    this.setEmbedTrue = this.setEmbedTrue.bind(this);
   }
 
   responseFacebook = (response) => {
@@ -84,18 +87,29 @@ class Routes extends Component {
   }
 
   renderLoginButton() {
-    if(this.state.logged_in) {
-        return (
-          <div className="login-button-position">
-            <Link to={`../user/${this.state.user.id}`}>
-              <img className="avatar-top" src={this.state.user.profile_picture} alt={"profile"}></img>
-            </Link>
-          </div>
-        )
+    if(this.state.embed === false) {
+      if(this.state.logged_in) {
+          return (
+            <div className="login-button-position">
+              <Link to={`../user/${this.state.user.id}`}>
+                <img className="avatar-top" src={this.state.user.profile_picture} alt={"profile"}></img>
+              </Link>
+            </div>
+          )
+      }
+      else {
+          return(<Login callback={this.responseFacebook}/>);
+      }
     }
-    else {
-        return(<Login callback={this.responseFacebook}/>);
-    }
+  }
+
+  setEmbedTrue() {
+    this.setState(
+      prevState => ({
+        ...prevState,
+        embed: true
+      })
+    );
   }
 
   render() {
@@ -118,6 +132,9 @@ class Routes extends Component {
           <Route path="/polldetails/:poll_id"
                  render={(props) =>
                    <Details {...props} isAuthed={auth.logged_in} user={auth.user} />} />
+          <Route path="/embed/:poll_id"
+                 render={(props) =>
+                   <Embed {...props} isAuthed={auth.logged_in} user={auth.user} embed={this.setEmbedTrue}/>} />
           <Route path="/user/:user_id"
                  render={(props) =>
                    <User {...props} isAuthed={auth.logged_in} user={auth.user} />} />

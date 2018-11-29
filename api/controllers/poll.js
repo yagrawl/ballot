@@ -54,8 +54,14 @@ exports.archieve_poll = (req, res) => {
             `WHERE ${add.bt('polls')}.${add.bt('poll_id')} = ${add.cm(poll_id)};`;
 
   con.query(sql, function (err, result) {
-    if (err) throw err;
-    console.log(result);
+    try {
+      if (err) throw err;
+    } catch(error) {
+      if(error) {
+        console.log('SQL Parsing Error');
+      }
+    }
+    
     res.send({ result: result });
   });
 }
