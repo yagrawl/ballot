@@ -265,7 +265,7 @@ class Embed extends Component {
       return (
         <div>
           <p className="poll-expired-p">
-            <a className="poll-id-link" href={`../poll/${this.state.id}`}>
+            <a className="poll-id-link" href={`../poll/${this.state.id}`} target="_blank">
               {this.addLabel()}
             </a>
           </p>
