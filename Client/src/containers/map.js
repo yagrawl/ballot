@@ -29,7 +29,7 @@ class Maps extends Component {
       zoom: 2,
       disableDefaultUI: true,
       gestureHandling: 'none',
-      zoomControl: false,
+      zoomControl: true,
       styles: [
                 {
                   "elementType": "geometry",
