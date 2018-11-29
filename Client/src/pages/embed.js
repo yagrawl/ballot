@@ -247,10 +247,15 @@ class Embed extends Component {
                   this.state.response[0].option_2,
                   this.state.response[0].option_3,
                   this.state.response[0].option_4 ]}
+        size={200}
         />
       );
     } else {
-      return this.renderOptions();
+      return (
+        <div className="embed-poll-options">
+          {this.renderOptions()}
+        </div>
+      )
     }
   }
 

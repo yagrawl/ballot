@@ -101,13 +101,12 @@ class PollAnalytics extends Component {
     if(this.stats[1] === 0 && this.stats[2] === 0 && this.stats[3] === 0 && this.stats[4] === 0) {
       return (
         <div>
-          <p className="poll-denied-detection">No Responses Recorded</p>
+          <p className="poll-denied-detection"></p>
         </div>
       )
     } else {
       return (
-        <div>
-          <ResponsiveContainer width="90%" height={250}>
+          <ResponsiveContainer width="90%" height={this.props.size}>
             <PieChart>
               <Pie dataKey="angle"
                    isAnimationActive={true}
@@ -124,7 +123,6 @@ class PollAnalytics extends Component {
               <Tooltip/>
             </PieChart>
           </ResponsiveContainer>
-        </div>
       )
     }
   }
@@ -137,5 +135,9 @@ class PollAnalytics extends Component {
     )
   }
 }
+
+PollAnalytics.defaultProps = {
+  size: 250
+};
 
 export default PollAnalytics;

@@ -1503,3 +1503,7 @@ td {
 .embed-code-div {
   margin-top: 40px;
 }
+
+.embed-poll-options {
+  height: 250px;
+}
