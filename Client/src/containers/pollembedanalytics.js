@@ -119,7 +119,7 @@ class PollEmbedAnalytics extends Component {
           colorType={'literal'}
           colorDomain={[0, 100]}
           colorRange={[0, 10]}
-          radius={125}
+          radius={120}
           padAngle={0.00}
         />
       )
