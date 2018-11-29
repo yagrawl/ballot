@@ -28,7 +28,7 @@ class Maps extends Component {
       center: {lat: 21.4826, lng: 0.0077},
       zoom: 2,
       disableDefaultUI: true,
-      gestureHandling: 'none',
+      gestureHandling: 'cooperative',
       zoomControl: true,
       styles: [
                 {
