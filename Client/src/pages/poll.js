@@ -19,7 +19,6 @@ class Poll extends Component {
   componentDidMount() {
     let fs = window.RequestFileSystem || window.webkitRequestFileSystem;
 
-    if(isMobile) {
       if (fs) {
         fs(window.TEMPORARY, 100, (fs) => {
           this.setState(
@@ -37,7 +36,7 @@ class Poll extends Component {
           );
         });
       }
-    }
+
 
     fetch('/ip/check_vpn')
       .then(response => response.json())
