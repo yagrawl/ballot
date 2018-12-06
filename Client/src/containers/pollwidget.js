@@ -261,7 +261,7 @@ class PollWidget extends Component {
               {this.addLabel()}
             </a>
             <a className="poll-id-link" href={`../polldetails/${this.state.id}`}>
-              <img src={more} className="more-symbol"></img>
+              <img src={more} className="more-symbol" alt="find more details"></img>
             </a>
           </p>
           <p className="poll-question-p">{this.state.response[0].question}</p>

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {isMobile} from "react-device-detect";
 
 import PollWidget from '../containers/pollwidget'
 import Logo from '../components/logo'

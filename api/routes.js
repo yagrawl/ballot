@@ -7,7 +7,6 @@
 module.exports = function(app) {
   let ip = require('./controllers/ip');
   let create = require('./controllers/create');
-  let demo = require('./controllers/demo');
   let poll = require('./controllers/poll');
   let activity = require('./controllers/activity');
   let details = require('./controllers/details');
@@ -34,12 +33,6 @@ module.exports = function(app) {
 
   app.route('/api/poll/archieve/:poll_id')
     .put(poll.archieve_poll);
-
-  app.route('/api/demo')
-    .post(demo.demo_create)
-    .get(demo.demo_read)
-    .put(demo.demo_update)
-    .delete(demo.demo_delete);
 
   app.route('/api/activity')
     .post(activity.poll_vote)
@@ -83,7 +76,4 @@ module.exports = function(app) {
 
   app.route('/api/event')
     .post(event.add_event);
-
-  app.route('/api/demo/table')
-    .get(demo.demo_table);
 };

@@ -1,14 +1,10 @@
 import React, {Component} from 'react';
-import { Link } from 'react-router-dom';
 import Countdown from 'react-countdown-now';
 
 import avatar from '../assets/imgs/default_avatar.png';
-import more from '../assets/imgs/more.svg';
 import PollEmbedAnalytics from '../containers/pollembedanalytics';
-import Tag from '../containers/tag';
 import Loader from '../components/loader';
 import PollNotFound from '../components/pollnotfound';
-import ShareButtons from '../components/sharebuttons';
 
 class Embed extends Component {
   constructor(props) {

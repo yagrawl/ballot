@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
-import {isMobile} from "react-device-detect";
 import {ResponsiveContainer,
         Tooltip,
         AreaChart, Area,
         XAxis} from 'recharts';
 
-import PollWidget from '../containers/pollwidget'
 import Logo from '../components/logo'
-import PollDenied from '../components/pollDenied'
 import Loader from '../components/loader'
 import PollAnalytics from '../containers/pollanalytics';
 
