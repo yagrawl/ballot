@@ -34,7 +34,7 @@ class PollLink extends Component {
         </div>
       );
     } else {
-      return (<EmbedCode url={`https://theballot.herokuapp.com/embed/${this.props.pollid}`}/>)
+      return (<EmbedCode url={`https://www.theballot.app/embed/${this.props.pollid}`}/>)
     }
   }
 
