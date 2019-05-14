@@ -5,6 +5,7 @@ import { sendEvent } from './containers/event'
 import Login from './components/login'
 
 import Index from './pages/index';
+import Auth from './pages/auth'
 import Create from './pages/create';
 import Poll from './pages/poll';
 import Details from './pages/details';
@@ -21,11 +22,11 @@ class Routes extends Component {
 
     this.state = {
       response: "",
-      logged_in: false,
+      logged_in: true,
       user: {
         id: "Unknown",
         name: "Ballot User",
-        profile_picture: "https://i.imgur.com/fMVORsK.png",
+        profile_picture: "http://tinygraphs.com/squares/tinygraphs?theme=bythepool&numcolors=4&size=220&fmt=svg",
         email: "theballot@gmail.com"
       },
       embed: false
@@ -97,7 +98,7 @@ class Routes extends Component {
           )
       }
       else {
-          return(<Login callback={this.responseFacebook}/>);
+          return(<Login />);
       }
     }
   }
@@ -122,9 +123,12 @@ class Routes extends Component {
           <Route exact path="/"
                  render={(props) =>
                    <Index {...props} isAuthed={auth.logged_in} user={auth.user} />} />
+         <Route path="/auth"
+                render={(props) =>
+                  <Auth {...props} isAuthed={auth.logged_in} user={auth.user} />} embed={this.setEmbedTrue}/>} />
           <Route path="/create"
                  render={(props) =>
-                   <Create {...props} isAuthed={auth.logged_in} user={auth.user} />} />
+                   <Create {...props} isAuthed={true} user={auth.user} />} />
           <Route path="/poll/:poll_id"
                  render={(props) =>
                    <Poll {...props} isAuthed={auth.logged_in} user={auth.user} />} />

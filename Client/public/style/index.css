@@ -59,6 +59,14 @@ body {
   color: #8BD9F9;
 }
 
+.Auth-header {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .mobile-overflow {
   overflow-x: hidden;
   width: 100%;

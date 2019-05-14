@@ -1,17 +1,12 @@
 import React from 'react';
-import FacebookLogin from 'react-facebook-login';
+import { Link } from 'react-router-dom';
 
-const Logo = (props) => (
+const Login = (props) => (
   <div className="login-button-position">
-    <FacebookLogin
-      appId={"2075066269470448"}
-      autoLoad={true}
-      fields={"name,email,picture"}
-      callback={props.callback}
-      cssClass={"button-black button-black-transparent"}
-      textButton={"Login"}
-    />
+    <Link to={'./auth'}>
+      <button className="button-black button-black-transparent">Login</button>
+    </Link>
   </div>
 );
 
-export default Logo;
+export default Login;

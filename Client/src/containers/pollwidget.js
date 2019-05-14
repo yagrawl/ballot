@@ -269,7 +269,7 @@ class PollWidget extends Component {
             {this.checkPollVote()}
           </center>
           <Link to={`.././user/${this.state.response[0].creator_id}`}>
-            <img className="avatar-top" src={`https://graph.facebook.com/v3.2/${this.state.response[0].creator_id}/picture?height=400&width=400`} alt={"profile"}></img>
+            <img className="avatar-top" src={`https://www.tinygraphs.com/squares/tinygraphs?theme=frogideas&numcolors=2&size=400&fmt=svg`} alt={"profile"}></img>
           </Link>
           <div className="poll-timer">
             <Tag poll_id={this.state.id} />
