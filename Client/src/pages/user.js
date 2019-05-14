@@ -39,19 +39,6 @@ class User extends Component {
       console.log('%cUser:', 'background: #E06C75; color: white');
       console.log('User Data: ', data.details);
     });
-
-    fetch('/api/user/ip/' + this.props.match.params.user_id)
-      .then(response => response.json())
-      .then(data => {
-        this.setState(
-        prevState => ({
-          ...prevState,
-          ips: data.details
-        })
-      )
-      console.log('%cUser IPs:', 'background: #E06C75; color: white');
-      console.log('User Data IPs: ', data.details);
-    });
   }
 
   getUserFeed() {
